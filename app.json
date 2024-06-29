@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "tangmate",
-    "slug": "tangmate",
+    "name": "TangSquad",
+    "slug": "tangsquad",
+    "scheme": "tangsquad",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -26,6 +27,5 @@
     "plugins": [
       "expo-router"
     ]
-  },
-  "scheme": "tangmate"
+  }
 }
