@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-import type { Config } from 'tailwindcss';
-
 /** @type {import('tailwindcss').Config} */
-const config: Config = {
-  content: ['./app/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
+module.exports = {
+  content: [
+    './app/**/*.{js,jsx,ts,tsx}',
+    './components/**/*.{js,jsx,ts,tsx}',
+  ],
   theme: {
     extend: {
       colors: {
@@ -43,13 +43,14 @@ const config: Config = {
         md: ['SpoqaHanSansNeo-Medium', 'sans-serif'],
         bd: ['SpoqaHanSansNeo-Bold', 'sans-serif'],
       },
-      letterSpacing: {
+      letterSpacing: {  // tracking
         lt: '-0.3px',
         rg: '-0.3px',
         md: '-0.2px',
         bd: '-0.1px',
       },
-      fontSize: {
+      fontSize: { // text
+        xxxsm: '10px',
         xxsm: '12px',
         xsm: '14px',
         sm: '16px',
@@ -58,7 +59,8 @@ const config: Config = {
         xlg: '28px',
         xxlg: '32px',
       },
-      lineHeight: {
+      lineHeight: { // leading
+        xxxsm: '24px',
         xxsm: '28px',
         xsm: '32px',
         sm: '35px',
@@ -74,5 +76,3 @@ const config: Config = {
   },
   plugins: [],
 };
-
-export default config;
