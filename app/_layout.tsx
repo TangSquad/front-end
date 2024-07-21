@@ -1,13 +1,11 @@
 import { useEffect } from 'react';
-// import { StyleSheet, Text, View } from 'react-native';
-import { SplashScreen, Slot, Stack } from 'expo-router';
-
+import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 
-import { NativeWindStyleSheet } from "nativewind";
+import { NativeWindStyleSheet } from 'nativewind';
 
 NativeWindStyleSheet.setOutput({
-  default: "native",
+  default: 'native',
 });
 
 // Prevent splash screen from auto hiding before asset loading is complete
@@ -33,7 +31,7 @@ const RootLayout = () => {
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }}/>
     </Stack>
-  )
+  );
 };
 
 export default RootLayout;
