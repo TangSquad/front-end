@@ -35,6 +35,7 @@ const GatheringList = () => {
     <FlatList
       data={mockData}
       keyExtractor={(item) => item.id}
+      className='h-full'
       renderItem={({ item }) => (
         <View className='flex-row items-center gap-x-14 px-24 py-16'>
           <Image source={item.src ? { uri: item.src } : DefaultImg} className='w-70 h-70 rounded-10' />
