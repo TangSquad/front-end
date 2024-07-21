@@ -4,6 +4,12 @@ import { SplashScreen, Slot, Stack } from 'expo-router';
 
 import { useFonts } from 'expo-font';
 
+import { NativeWindStyleSheet } from "nativewind";
+
+NativeWindStyleSheet.setOutput({
+  default: "native",
+});
+
 // Prevent splash screen from auto hiding before asset loading is complete
 SplashScreen.preventAutoHideAsync();
 
