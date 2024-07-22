@@ -1,8 +1,12 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     './app/**/*.{js,jsx,ts,tsx}',
     './components/**/*.{js,jsx,ts,tsx}',
+    './constants/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
     extend: {
@@ -61,16 +65,31 @@ module.exports = {
       },
       lineHeight: { // leading
         xxxsm: '24px',
-        xxsm: '28px',
-        xsm: '32px',
-        sm: '35px',
-        md: '45px',
-        lg: '45px',
-        xlg: '50px',
+        xxsm: '20px',
+        xsm: '24px',
+        sm: '26px',
+        md: '32px',
+        lg: '32px',
+        xlg: '40px',
         xxlg: '50px',
       },
-      spacing: {  // paragraph spacing
-        xxlg: '5px',
+      spacing: {
+        'fit': 'fit-content',
+        5: '5px',
+        9: '9px',
+        12: '12px',
+        14: '14px',
+        16: '16px',
+        18: '18px',
+        24: '24px',
+        70: '70px',
+      },
+      borderRadius: {
+        10: '10px',
+        20: '20px',
+        30: '20px',
+        50: '50px',
+        60: '60px',
       },
     },
   },
