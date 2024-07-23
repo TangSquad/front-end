@@ -1,11 +1,11 @@
-import { View } from 'react-native';
-import GatheringList from '../../components/GatheringList';
+import { SafeAreaView } from 'react-native';
+import TopNavigationBar from '../../components/TopNavigationBar';
 
 const Search = () => {
   return (
-    <View>
-      <GatheringList />
-    </View>
+    <SafeAreaView className='flex-1'>
+      <TopNavigationBar />
+    </SafeAreaView>
   );
 };
 
