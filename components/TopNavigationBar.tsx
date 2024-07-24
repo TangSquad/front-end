@@ -3,9 +3,14 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import GatheringList from './GatheringList';
 import tokens from '../constants/tokens';
 
+interface TopNavigationBarProps {
+  type: string;
+}
+
 const Tab = createMaterialTopTabNavigator();
 
-function TopNavigationBar() {
+function TopNavigationBar({ type }: TopNavigationBarProps) {
+  
   return (
     <Tab.Navigator
       className={`${tokens.bd_16}`}
@@ -16,7 +21,7 @@ function TopNavigationBar() {
       }}
     >
       <Tab.Screen
-        name="모임 찾기"
+        name={`${type} 찾기`}
         component={GatheringList}
         options={{
           tabBarLabel: ({ color, children }) => (
@@ -25,7 +30,7 @@ function TopNavigationBar() {
         }}
       />
       <Tab.Screen
-        name="내 모임"
+        name={`내 ${type}`}
         component={GatheringList}
         options={{
           tabBarLabel: ({ color, children }) => (
@@ -34,7 +39,7 @@ function TopNavigationBar() {
         }}
       />
       <Tab.Screen
-        name="좋아요 한 모임"
+        name={`좋아요 한 ${type}`}
         component={GatheringList}
         options={{
           tabBarLabel: ({ color, children }) => (
