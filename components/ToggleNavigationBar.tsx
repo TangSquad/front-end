@@ -9,9 +9,10 @@ interface ToggleNavigationBarProps {
 }
 
 function ToggleNavigationBar({ selectedTab, setSelectedTab }: ToggleNavigationBarProps) {
+  const isGroup = (type: string) => type === '모임';
 
   const SelectedItem = ( { title }: { title: string } ) => {
-    const position = title === '모임' ? 'left-0' : 'right-0';
+    const position = isGroup(title) ? 'left-0' : 'right-0';
 
     return (
       <TouchableOpacity
@@ -19,21 +20,21 @@ function ToggleNavigationBar({ selectedTab, setSelectedTab }: ToggleNavigationBa
         onPress={() => setSelectedTab(title)}
         style={{ shadowColor: tokens.primary_600, shadowOffset: { width:0, height:0 }, shadowOpacity: 0.3, shadowRadius: 8 }}
       >
-        <Image source={GroupIcon} tintColor={tokens.primary_600} />
+        <Image source={isGroup(title) ? GroupIcon : DivingIcon} tintColor={tokens.primary_600} />
         <Text className={`${tokens.bd_14} color-primary-500 pl-5`}>{title}</Text>
       </TouchableOpacity>
     );
   };
   
   const UnselectedItem = ( { title }: { title: string } ) => {
-    const justifyContent = title === '모임' ? 'justify-start' : 'justify-end';
+    const justifyContent = isGroup(title) ? 'justify-start' : 'justify-end';
     
     return (
       <TouchableOpacity
         className={`z-0 flex-row ${justifyContent} items-center w-full h-30 px-15 bg-primary-300 rounded-50`}
         onPress={() => setSelectedTab(title)}
       >
-        <Image source={DivingIcon} tintColor={tokens.primary_100} />
+        <Image source={isGroup(title) ? GroupIcon : DivingIcon} tintColor={tokens.primary_100} />
         <Text className={`${tokens.md_14} color-primary-100 pl-5`}>{title}</Text>
       </TouchableOpacity>
     );
@@ -42,8 +43,16 @@ function ToggleNavigationBar({ selectedTab, setSelectedTab }: ToggleNavigationBa
   return (
     <View className='flex items-center w-full h-fit py-24 bg-primary-100'>
       <View className='flex justify-center w-183 h-fit'>
-        {selectedTab === '모임' ? <SelectedItem title='모임' /> : <UnselectedItem title='모임' />}
-        {selectedTab === '다이빙' ? <SelectedItem title='다이빙' /> : <UnselectedItem title='다이빙' />}
+        {isGroup(selectedTab) ? 
+          <>
+            <SelectedItem title='모임' />
+            <UnselectedItem title='다이빙' />
+          </>
+          : <>
+            <UnselectedItem title='모임' />
+            <SelectedItem title='다이빙' />
+          </>
+        }
       </View>
     </View>
   );
