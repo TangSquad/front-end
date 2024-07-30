@@ -5,7 +5,7 @@ import TopNavigationBar from '../../components/TopNavigationBar';
 
 const Search = () => {
   const [selectedTab, setSelectedTab] = useState('모임');  
-
+  
   return (
     <SafeAreaView className='flex-1'>
       <ToggleNavigationBar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
