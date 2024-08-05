@@ -1,4 +1,5 @@
 import { TouchableOpacity, Image } from 'react-native';
+import { useRouter } from 'expo-router';
 import { icons } from '../constants';
 
 interface CreateGatheringBtnProps {
@@ -6,11 +7,13 @@ interface CreateGatheringBtnProps {
 }
 
 function CreateGatheringBtn( { type } : CreateGatheringBtnProps ) {
+  const router = useRouter();
+  
   const handlePress = () => {
     if(type === '모임') {
-      // 모임 생성 페이지로 넘어가기
+      router.push('screens/CreateGroup');
     } else {
-      // 다이빙 생성 페이지로 넘어가기
+      router.push('screens/CreateDiving');
     }
   };
 
