@@ -28,7 +28,9 @@ const RootLayout = () => {
   if(!fontsLoaded && !err) return null;
 
   return (
-    <Stack>
+    <Stack screenOptions={{
+      headerTitleAlign: 'center',
+    }}>
       <Stack.Screen name="index" options={{ headerShown: false }}/>
       <Stack.Screen name="(tabs)" />
       <Stack.Screen name="screens/CreateGroup" options={{
