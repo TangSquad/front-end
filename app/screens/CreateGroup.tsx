@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import CreateGatheringInputSection from '../../components/CreateGatheringInputSection';
 import PublicPrivateSwitch from '../../components/CreateGathering/PublicPrivateSwitch';
+import TagGroup from '../../components/CreateGathering/TagGroup';
 import { tokens } from '../../constants';
+import { tags } from '../../data';
 
 function CreateGathering() {
   const router = useRouter();
@@ -14,8 +16,14 @@ function CreateGathering() {
   const [limit, setLimit] = useState('');
   const [cost, setCost] = useState('');
 
+  const [selectedAge, setSelectedAge] = useState<string[]>([]);
+  const [selectedMood, setSelectedMood] = useState<string[]>([]);
+  const [selectedCert, setSelectedCert] = useState<string[]>([]);
+
+  const isEmpty = (arr: string[]) => arr.length === 0;
+
   const handleSubmit = () => {
-    if (!name || !line || !desc || !limit || !cost) {
+    if (!name || !line || !desc || !limit || !cost || isEmpty(selectedCert) || isEmpty(selectedMood) || isEmpty(selectedAge)) {
       alert('입력하지 않은 항목이 있습니다.');
       return;
     }
@@ -64,6 +72,25 @@ function CreateGathering() {
           flex='row'
           input={cost}
           setInput={setCost}
+        />
+        <TagGroup
+          data={tags.certificates}
+          title="자격 조건"
+          selectedTags={selectedCert}
+          setSelectedTags={setSelectedCert}
+        />
+        <TagGroup
+          data={tags.ageGroup}
+          title="연령"
+          selectedTags={selectedAge}
+          setSelectedTags={setSelectedAge}
+        />
+        <TagGroup
+          data={tags.mood}
+          title="분위기"
+          limit={2}
+          selectedTags={selectedMood}
+          setSelectedTags={setSelectedMood}
         />
         <TouchableOpacity
           className='rounded-10 bg-primary mb-70 py-16 justify-center items-center'

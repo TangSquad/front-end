@@ -30,6 +30,7 @@ module.exports = {
           600: "#FFC105",
         },
         gray: {
+          50: "#F3F4F8",
           100: "#EEF1F6",
           200: "#E5E9F1",
           300: "#CED4DF",
@@ -75,6 +76,7 @@ module.exports = {
       },
       spacing: {
         'fit': 'fit-content',
+        1: '1px',
         5: '5px',
         9: '9px',
         10: '10px',
