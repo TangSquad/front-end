@@ -1,11 +1,13 @@
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
-import { tokens } from '../../constants';
 import CreateGatheringInputSection from '../../components/CreateGatheringInputSection';
+import PublicPrivateSwitch from '../../components/CreateGathering/PublicPrivateSwitch';
+import { tokens } from '../../constants';
 
 function CreateGathering() {
   const router = useRouter();
+  const [isPublic, setIsPublic] = useState(true);
   const [name, setName] = useState('');
   const [line, setLine] = useState('');
   const [desc, setDesc] = useState('');
@@ -22,8 +24,13 @@ function CreateGathering() {
   };
 
   return (
-    <ScrollView>
-      <View className='flex-1 bg-white rounded-t-30 px-24 py-20 gap-y-24 mt-10'>
+    <ScrollView className='flex-1'>
+      <View className='flex-1 bg-white rounded-t-30 px-24 py-20 space-y-24 mt-10'>
+        <PublicPrivateSwitch
+          type='모임'
+          isPublic={isPublic}
+          setIsPublic={setIsPublic}
+        />
         <Text className={`${tokens.bd_20} color-primary`}>모임 소개</Text>
         <CreateGatheringInputSection
           title='모임 이름'
@@ -59,7 +66,7 @@ function CreateGathering() {
           setInput={setCost}
         />
         <TouchableOpacity
-          className='rounded-10 bg-primary py-16 justify-center items-center'
+          className='rounded-10 bg-primary mb-70 py-16 justify-center items-center'
           onPress={handleSubmit}
         >
           <Text className={`${tokens.md_16} color-white`}>완료</Text>
