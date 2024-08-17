@@ -1,6 +1,7 @@
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
+import AddPhoto from '../../components/CreateGathering/AddPhoto';
 import CreateGatheringInputSection from '../../components/CreateGatheringInputSection';
 import PublicPrivateSwitch from '../../components/CreateGathering/PublicPrivateSwitch';
 import TagGroup from '../../components/CreateGathering/TagGroup';
@@ -10,6 +11,7 @@ import { tags } from '../../data';
 function CreateGathering() {
   const router = useRouter();
   const [isPublic, setIsPublic] = useState(true);
+  const [thumbnail, setThumbnail] = useState<string | null>(null);
   const [name, setName] = useState('');
   const [line, setLine] = useState('');
   const [desc, setDesc] = useState('');
@@ -32,8 +34,9 @@ function CreateGathering() {
   };
 
   return (
-    <ScrollView className='flex-1'>
-      <View className='flex-1 bg-white rounded-t-30 px-24 py-20 space-y-24 mt-10'>
+    <ScrollView className='flex-1 bg-white'>
+      <AddPhoto uri={thumbnail} setUri={setThumbnail} />
+      <View className='-top-30 flex-1 bg-white rounded-t-30 px-24 py-20 space-y-24'>
         <PublicPrivateSwitch
           type='모임'
           isPublic={isPublic}
