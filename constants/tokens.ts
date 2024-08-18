@@ -7,6 +7,7 @@ const md_16 = 'font-md tracking-md text-sm leading-sm';
 const bd_14 = 'font-bd tracking-bd text-xsm leading-xsm';
 const bd_16 = 'font-bd tracking-bd text-sm leading-sm';
 const bd_20 = 'font-bd tracking-bd text-md leading-md';
+const bd_28 = 'font-bd tracking-bd text-xlg leading-xlg';
 
 const primary_100 = '#E4ECFF';
 const primary_400 = '#5A8CFF';
@@ -25,6 +26,7 @@ export default {
   bd_14,
   bd_16,
   bd_20,
+  bd_28,
   primary_100,
   primary_400,
   primary_600,

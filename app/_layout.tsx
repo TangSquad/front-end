@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Toast from 'react-native-toast-message';
 import { NativeWindStyleSheet } from 'nativewind';
 
 NativeWindStyleSheet.setOutput({
@@ -27,21 +28,30 @@ const RootLayout = () => {
 
   if(!fontsLoaded && !err) return null;
 
+  const queryClient = new QueryClient();
+
   return (
-    <Stack screenOptions={{
-      headerTitleAlign: 'center',
-    }}>
-      <Stack.Screen name="index" options={{ headerShown: false }}/>
-      <Stack.Screen name="(tabs)" />
-      <Stack.Screen name="screens/CreateGroup" options={{
-        title: '모임 등록',
-        animation: 'slide_from_bottom',
-      }} />
-      <Stack.Screen name="screens/CreateDiving" options={{
-        title: '다이빙 등록',
-        animation: 'slide_from_bottom',
-      }}/>
-    </Stack>
+    <QueryClientProvider client={queryClient}>
+      <Stack screenOptions={{
+        headerTitleAlign: 'center',
+      }}>
+        <Stack.Screen name="index" options={{ headerShown: false }}/>
+        <Stack.Screen name="(auth)/sign-in" options={{
+          animation: 'slide_from_bottom',
+          headerShown: false,
+        }} />
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="screens/CreateGroup" options={{
+          title: '모임 등록',
+          animation: 'slide_from_bottom',
+        }} />
+        <Stack.Screen name="screens/CreateDiving" options={{
+          title: '다이빙 등록',
+          animation: 'slide_from_bottom',
+        }}/>
+      </Stack>
+      <Toast />
+    </QueryClientProvider>
   );
 };
 
