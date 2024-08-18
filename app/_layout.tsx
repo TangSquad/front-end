@@ -28,9 +28,19 @@ const RootLayout = () => {
   if(!fontsLoaded && !err) return null;
 
   return (
-    <Stack>
+    <Stack screenOptions={{
+      headerTitleAlign: 'center',
+    }}>
       <Stack.Screen name="index" options={{ headerShown: false }}/>
       <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="screens/CreateGroup" options={{
+        title: '모임 등록',
+        animation: 'slide_from_bottom',
+      }} />
+      <Stack.Screen name="screens/CreateDiving" options={{
+        title: '다이빙 등록',
+        animation: 'slide_from_bottom',
+      }}/>
     </Stack>
   );
 };
