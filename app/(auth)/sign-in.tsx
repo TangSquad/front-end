@@ -23,6 +23,8 @@ function SignIn() {
         position: 'bottom',
         bottomOffset: 100,
       });
+
+      return;
     }
 
     try {

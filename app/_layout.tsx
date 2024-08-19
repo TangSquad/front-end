@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Toast from 'react-native-toast-message';
+import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { NativeWindStyleSheet } from 'nativewind';
+import { tokens } from '../constants';
 
 NativeWindStyleSheet.setOutput({
   default: 'native',
@@ -30,6 +31,23 @@ const RootLayout = () => {
 
   const queryClient = new QueryClient();
 
+  const toastConfig = {
+    success: (props) => (
+      <BaseToast
+        {...props}
+        style={{ borderLeftColor: tokens.primary_400 }}
+        text1Style={{ color: tokens.gray_800, fontWeight: 'bold', fontSize: 14 }}
+      />
+    ),
+    error: (props) => (
+      <ErrorToast
+        {...props}
+        style={{ borderLeftColor: 'red' }}
+        text1Style={{ color: tokens.gray_800, fontWeight: 'bold', fontSize: 14 }}
+      />
+    ),
+  };
+  
   return (
     <QueryClientProvider client={queryClient}>
       <Stack screenOptions={{
@@ -50,7 +68,7 @@ const RootLayout = () => {
           animation: 'slide_from_bottom',
         }}/>
       </Stack>
-      <Toast />
+      <Toast config={toastConfig}/>
     </QueryClientProvider>
   );
 };
