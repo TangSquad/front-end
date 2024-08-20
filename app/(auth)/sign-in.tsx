@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
-import Toast from 'react-native-toast-message';
 import { router } from 'expo-router';
 import CustomInput from '../../components/Auth/CustomInput';
+import showToast from '../../utils/toast';
 import { loginUser } from '../../api/auth';
 import { tokens } from '../../constants';
 
@@ -17,32 +17,16 @@ function SignIn() {
 
   const emailSignin = async () => {
     if (!email || !password) {
-      Toast.show({
-        type: 'error',
-        text1: '이메일과 비밀번호를 입력해주세요.',
-        position: 'bottom',
-        bottomOffset: 100,
-      });
-
+      showToast('error', '이메일 또는 비밀번호를 입력해주세요.');
       return;
     }
 
     try {
       const data = await mutation.mutateAsync({ email: email, password: password });
-      Toast.show({
-        type: 'success',
-        text1: '로그인 성공',
-        position: 'bottom',
-        bottomOffset: 100,
-      });
+      showToast('success', '로그인 성공');
       router.push('/home');
     } catch (error) {
-      Toast.show({
-        type: 'error',
-        text1: '아이디 또는 비밀번호가 일치하지 않습니다.',
-        position: 'bottom',
-        bottomOffset: 100,
-      });
+      showToast('error', '로그인 실패');
     }
   };
 
