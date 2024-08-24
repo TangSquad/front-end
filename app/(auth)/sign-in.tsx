@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
-import { router } from 'expo-router';
+import { Link, router } from 'expo-router';
 import CustomInput from '../../components/Auth/CustomInput';
 import showToast from '../../utils/toast';
 import { loginUser } from '../../api/auth';
@@ -54,6 +54,19 @@ function SignIn() {
           >
             <Text className={`${tokens.bd_16} color-white`}>로그인</Text>
           </TouchableOpacity>
+          <View className='flex-row justify-center items-center my-9'>
+            <Link href='/find-email'>
+              <Text className={`color-gray-300 ${tokens.rg_14}`}>이메일 찾기</Text>
+            </Link>
+            <Text className='color-gray-300 px-12'>|</Text>
+            <Link href='/find-password'>
+              <Text className={`color-gray-300 ${tokens.rg_14}`}>비밀번호 찾기</Text>
+            </Link>
+            <Text className='color-gray-300 px-12'>|</Text>
+            <Link href='/sign-up'>
+              <Text className={`color-gray-300 ${tokens.rg_14}`}>회원가입</Text>
+            </Link>
+          </View>
         </View>
       </SafeAreaView>
     </TouchableWithoutFeedback>

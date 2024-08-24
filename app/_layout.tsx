@@ -58,6 +58,10 @@ const RootLayout = () => {
           animation: 'slide_from_bottom',
           headerShown: false,
         }} />
+        <Stack.Screen name="(auth)/sign-up" options={{
+          animation: 'slide_from_right',
+          title: '회원가입',
+        }} />
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="screens/CreateGroup" options={{
           title: '모임 등록',
