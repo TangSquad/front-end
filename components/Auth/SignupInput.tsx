@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Text, TextInput, View } from 'react-native';
+import { PhoneNumberContext } from '../../contexts/PhoneNumberContext';
 import PswdToggleBtn from './PswdToggleBtn';
 import { SendVerificationBtn, VerifyCodeBtn } from './PhoneVerification';
+import { inputTypes } from '../../data';
 import { tokens } from '../../constants';
 
 interface BaseInputProps {
@@ -13,42 +15,6 @@ interface TwoInputsProps extends BaseInputProps {
   setSecondInput: (value: string) => void;
 }
 
-const inputTypes = {
-  email: {
-    title: '이메일',
-    placeholder: '이메일을 입력해주세요',
-    invalidEmail: 'Invalid email address',
-  },
-  password: {
-    title: '비밀번호',
-    placeholder: '비밀번호를 입력해주세요',
-    invalidPassword: 'Password must be at least 8 characters long',
-  },
-  phone: {
-    title: '전화번호',
-    placeholder: '전화번호를 입력해주세요',
-    invalidPhone: 'Invalid phone number',
-  },
-  name: {
-    title: '이름',
-    placeholder: '이름을 입력해주세요',
-    invalidName: 'Name must be at least 2 characters long',
-  },
-  nickname: {
-    title: '닉네임',
-    placeholder: '닉네임을 입력해주세요',
-    invalidNickname: 'Nickname must be at least 2 characters long',
-  },
-  passwordConfirm: {
-    placeholder: '비밀번호를 다시 입력해주세요',
-    invalidPasswordConfirm: 'Passwords do not match',
-  },
-  verificationCode: {
-    placeholder: '인증번호를 입력해주세요',
-    invalidVerificationCode: 'Invalid verification code',
-  },
-};
-
 const checkIsInputValid = (input: string, type: string): boolean => {
   if (type === 'email') {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input);
@@ -57,7 +23,10 @@ const checkIsInputValid = (input: string, type: string): boolean => {
     return input.length >= 8;
   }
   else if (type === 'phone') {
-    return /^[0-9]{10}$/.test(input);
+    return /^[0-9]{9,11}$/.test(input);
+  }
+  else if (type === 'verificationCode') {
+    return /^[0-9]{6}$/.test(input);
   }
   else if (type === 'name' || type === 'nickname') {
     return input.length >= 2;
@@ -73,14 +42,14 @@ const Title = ({ type }: { type: string }) => (
 function BaseInput({ type, setInput }: BaseInputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [isValid, setIsValid] = useState(true);
-  const [showPswd, setShowPswd] = useState(false);  
-
+  const [showPswd, setShowPswd] = useState(false);
+  const { isVerified } = useContext(PhoneNumberContext);
 
   // if not focused, gray, if focused and valid, blue, if focused and invalid, red
-  const borderColor = !isFocused ? 'border-gray-300' : isValid ? 'border-primary-500' : 'red';
+  const borderColor = !isFocused ? 'border-gray-300' : isValid ? 'border-primary-500' : 'border-[#ff0000]';
 
   const handleChange = (value: string) => {
-    setInput(value.trim());
+    setInput(value);
     setIsValid(checkIsInputValid(value, type));
   };
 
@@ -96,12 +65,13 @@ function BaseInput({ type, setInput }: BaseInputProps) {
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           secureTextEntry={type === 'password' && !showPswd}
+          keyboardType={type === 'phone' ? 'number-pad' : 'default'}
         />
         {type === 'password' && <PswdToggleBtn showPswd={showPswd} setShowPswd={setShowPswd} />}
-        {type === 'phone' && <SendVerificationBtn disabled={false} />}
-        {type === 'verificationCode' && <VerifyCodeBtn disabled={false} />}
+        {type === 'phone' && !isVerified && <SendVerificationBtn disabled={!isValid} />}
+        {type === 'verificationCode' && <VerifyCodeBtn disabled={!isValid} />}
       </View>
-      {!isValid && <Text className='color-red'>{inputTypes[type][`invalid${type[0].toUpperCase() + type.slice(1)}`]}</Text>}
+      {!isValid && <Text className='color-[#ff0000]'>{inputTypes[type][`invalid${type[0].toUpperCase() + type.slice(1)}`]}</Text>}
     </View>
   );
 }
@@ -127,12 +97,14 @@ function PasswordInput({ type, setInput, setSecondInput }: TwoInputsProps) {
 }
 
 function PhonenumInput({ type, setInput, setSecondInput }: TwoInputsProps) {
+  const { isCodeSent } = useContext(PhoneNumberContext);
+
   return (
     <View className='flex items-start w-full h-fit my-20'>
       <Title type={type} />
       <BaseInput type={type} setInput={setInput} />
       <View className='h-5'/>
-      <BaseInput type='verificationCode' setInput={setSecondInput} />
+      {isCodeSent && <BaseInput type='verificationCode' setInput={setSecondInput} />}
     </View>
   );
 }

@@ -1,3 +1,4 @@
 import tags from './tags';
+import inputTypes from './signupInputTypes';
 
-export { tags };
+export { tags, inputTypes };
