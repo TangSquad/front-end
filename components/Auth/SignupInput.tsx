@@ -50,7 +50,8 @@ function BaseInput({ type, setInput }: BaseInputProps) {
 
   const handleChange = (value: string) => {
     setInput(value);
-    setIsValid(checkIsInputValid(value, type));
+    if (!value) setIsValid(true);
+    else setIsValid(checkIsInputValid(value, type));
   };
 
   return (
@@ -71,7 +72,7 @@ function BaseInput({ type, setInput }: BaseInputProps) {
         {type === 'phone' && !isVerified && <SendVerificationBtn disabled={!isValid} />}
         {type === 'verificationCode' && <VerifyCodeBtn disabled={!isValid} />}
       </View>
-      {!isValid && <Text className='color-[#ff0000]'>{inputTypes[type][`invalid${type[0].toUpperCase() + type.slice(1)}`]}</Text>}
+      {!isValid && <Text className='color-[#ff0000]'>{inputTypes[type].invalid}</Text>}
     </View>
   );
 }
