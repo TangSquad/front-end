@@ -1,7 +1,9 @@
 import { useState, useContext } from 'react';
 import { Text, TextInput, View } from 'react-native';
+import { useMutation } from '@tanstack/react-query';
 import { PhoneNumberContext } from '../../contexts/PhoneNumberContext';
 import PswdToggleBtn from './PswdToggleBtn';
+import * as DupCheck from '../../api/auth/duplication-check';
 import { SendVerificationBtn, VerifyCodeBtn } from './PhoneVerification';
 import { inputTypes } from '../../data';
 import { tokens } from '../../constants';
@@ -17,7 +19,7 @@ interface TwoInputsProps extends BaseInputProps {
 
 const checkIsInputValid = (input: string, type: string): boolean => {
   if (type === 'email') {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input);
+    return /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(input);
   }
   else if (type === 'password') {
     return input.length >= 8;
@@ -43,15 +45,51 @@ function BaseInput({ type, setInput }: BaseInputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [isValid, setIsValid] = useState(true);
   const [showPswd, setShowPswd] = useState(false);
+  const [isDup, setIsDup] = useState(false);
   const { isVerified } = useContext(PhoneNumberContext);
 
-  // if not focused, gray, if focused and valid, blue, if focused and invalid, red
-  const borderColor = !isFocused ? 'border-gray-300' : isValid ? 'border-primary-500' : 'border-[#ff0000]';
+  const mutation = useMutation({
+    mutationFn: async (input: string) => {
+      let params;
+      let response;
+
+      if (type === 'email') {
+        params = { email: input };
+        response = await DupCheck.checkEmailDuplication(params);
+      } else if (type === 'phone') {
+        params = { phoneNumber: input };
+        response = await DupCheck.checkPhoneDuplication(params);
+      } else {
+        params = { nickname: input };
+        response = await DupCheck.checkNicknameDuplication(params);
+      }
+
+      return response;
+    },
+    onSuccess: (data) => {
+      setIsDup(data.message.includes('registered'));
+    },
+    onError: () => {
+      setIsDup(false);
+    },
+  });
+
+  // if not focused, gray, if focused, valid, and not duplicated, blue, if focused and invalid or duplicated, red
+  const borderColor = !isFocused ? 'border-gray-300' : (isValid && !isDup) ? 'border-primary-500' : 'border-[#ff0000]';
 
   const handleChange = (value: string) => {
     setInput(value);
-    if (!value) setIsValid(true);
-    else setIsValid(checkIsInputValid(value, type));
+
+    if (!value) {
+      setIsValid(true);
+      setIsDup(false);
+    } else if (checkIsInputValid(value, type)) {
+      setIsValid(true);
+      mutation.mutate(value);
+    } else {
+      setIsValid(false);
+      setIsDup(false);
+    }
   };
 
   return (
@@ -69,10 +107,11 @@ function BaseInput({ type, setInput }: BaseInputProps) {
           keyboardType={type === 'phone' ? 'number-pad' : 'default'}
         />
         {type === 'password' && <PswdToggleBtn showPswd={showPswd} setShowPswd={setShowPswd} />}
-        {type === 'phone' && !isVerified && <SendVerificationBtn disabled={!isValid} />}
+        {type === 'phone' && !isVerified && <SendVerificationBtn disabled={!isValid || isDup} />}
         {type === 'verificationCode' && <VerifyCodeBtn disabled={!isValid} />}
       </View>
       {!isValid && <Text className='color-[#ff0000]'>{inputTypes[type].invalid}</Text>}
+      {isDup && <Text className='color-[#ff0000]'>이미 사용 중인 {inputTypes[type]['title']}입니다</Text>}
     </View>
   );
 }
