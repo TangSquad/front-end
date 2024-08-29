@@ -8,6 +8,7 @@ export const ENDPOINTS = {
     PHONE_DUPLICATION_CHECK: `${baseUrl}/auth/check/phone`,
     EMAIL_DUPLICATION_CHECK: `${baseUrl}/auth/check/email`,
     NICKNAME_DUPLICATION_CHECK: `${baseUrl}/auth/check/nickname`,
+    SIGNUP: `${baseUrl}/auth/register`,
   },
 };
 

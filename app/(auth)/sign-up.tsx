@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { SafeAreaView, TouchableWithoutFeedback, Keyboard, TouchableOpacity, View, Text } from 'react-native';
+import { SafeAreaView, TouchableWithoutFeedback, Keyboard, TouchableOpacity, View, Text, Alert } from 'react-native';
+import { useMutation } from '@tanstack/react-query';
+import { router } from 'expo-router';
 import { TitledInput, PasswordInput, PhonenumInput } from '../../components/Auth/SignupInput';
 import { PhoneNumberContext } from '../../contexts/PhoneNumberContext';
+import signup from '../../api/auth/signup';
 import { tokens } from '../../constants';
 
 function SignUp() {
@@ -13,9 +16,26 @@ function SignUp() {
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [isCodeSent, setIsCodeSent] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const disabled = !(name && phoneNumber && code && email && password && passwordConfirm && isVerified);
 
-  const handleSignup = () => {
-    // Signup
+  const mutation = useMutation({
+    mutationFn: signup,
+    onSuccess: () => {
+      router.push('(auth)/sign-in');
+    },
+    onError: (error) => {
+      Alert.alert('회원가입 실패', error.message);
+    },
+  });
+
+
+  const handleSignup = async () => {
+    await mutation.mutate({
+      name,
+      phone: phoneNumber,
+      email,
+      password,
+    });
   };
 
   return (
@@ -45,8 +65,9 @@ function SignUp() {
             </View>
           </PhoneNumberContext.Provider>
           <TouchableOpacity
-            className='bg-primary w-full py-16 flex items-center justify-center rounded-10'
+            className={`${disabled ? 'bg-gray-300' : 'bg-primary'} w-full py-16 flex items-center justify-center rounded-10`}
             onPress={handleSignup}
+            disabled={disabled}
           >
             <Text className={`${tokens.bd_16} color-white`}>회원가입</Text>
           </TouchableOpacity>
