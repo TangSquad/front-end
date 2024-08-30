@@ -1,9 +1,12 @@
-
 import { Text, View } from 'react-native';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { router } from 'expo-router';
+import { TokenContext } from '../contexts/TokenContext';
 
 export default function App() {
+  const [accessToken, setAccessToken] = useState('');
+  const [refreshToken, setRefreshToken] = useState('');
+
   useEffect(() => {
     const timer = setTimeout(() => {
       router.push('/(auth)/sign-in');
@@ -12,8 +15,10 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
   return (
-    <View className="w-screen h-screen items-center justify-center bg-white font-sans-md">
-      <Text>GREET!</Text>
-    </View>
+    <TokenContext.Provider value={{ accessToken, setAccessToken, refreshToken, setRefreshToken }}>
+      <View className="w-screen h-screen items-center justify-center bg-white font-sans-md">
+        <Text>GREET!</Text>
+      </View>
+    </TokenContext.Provider>
   );
 }
