@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { SafeAreaView, TouchableWithoutFeedback, Keyboard, TouchableOpacity, View, Text, Alert } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import { TitledInput, PasswordInput, PhonenumInput } from '../../components/Auth/SignupInput';
+import { TokenContext } from '../../contexts/TokenContext';
 import { PhoneNumberContext } from '../../contexts/PhoneNumberContext';
 import signup from '../../api/auth/signup';
 import { tokens } from '../../constants';
@@ -16,11 +17,15 @@ function SignUp() {
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [isCodeSent, setIsCodeSent] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const { setAccessToken, setRefreshToken } = useContext(TokenContext);
+
   const disabled = !(name && phoneNumber && code && email && password && passwordConfirm && isVerified);
 
   const mutation = useMutation({
     mutationFn: signup,
-    onSuccess: () => {
+    onSuccess: (res) => {
+      setAccessToken(res.data.accessToken);
+      setRefreshToken(res.data.refreshToken);
       router.push('(auth)/sign-in');
     },
     onError: (error) => {

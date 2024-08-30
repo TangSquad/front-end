@@ -12,7 +12,11 @@ interface SignupRequest {
 interface SignupResponse {
   success: boolean;
   message: string;
-  data: boolean;
+  data: {
+    accessToken: string,
+    refreshToken: string,
+    type: string,
+  };
 }
 
 const signup = async ({ email, password, name, phone }: SignupRequest): Promise<SignupResponse> => {

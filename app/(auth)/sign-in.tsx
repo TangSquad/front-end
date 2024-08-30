@@ -1,18 +1,29 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
 import { Link, router } from 'expo-router';
 import CustomInput from '../../components/Auth/CustomInput';
 import showToast from '../../utils/toast';
+import { TokenContext } from '../../contexts/TokenContext';
 import { emailSignIn } from '../../api/auth/singin';
 import { tokens } from '../../constants';
 
 function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { setAccessToken, setRefreshToken } = useContext(TokenContext);
 
   const mutation = useMutation({
     mutationFn: emailSignIn,
+    onSuccess: (res) => {
+      setAccessToken(res.data.accessToken);
+      setRefreshToken(res.data.refreshToken);
+      showToast('success', '로그인 성공');
+      router.push('/home');
+    },
+    onError: () => {
+      showToast('error', '로그인 실패.');
+    },
   });
 
   const emailSignin = async () => {
@@ -21,13 +32,7 @@ function SignIn() {
       return;
     }
 
-    try {
-      const data = await mutation.mutateAsync({ email: email, password: password });
-      showToast('success', '로그인 성공');
-      router.push('/home');
-    } catch (error) {
-      showToast('error', '로그인 실패');
-    }
+    await mutation.mutateAsync({ email: email, password: password });
   };
 
   return (
