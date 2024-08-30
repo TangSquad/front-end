@@ -1,6 +1,6 @@
 import axios from 'axios';
-import apiClient from './apiClient';
-import { api } from '../constants';
+import apiClient from '../apiClient';
+import { api } from '../../constants';
 
 interface LoginRequestData {
   email: string;
@@ -17,7 +17,7 @@ interface LoginResponseData {
   };
 }
 
-const loginUser = async ({ email, password }: LoginRequestData): Promise<LoginResponseData> => {
+const emailSignIn = async ({ email, password }: LoginRequestData): Promise<LoginResponseData> => {
   try {
     const response = await apiClient.post<LoginResponseData>(api.ENDPOINTS.AUTH.EMAIL_LOGIN, {
       email,
@@ -37,5 +37,5 @@ const loginUser = async ({ email, password }: LoginRequestData): Promise<LoginRe
 };
 
 export {
-  loginUser,
+  emailSignIn,
 };

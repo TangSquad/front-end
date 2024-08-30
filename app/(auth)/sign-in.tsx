@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Link, router } from 'expo-router';
 import CustomInput from '../../components/Auth/CustomInput';
 import showToast from '../../utils/toast';
-import { loginUser } from '../../api/auth';
+import { emailSignIn } from '../../api/auth/singin';
 import { tokens } from '../../constants';
 
 function SignIn() {
@@ -12,7 +12,7 @@ function SignIn() {
   const [password, setPassword] = useState('');
 
   const mutation = useMutation({
-    mutationFn: loginUser,
+    mutationFn: emailSignIn,
   });
 
   const emailSignin = async () => {
