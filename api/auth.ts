@@ -1,4 +1,5 @@
 import axios from 'axios';
+import apiClient from './apiClient';
 import { api } from '../constants';
 
 interface LoginRequestData {
@@ -18,13 +19,9 @@ interface LoginResponseData {
 
 const loginUser = async ({ email, password }: LoginRequestData): Promise<LoginResponseData> => {
   try {
-    const response = await axios.post<LoginResponseData>(api.ENDPOINTS.AUTH.EMAIL_LOGIN, {
+    const response = await apiClient.post<LoginResponseData>(api.ENDPOINTS.AUTH.EMAIL_LOGIN, {
       email,
       password,
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
 
     return response.data;

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import apiClient from '../apiClient';
 import { api } from '../../constants';
 
 interface CodeRequest {
@@ -27,9 +28,10 @@ interface VerifyResponse {
 
 const sendVerificationCode = async ({ phoneNumber }: CodeRequest): Promise<CodeResponse> => {
   try {
-    const response = await axios.post<CodeResponse>(api.ENDPOINTS.AUTH.SEND_VERIFICATION_CODE, {
+    const response = await apiClient.post<CodeResponse>(api.ENDPOINTS.AUTH.SEND_VERIFICATION_CODE, {
       phoneNumber,
     });
+
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))
@@ -41,13 +43,9 @@ const sendVerificationCode = async ({ phoneNumber }: CodeRequest): Promise<CodeR
 
 const verifyPhoneNumber = async ({ phoneNumber, code }: VerifyData): Promise<VerifyResponse> => {
   try {
-    const response = await axios.post<VerifyResponse>(api.ENDPOINTS.AUTH.VERIFY_PHONE_NUMBER, {
+    const response = await apiClient.post<VerifyResponse>(api.ENDPOINTS.AUTH.VERIFY_PHONE_NUMBER, {
       phoneNumber,
       code,
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
 
     return response.data;

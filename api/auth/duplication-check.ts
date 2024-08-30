@@ -1,4 +1,5 @@
 import axios from 'axios';
+import apiClient from '../apiClient';
 import { api } from '../../constants';
 
 interface PhoneRequestData {
@@ -33,9 +34,10 @@ interface NicknameResponseData {
 
 const checkPhoneDuplication = async ({ phoneNumber }: PhoneRequestData): Promise<PhoneResponseData> => {
   try {
-    const response = await axios.post<PhoneResponseData>(api.ENDPOINTS.AUTH.PHONE_DUPLICATION_CHECK, {
+    const response = await apiClient.post<PhoneResponseData>(api.ENDPOINTS.AUTH.PHONE_DUPLICATION_CHECK, {
       phoneNumber,
     });
+
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))
@@ -47,9 +49,10 @@ const checkPhoneDuplication = async ({ phoneNumber }: PhoneRequestData): Promise
 
 const checkEmailDuplication = async ({ email }: EmailRequestData): Promise<EmailResponseData> => {
   try {
-    const response = await axios.post<EmailResponseData>(api.ENDPOINTS.AUTH.EMAIL_DUPLICATION_CHECK, {
+    const response = await apiClient.post<EmailResponseData>(api.ENDPOINTS.AUTH.EMAIL_DUPLICATION_CHECK, {
       email,
     });
+
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))
@@ -61,7 +64,7 @@ const checkEmailDuplication = async ({ email }: EmailRequestData): Promise<Email
 
 const checkNicknameDuplication = async ({ nickname }: NicknameRequestData): Promise<NicknameResponseData> => {
   try {
-    const response = await axios.post<NicknameResponseData>(api.ENDPOINTS.AUTH.NICKNAME_DUPLICATION_CHECK, {
+    const response = await apiClient.post<NicknameResponseData>(api.ENDPOINTS.AUTH.NICKNAME_DUPLICATION_CHECK, {
       nickname,
     });
     return response.data;

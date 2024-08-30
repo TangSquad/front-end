@@ -1,14 +1,15 @@
-export const baseUrl = 'http://13.125.41.75:8080';
+const baseUrl = 'http://13.125.41.75:8080';
+const getBaseUrl = () => { return baseUrl; };
 
-export const ENDPOINTS = {
+const ENDPOINTS = {
   AUTH: {
-    EMAIL_LOGIN: `${baseUrl}/auth/login`,
-    SEND_VERIFICATION_CODE: `${baseUrl}/auth/verification/phone/send`,
-    VERIFY_PHONE_NUMBER: `${baseUrl}/auth/verification/phone/verify`,
-    PHONE_DUPLICATION_CHECK: `${baseUrl}/auth/check/phone`,
-    EMAIL_DUPLICATION_CHECK: `${baseUrl}/auth/check/email`,
-    NICKNAME_DUPLICATION_CHECK: `${baseUrl}/auth/check/nickname`,
-    SIGNUP: `${baseUrl}/auth/register`,
+    EMAIL_LOGIN: '/auth/login',
+    SEND_VERIFICATION_CODE: '/auth/verification/phone/send',
+    VERIFY_PHONE_NUMBER: '/auth/verification/phone/verify',
+    PHONE_DUPLICATION_CHECK: '/auth/check/phone',
+    EMAIL_DUPLICATION_CHECK: '/auth/check/email',
+    NICKNAME_DUPLICATION_CHECK: '/auth/check/nickname',
+    SIGNUP: '/auth/register',
   },
 };
 
@@ -16,4 +17,5 @@ const api = {
   ENDPOINTS,
 };
 
+export { getBaseUrl };
 export default api;

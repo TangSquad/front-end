@@ -1,4 +1,5 @@
 import axios from 'axios';
+import apiClient from '../apiClient';
 import { api } from '../../constants';
 
 interface SignupRequest {
@@ -16,7 +17,7 @@ interface SignupResponse {
 
 const signup = async ({ email, password, name, phone }: SignupRequest): Promise<SignupResponse> => {
   try {
-    const response = await axios.post<SignupResponse>(api.ENDPOINTS.AUTH.SIGNUP, {
+    const response = await apiClient.post<SignupResponse>(api.ENDPOINTS.AUTH.SIGNUP, {
       email,
       password,
       name,
