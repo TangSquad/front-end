@@ -17,6 +17,7 @@ function SignUp() {
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [isCodeSent, setIsCodeSent] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+
   const { setAccessToken, setRefreshToken } = useContext(TokenContext);
 
   const disabled = !(name && phoneNumber && code && email && password && passwordConfirm && isVerified);
@@ -56,7 +57,7 @@ function SignUp() {
               <PhonenumInput
                 type='phone'
                 setInput={setPhoneNumber}
-                setSecondInput={setCode}
+                setCodeInput={setCode}
               />
               <TitledInput
                 type='email'
@@ -64,8 +65,9 @@ function SignUp() {
               />
               <PasswordInput
                 type='password'
+                input={password}
                 setInput={setPassword}
-                setSecondInput={setPasswordConfirm}
+                setPasswordConfirm={setPasswordConfirm}
               />
             </View>
           </PhoneNumberContext.Provider>
