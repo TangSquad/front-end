@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { TokenProvider } from '../contexts/TokenContext';
+import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { NativeWindStyleSheet } from 'nativewind';
+import { tokens } from '../constants';
 
 NativeWindStyleSheet.setOutput({
   default: 'native',
@@ -27,21 +30,53 @@ const RootLayout = () => {
 
   if(!fontsLoaded && !err) return null;
 
+  const queryClient = new QueryClient();
+
+  const toastConfig = {
+    success: (props) => (
+      <BaseToast
+        {...props}
+        style={{ borderLeftColor: tokens.primary_400 }}
+        text1Style={{ color: tokens.gray_800, fontWeight: 'bold', fontSize: 14 }}
+      />
+    ),
+    error: (props) => (
+      <ErrorToast
+        {...props}
+        style={{ borderLeftColor: 'red' }}
+        text1Style={{ color: tokens.gray_800, fontWeight: 'bold', fontSize: 14 }}
+      />
+    ),
+  };
+  
   return (
-    <Stack screenOptions={{
-      headerTitleAlign: 'center',
-    }}>
-      <Stack.Screen name="index" options={{ headerShown: false }}/>
-      <Stack.Screen name="(tabs)" />
-      <Stack.Screen name="screens/CreateGroup" options={{
-        title: '모임 등록',
-        animation: 'slide_from_bottom',
-      }} />
-      <Stack.Screen name="screens/CreateDiving" options={{
-        title: '다이빙 등록',
-        animation: 'slide_from_bottom',
-      }}/>
-    </Stack>
+    <QueryClientProvider client={queryClient}>
+      <TokenProvider>
+        <Stack screenOptions={{
+          headerTitleAlign: 'center',
+        }}>
+          <Stack.Screen name="index" options={{ headerShown: false }}/>
+          <Stack.Screen name="(auth)/sign-in" options={{
+            animation: 'slide_from_bottom',
+            headerShown: false,
+          }} />
+          <Stack.Screen name="(auth)/sign-up" options={{
+            animation: 'slide_from_right',
+            title: '회원가입',
+          }} />
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="screens/CreateGroup" options={{
+            title: '모임 등록',
+            animation: 'slide_from_bottom',
+          }} />
+          <Stack.Screen name="screens/CreateDiving" options={{
+            title: '다이빙 등록',
+            animation: 'slide_from_bottom',
+          }}/>
+        </Stack>
+        <Toast config={toastConfig}/>
+      </TokenProvider>
+    </QueryClientProvider>
   );
 };
 

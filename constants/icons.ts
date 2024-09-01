@@ -5,6 +5,8 @@ import profile from '../assets/icons/profile.png';
 import group from '../assets/icons/group.png';
 import diving from '../assets/icons/diving.png';
 import plus from '../assets/icons/plus.png';
+import openedEyes from '../assets/icons/opened-eyes.png';
+import closedEyes from '../assets/icons/closed-eyes.png';
 
 export default {
   home,
@@ -14,4 +16,6 @@ export default {
   group,
   diving,
   plus,
+  openedEyes,
+  closedEyes,
 };

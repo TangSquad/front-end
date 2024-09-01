@@ -77,6 +77,7 @@ module.exports = {
       spacing: {
         'fit': 'fit-content',
         1: '1px',
+        2: '2px',
         5: '5px',
         9: '9px',
         10: '10px',
@@ -92,6 +93,8 @@ module.exports = {
         32: '32px',
         36: '36px',
         38: '38px',
+        50: '50px',
+        60: '60px',
         70: '70px',
         100: '100px',
         150: '150px',
