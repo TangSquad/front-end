@@ -1,5 +1,6 @@
 const rg_12 = 'font-rg tracking-rg text-xxsm leading-xxsm';
 const rg_14 = 'font-rg tracking-rg text-xsm leading-xsm';
+const rg_16 = 'font-rg tracking-rg text-sm leading-sm';
 const md_10 = 'font-md tracking-md text-xxxsm leading-xxxsm';
 const md_12 = 'font-md tracking-md text-xxsm leading-xxsm';
 const md_14 = 'font-md tracking-md text-xsm leading-xsm';
@@ -7,6 +8,7 @@ const md_16 = 'font-md tracking-md text-sm leading-sm';
 const bd_14 = 'font-bd tracking-bd text-xsm leading-xsm';
 const bd_16 = 'font-bd tracking-bd text-sm leading-sm';
 const bd_20 = 'font-bd tracking-bd text-md leading-md';
+const bd_24 = 'font-bd tracking-bd text-lg leading-lg';
 const bd_28 = 'font-bd tracking-bd text-xlg leading-xlg';
 
 const primary_100 = '#E4ECFF';
@@ -22,6 +24,7 @@ const gray_800 = '#3B414E';
 export default {
   rg_12,
   rg_14,
+  rg_16,
   md_10,
   md_12,
   md_14,
@@ -29,6 +32,7 @@ export default {
   bd_14,
   bd_16,
   bd_20,
+  bd_24,
   bd_28,
   primary_100,
   primary_400,
