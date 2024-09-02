@@ -1,5 +1,5 @@
 import { TouchableOpacity, Image } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
+import pickImage from '../../utils/pickImage';
 import { images } from '../../constants';
 
 interface ProfileSelectorProps {
@@ -8,21 +8,8 @@ interface ProfileSelectorProps {
   }
 
 function ProfileSelector({ uri, setUri }: ProfileSelectorProps) {
-  const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setUri(result.assets[0].uri);
-    }
-  };
-  
   const handlePress = () => {
-    pickImage();
+    pickImage(setUri);
   };
 
   return (
