@@ -9,8 +9,13 @@ declare module 'react-native-actions-sheet' {
   interface Sheets {
     'certificate-sheet': SheetDefinition<{
       payload: {
-        type: 'organization' | 'level';
+        type: 'organization';
         ref: React.RefObject<ActionSheetRef>;
+        setSelectedOrganization: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
+      } | {
+        type: 'level';
+        ref: React.RefObject<ActionSheetRef>;
+        setSelectedLevel: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
       };
     }>;
   }

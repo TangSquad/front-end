@@ -18,11 +18,28 @@ const levels = [
   'Advanced Open Water Diver',
   'Rescue Diver',
   'Dive master',
-  'Instructor Deevelopment Course',
+  'Instructor Development Course',
   'Course director',
 ];
 
-const CertificateItem = ({ type, item, handleSelect }: { type: 'organization' | 'level' | undefined; item: string; handleSelect: () => void }) => {
+interface CertificateItemProps {
+  type: 'organization' | 'level';
+  item: string;
+  handleSelect: (type: string, item: string) => void;
+}
+
+interface SelectedItemProps extends Omit<CertificateItemProps, 'handleSelect'> {}
+
+const SelectedItem = ({ type, item }: SelectedItemProps): JSX.Element => {
+  return (
+    <View className='relative flex-row justify-between items-center w-fit h-fit mx-16 my-5'>
+      {type === 'organization' && <Image source={images[item]} className='w-32 h-32 mr-12'/>}
+      <Text className={`${tokens.md_16} color-gray-800`}>{item}</Text>
+    </View>
+  );
+};
+
+const CertificateItem = ({ type, item, handleSelect }: CertificateItemProps) => {
   const [isPressed, setIsPressed] = useState(false);
 
   return (
@@ -31,7 +48,7 @@ const CertificateItem = ({ type, item, handleSelect }: { type: 'organization' | 
       className={`flex-row w-full h-52 items-center px-24 ${isPressed ? 'bg-primary-100' : ''}`}
       onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
-      onPress={() => handleSelect()}
+      onPress={() => handleSelect(type, item)}
     >
       {type === 'organization' && <Image source={images[item]} className='mr-24'/>}
       <Text className={`${tokens.rg_16} color-gray-800`}>{item}</Text>
@@ -40,10 +57,18 @@ const CertificateItem = ({ type, item, handleSelect }: { type: 'organization' | 
 };
 
 function CertificateActionSheet({ payload }: SheetProps<'certificate-sheet'>) {
-  const ref = payload?.ref;
-  const type = payload?.type;
+  if (!payload) return null;
 
-  const handleSelectItem = () => {
+  const ref = payload.ref;
+  const type = payload.type;
+
+  const handleSelectItem = (type, item) => {
+    if (type === 'organization' && 'setSelectedOrganization' in payload) {
+      payload.setSelectedOrganization(SelectedItem({ type, item }));
+    } else if (type === 'level' && 'setSelectedLevel' in payload) {
+      payload.setSelectedLevel(SelectedItem({ type, item }));
+    }
+
     ref?.current?.hide();
   };
 
