@@ -18,8 +18,14 @@ const DefaultView = ({ type }: { type: '단체' | '레벨' } ) => {
 function UserInfo() {
   const [uri, setUri] = useState<string | null>(null);
   const [nickname, setNickname] = useState<string>('');
-  const [selectedOrganization, setSelectedOrganization] = useState<JSX.Element | null>(null);
-  const [selectedLevel, setSelectedLevel] = useState<JSX.Element | null>(null);
+  const [selectedOrganization, setSelectedOrganization] = useState<{
+    component: JSX.Element;
+    id: number;
+  } | null>(null);
+  const [selectedLevel, setSelectedLevel] = useState<{
+    component: JSX.Element;
+    id: number;
+   } | null>(null);
 
   const organzizationActionSheetRef = useRef<ActionSheetRef>(null);
   const levelActionSheetRef = useRef<ActionSheetRef>(null);
@@ -41,18 +47,20 @@ function UserInfo() {
               },
             })}
           >
-            {selectedOrganization || <DefaultView type='단체' />}
+            {selectedOrganization?.component || <DefaultView type='단체' />}
           </TouchableOpacity>
           <TouchableOpacity
             className={`flex-1 justify-center items-center border ${selectedLevel ? 'border-primary' : 'border-gray-300'} rounded-10`}
+            disabled={!selectedOrganization}
             onPress={() => SheetManager.show('certificate-sheet', {
               payload: {
                 type: 'level',
                 ref: levelActionSheetRef,
                 setSelectedLevel: setSelectedLevel,
+                organizationId: selectedOrganization?.id || 0,
               },
             })}>
-            {selectedLevel || <DefaultView type='레벨' />}
+            {selectedLevel?.component || <DefaultView type='레벨' />}
           </TouchableOpacity>
         </View>
       </View>

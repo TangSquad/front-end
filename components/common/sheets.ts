@@ -11,11 +11,12 @@ declare module 'react-native-actions-sheet' {
       payload: {
         type: 'organization';
         ref: React.RefObject<ActionSheetRef>;
-        setSelectedOrganization: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
+        setSelectedOrganization: React.Dispatch<React.SetStateAction<{component: JSX.Element; id: number} | null>>;
       } | {
         type: 'level';
         ref: React.RefObject<ActionSheetRef>;
-        setSelectedLevel: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
+        setSelectedLevel: React.Dispatch<React.SetStateAction<{component: JSX.Element; id: number} | null>>;
+        organizationId: number;
       };
     }>;
   }

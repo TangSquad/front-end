@@ -11,6 +11,10 @@ const ENDPOINTS = {
     NICKNAME_DUPLICATION_CHECK: '/auth/check/nickname',
     SIGNUP: '/auth/register',
   },
+  CERTIFICATE: {
+    ORGANIZATION: '/certificate/public/organization',
+    LEVEL: '/certificate/public/{organizationId}/level',
+  },
 };
 
 const api = {
