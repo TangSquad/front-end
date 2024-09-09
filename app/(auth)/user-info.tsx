@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import ProfileSelector from '../../components/Auth/ProfileSelector';
 import { TitledInput } from '../../components/Auth/SignupInput';
 import { ActionSheetRef, SheetManager } from 'react-native-actions-sheet';
-import { tokens } from '../../constants';
+import { tokens, icons } from '../../constants';
 import Plus from '../../assets/icons/plus.png';
 
 const DefaultView = ({ type }: { type: '단체' | '레벨' } ) => {
@@ -26,15 +26,17 @@ function UserInfo() {
     component: JSX.Element;
     id: number;
    } | null>(null);
+  const [certificateImage, setCertificateImage] = useState<string | null>(null);
 
   const organzizationActionSheetRef = useRef<ActionSheetRef>(null);
   const levelActionSheetRef = useRef<ActionSheetRef>(null);
+  const imageActionSheetRef = useRef<ActionSheetRef>(null);
 
   return (
     <View className='flex-1 items-center bg-white p-24'>
       <ProfileSelector uri={uri} setUri={setUri} />
       <TitledInput type='nickname' setInput={setNickname} />
-      <View className='flex-1 items-start w-full'>
+      <View className='flex items-start w-full'>
         <Text className={`${tokens.bd_16} color-primary mb-8`}>자격증</Text>
         <View className='flex-row justify-between w-full'>
           <TouchableOpacity
@@ -64,6 +66,22 @@ function UserInfo() {
           </TouchableOpacity>
         </View>
       </View>
+      <TouchableOpacity
+        className='w-full mt-14 border border-dashed border-gray-300 rounded-10'
+        onPress={() => SheetManager.show('certificate-image-sheet', {
+          payload: {
+            ref: imageActionSheetRef,
+            setUri: setCertificateImage,
+          },
+        })}
+      >
+        <View className='flex justify-center items-center my-44'>
+          <Image source={icons.plus} tintColor={tokens.gray_300} className='w-38 h-38' />
+          <Text className={`${tokens.rg_16} color-gray-400`}>
+            자격증 사진을 첨부하고 인증 받아보세요
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
