@@ -29,7 +29,15 @@
     },
     "plugins": [
       "expo-router",
-      "expo-image-picker"
+      "expo-image-picker",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow TangSquad to access your camera",
+          "microphonePermission": "Allow TangSquad to access your microphone",
+          "recordAudioAndroid": true
+        }
+      ]
     ]
   }
 }

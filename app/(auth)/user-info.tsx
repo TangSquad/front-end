@@ -67,7 +67,7 @@ function UserInfo() {
         </View>
       </View>
       <TouchableOpacity
-        className='w-full mt-14 border border-dashed border-gray-300 rounded-10'
+        className='w-full h-170 mt-14 border border-dashed border-gray-300 rounded-10'
         onPress={() => SheetManager.show('certificate-image-sheet', {
           payload: {
             ref: imageActionSheetRef,
@@ -75,12 +75,15 @@ function UserInfo() {
           },
         })}
       >
-        <View className='flex justify-center items-center my-44'>
-          <Image source={icons.plus} tintColor={tokens.gray_300} className='w-38 h-38' />
-          <Text className={`${tokens.rg_16} color-gray-400`}>
-            자격증 사진을 첨부하고 인증 받아보세요
-          </Text>
-        </View>
+        {certificateImage
+          ? <Image source={{ uri: certificateImage }} className='w-full h-full rounded-10' /> 
+          : <View className='flex justify-center items-center my-44'>
+            <Image source={icons.plus} tintColor={tokens.gray_300} className='w-38 h-38 mb-12' />
+            <Text className={`${tokens.rg_16} color-gray-400`}>
+              자격증 사진을 첨부하고 인증 받아보세요
+            </Text>
+          </View>
+        }
       </TouchableOpacity>
     </View>
   );
