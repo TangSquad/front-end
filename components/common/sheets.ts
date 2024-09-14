@@ -24,7 +24,7 @@ declare module 'react-native-actions-sheet' {
     'certificate-image-sheet': SheetDefinition<{
       payload: {
         ref: React.RefObject<ActionSheetRef>;
-        setUri: React.Dispatch<React.SetStateAction<string | null>>;
+        setUri: React.Dispatch<React.SetStateAction<string>>;
       };
     }>;
   }

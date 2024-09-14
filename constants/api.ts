@@ -10,6 +10,7 @@ const ENDPOINTS = {
     EMAIL_DUPLICATION_CHECK: '/auth/check/email',
     NICKNAME_DUPLICATION_CHECK: '/auth/check/nickname',
     SIGNUP: '/auth/register',
+    ADDITIONAL: '/auth/additional',
   },
   CERTIFICATE: {
     ORGANIZATION: '/certificate/public/organization',

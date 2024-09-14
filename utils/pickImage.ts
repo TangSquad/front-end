@@ -1,6 +1,6 @@
 import * as ImagePicker from 'expo-image-picker';
 
-type SetUri = (uri: string | null) => void;
+type SetUri = (uri: string) => void;
 
 const pickImage = async (setUri: SetUri) => {
   const result = await ImagePicker.launchImageLibraryAsync({

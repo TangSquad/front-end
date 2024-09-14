@@ -3,8 +3,8 @@ import pickImage from '../../utils/pickImage';
 import { images } from '../../constants';
 
 interface AddPhotoProps {
-  uri: string | null;
-  setUri: (image: string | null) => void;
+  uri: string;
+  setUri: (image: string) => void;
 }
 
 function AddPhoto({ uri, setUri }: AddPhotoProps) {
