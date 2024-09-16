@@ -16,6 +16,9 @@ const ENDPOINTS = {
     ORGANIZATION: '/certificate/public/organization',
     LEVEL: '/certificate/public/{organizationId}/level',
   },
+  USER: {
+    PROFILE: '/user/profile',
+  },
 };
 
 const api = {

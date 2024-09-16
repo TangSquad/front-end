@@ -74,6 +74,10 @@ const RootLayout = () => {
             <Stack.Screen name="(auth)/user-info" options={{
               title: '회원정보',
             }}/>
+            <Stack.Screen name="(auth)/user-info-finished" options={{
+              title: '',
+              headerShown: false,
+            }}/>
             <Stack.Screen name="(tabs)" />
             <Stack.Screen name="screens/CreateGroup" options={{
               title: '모임 등록',

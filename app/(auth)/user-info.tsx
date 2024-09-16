@@ -5,6 +5,7 @@ import { TitledInput } from '../../components/Auth/SignupInput';
 import { ActionSheetRef, SheetManager } from 'react-native-actions-sheet';
 import { useMutation } from '@tanstack/react-query';
 import postAdditional from '../../api/auth/addtional';
+import { router } from 'expo-router';
 import showToast from '../../utils/toast';
 import Plus from '../../assets/icons/plus.png';
 import { tokens, icons } from '../../constants';
@@ -41,10 +42,10 @@ function UserInfo() {
   const mutation = useMutation({
     mutationFn: postAdditional,
     onSuccess: () => {
-      // navigate to finish screen
+      router.push('/user-info-finished');
     },
     onError: (error) => {
-      showToast('error', error.message);
+      showToast('error', `등록 실패: ${error.message}`);
     },
   });
 
