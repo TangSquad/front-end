@@ -27,7 +27,7 @@ function SignUp() {
     onSuccess: (res) => {
       setAccessToken(res.data.accessToken);
       setRefreshToken(res.data.refreshToken);
-      router.push('(auth)/sign-in');
+      router.push('/signup-finished');
     },
     onError: (error) => {
       Alert.alert('회원가입 실패', error.message);
