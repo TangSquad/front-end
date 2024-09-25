@@ -8,10 +8,10 @@ import TagGroup from '../../components/CreateGathering/TagGroup';
 import { tokens } from '../../constants';
 import { tags } from '../../data';
 
-function CreateGathering() {
+function CreateGroup() {
   const router = useRouter();
   const [isPublic, setIsPublic] = useState(true);
-  const [thumbnail, setThumbnail] = useState<string | null>(null);
+  const [thumbnail, setThumbnail] = useState<string>('');
   const [name, setName] = useState('');
   const [line, setLine] = useState('');
   const [desc, setDesc] = useState('');
@@ -106,4 +106,4 @@ function CreateGathering() {
   );
 }
 
-export default CreateGathering;
+export default CreateGroup;

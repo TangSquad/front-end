@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 
-function CreateGathering() {
+function CreateDiving() {
   return (
     <View>
       <Text>Create Diving</Text>
@@ -8,4 +8,4 @@ function CreateGathering() {
   );
 }
 
-export default CreateGathering;
+export default CreateDiving;

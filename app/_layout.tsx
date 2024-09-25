@@ -79,11 +79,11 @@ const RootLayout = () => {
               headerShown: false,
             }}/>
             <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="screens/CreateGroup" options={{
+            <Stack.Screen name="screens/create-group" options={{
               title: '모임 등록',
               animation: 'slide_from_bottom',
             }} />
-            <Stack.Screen name="screens/CreateDiving" options={{
+            <Stack.Screen name="screens/create-diving" options={{
               title: '다이빙 등록',
               animation: 'slide_from_bottom',
             }}/>
