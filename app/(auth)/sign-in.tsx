@@ -7,6 +7,7 @@ import showToast from '../../utils/toast';
 import { TokenContext } from '../../contexts/TokenContext';
 import { emailSignIn } from '../../api/auth/singin';
 import { tokens } from '../../constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -16,6 +17,13 @@ function SignIn() {
   const mutation = useMutation({
     mutationFn: emailSignIn,
     onSuccess: (res) => {
+      try {
+        AsyncStorage.setItem('accessToken', res.data.accessToken);
+        AsyncStorage.setItem('refreshToken', res.data.refreshToken);
+      } catch (e) {
+        showToast('error', '토큰을 저장하는데 실패했습니다.');
+      }
+
       setAccessToken(res.data.accessToken);
       setRefreshToken(res.data.refreshToken);
       showToast('success', '로그인 성공');

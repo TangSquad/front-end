@@ -8,15 +8,18 @@ const defaultValue = {
 };
 
 export const TokenContext = createContext(defaultValue);
-export const getAccessToken = () => defaultValue.accessToken;
-export const getRefreshToken = () => defaultValue.refreshToken;
 
 export const TokenProvider = ({ children }: {children: ReactNode}) => {
   const [accessToken, setAccessToken] = useState('');
   const [refreshToken, setRefreshToken] = useState('');
 
   return (
-    <TokenContext.Provider value={{ accessToken, setAccessToken, refreshToken, setRefreshToken }}>
+    <TokenContext.Provider value={{
+      accessToken,
+      setAccessToken, 
+      refreshToken,
+      setRefreshToken, 
+    }}>
       {children}
     </TokenContext.Provider>
   );

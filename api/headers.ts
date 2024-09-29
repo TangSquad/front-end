@@ -1,7 +1,7 @@
-import { getAccessToken } from '../contexts/TokenContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const getHeaders = () => {
-  const accessToken = getAccessToken();
+export const getHeaders = async () => {
+  const accessToken = await AsyncStorage.getItem('accessToken');
 
   const headers = {
     'Content-Type': 'application/json',

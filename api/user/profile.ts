@@ -3,13 +3,13 @@ import apiClient from '../apiClient';
 import { api } from '../../constants';
 
 interface Profile {
-    userId: number;
+    // userId: number;
     name: string;
     nickname: string;
     clubCount: number;
     divingCount: number;
     logBookCount: number;
-    profileImage: string;
+    profileImageUrl: string;
   }
 
 interface ProfileResponse {
@@ -21,7 +21,6 @@ interface ProfileResponse {
 const getMyProfile = async (): Promise<ProfileResponse> => {
   try {
     const response = await apiClient.get<ProfileResponse>(api.ENDPOINTS.USER.PROFILE);
-
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))
