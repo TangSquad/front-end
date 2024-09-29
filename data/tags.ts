@@ -11,10 +11,24 @@ const mood = [
   '계획적인',
   '내향인 환영',
 ];
+const locations = [
+  '서울',
+  '경기도',
+  '인천',
+  '강원도',
+  '경상북도',
+  '경상남도',
+  '전라북도',
+  '전라남도',
+  '충청북도',
+  '충청남도',
+  '제주도',
+];
 const certificates = ['전체', '스쿠버', '오픈워터', '어드벤스', '레스큐', '마스터'];
 
 export default {
   ageGroup,
   mood,
+  locations,
   certificates,
 };

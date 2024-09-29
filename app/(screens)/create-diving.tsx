@@ -22,6 +22,7 @@ function CreateDiving() {
   const [selectedAge, setSelectedAge] = useState<string[]>([]);
   const [selectedMood, setSelectedMood] = useState<string[]>([]);
   const [selectedCert, setSelectedCert] = useState<string[]>([]);
+  const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
 
   const isEmpty = (arr: string[]) => arr.length === 0;
 
@@ -100,6 +101,13 @@ function CreateDiving() {
           title="자격 조건"
           selectedTags={selectedCert}
           setSelectedTags={setSelectedCert}
+        />
+        <TagGroup
+          data={tags.locations}
+          title="활동 지역"
+          limit={1}
+          selectedTags={selectedLocation}
+          setSelectedTags={setSelectedLocation}
         />
         <TagGroup
           data={tags.ageGroup}
