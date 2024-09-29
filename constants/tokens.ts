@@ -13,12 +13,15 @@ const bd_24 = 'font-bd tracking-bd text-lg leading-lg';
 const bd_28 = 'font-bd tracking-bd text-xlg leading-xlg';
 
 const primary_100 = '#E4ECFF';
+const primary_200 = '#BFD3FF';
 const primary_400 = '#5A8CFF';
+const primary_500 = '3371FF';
 const primary_600 = '#0A54FF';
 const gray_50 = 'F3F4F8';
 const gray_300 = '#CED4DF';
 const gray_400 = '#B1B9C9';
 const gray_500 = '#8991A4';
+const gray_700 = '#575E70';
 const gray_800 = '#3B414E';
 
 
@@ -37,11 +40,14 @@ export default {
   bd_24,
   bd_28,
   primary_100,
+  primary_200,
   primary_400,
+  primary_500,
   primary_600,
   gray_50,
   gray_300,
   gray_400,
   gray_500,
+  gray_700,
   gray_800,
 };

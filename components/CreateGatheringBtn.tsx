@@ -11,9 +11,9 @@ function CreateGatheringBtn( { type } : CreateGatheringBtnProps ) {
   
   const handlePress = () => {
     if(type === '모임') {
-      router.push('screens/CreateGroup');
+      router.push('create-group');
     } else {
-      router.push('screens/CreateDiving');
+      router.push('create-diving');
     }
   };
 
