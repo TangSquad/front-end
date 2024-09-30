@@ -79,6 +79,7 @@ const RootLayout = () => {
               headerShown: false,
             }}/>
             <Stack.Screen name="(tabs)" options={{
+              headerShown: false,
               title: '',
             }}/>
             <Stack.Screen name="(screens)/create-group" options={{
