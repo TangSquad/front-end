@@ -2,6 +2,7 @@ import { Text, View, Image, TouchableOpacity, SafeAreaView, Platform } from 'rea
 import { getMyProfile } from '../../api/user/profile';
 import { useQuery } from '@tanstack/react-query';
 import CountItem from '../../components/Profile/CountItem';
+import TopNavigationBar from '../../components/Profile/TopNavigationBar';
 import { images } from '../../constants';
 import { tokens } from '../../constants';
 
@@ -42,6 +43,10 @@ const Profile = () => {
           >
             <Text className={`${tokens.md_12} color-gray-700`}>프로필 편집</Text>
           </TouchableOpacity>
+        </View>
+        <View className='w-full h-full'>
+          <TopNavigationBar />
+          <Text>hi</Text>
         </View>
       </View>
     </SafeAreaView>
