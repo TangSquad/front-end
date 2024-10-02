@@ -19,6 +19,7 @@ const ENDPOINTS = {
   USER: {
     PROFILE: '/user/profile',
     INTRODUCTION: '/user/introduction',
+    EQUIPMENT: '/user/equipment',
   },
 };
 
