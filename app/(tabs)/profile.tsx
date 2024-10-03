@@ -1,4 +1,5 @@
 import { Text, View, Image, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
+import { router } from 'expo-router';
 import { getMyProfile } from '../../api/user/profile';
 import { useQuery } from '@tanstack/react-query';
 import CountItem from '../../components/Profile/CountItem';
@@ -11,6 +12,10 @@ const Profile = () => {
     queryKey: ['profile'],
     queryFn: getMyProfile,
   });
+
+  const goToSettings = () => {
+    router.push('/profile-edit');
+  };
 
   if (isLoading) return <View className='bg-white'></View>;
   if (error) return <Text>Error: {error.message}</Text>;
@@ -38,7 +43,7 @@ const Profile = () => {
           </View>
           <TouchableOpacity
             className='rounded-50 px-8 py-4 justify-center items-center border border-primary-300'
-            onPress={() => {}}
+            onPress={goToSettings}
             activeOpacity={0.8}
           >
             <Text className={`${tokens.md_12} color-gray-700`}>프로필 편집</Text>

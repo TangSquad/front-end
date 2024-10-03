@@ -17,6 +17,7 @@ const primary_200 = '#BFD3FF';
 const primary_400 = '#5A8CFF';
 const primary_500 = '3371FF';
 const primary_600 = '#0A54FF';
+const primary_800 = '#00206B';
 const gray_50 = 'F3F4F8';
 const gray_300 = '#CED4DF';
 const gray_400 = '#B1B9C9';
@@ -44,6 +45,7 @@ export default {
   primary_400,
   primary_500,
   primary_600,
+  primary_800,
   gray_50,
   gray_300,
   gray_400,
