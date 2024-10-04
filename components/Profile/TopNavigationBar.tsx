@@ -1,16 +1,11 @@
 import { Text } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Introduction from './Introduction';
+import LogbookList from './LogbookList';
 import Equipment from './Equipment';
 import { tokens } from '../../constants';
 
 const Tab = createMaterialTopTabNavigator();
-
-const MockComponent = () => {
-  return (
-    <Text>TopNavigationBar</Text>
-  );
-};
 
 export default function TopNavigationBar() {
   return (
@@ -31,7 +26,7 @@ export default function TopNavigationBar() {
       />
       <Tab.Screen
         name='로그북'
-        component={MockComponent}
+        component={LogbookList}
         options={{
           tabBarLabel: ({ color }) => (
             <Text className={`${tokens.md_16}`} style={{ color: color }}>로그북</Text>
