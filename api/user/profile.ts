@@ -3,13 +3,18 @@ import apiClient from '../apiClient';
 import { api } from '../../constants';
 
 interface Profile {
-    // userId: number;
+    userId: number;
+    profileImageUrl: string;
     name: string;
     nickname: string;
     clubCount: number;
     divingCount: number;
     logBookCount: number;
-    profileImageUrl: string;
+    certificationName: string;
+    certificationImageUrl: string;
+    isLogbookOpen: boolean;
+    isLikeOpen: boolean;
+    isEquipmentOpen: boolean;
   }
 
 interface ProfileResponse {
