@@ -1,13 +1,16 @@
-import { View, KeyboardAvoidingView } from 'react-native';
+import { View, KeyboardAvoidingView, Image, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getMyProfile } from '../../api/user/profile';
 import { getMyIntroduction } from '../../api/user/introduction';
 import { getMyEquipment } from '../../api/user/equipment';
+import pickImage from '../../utils/pickImage';
 import { TitledInput } from '../../components/ProfileEdit/CustomInputs';
+import { images } from '../../constants';
 
 export default function Settings() {
   const [name, setName] = useState('');
+  const [profileImageUrl, setProfileImageUrl] = useState('');
   const [nickname, setNickname] = useState('');
   const [introduction, setIntroduction] = useState('');
   const [affiliation, setAffiliation] = useState('');
@@ -29,6 +32,12 @@ export default function Settings() {
   if (isLoading) return <View />;
   if (error) return <View />;
 
+  // 사용자가 선택한 프로필 이미지가 있으면 그 이미지를, 없으면 서버에서 받아온 이미지 확인 후 있으면 그 이미지를, 둘 다 없으면 기본 이미지를 사용
+  const profileDisplayUrl = profileImageUrl ?
+    { uri: profileImageUrl } : data?.profile.data.profileImageUrl ?
+      { uri: data.profile.data.profileImageUrl } :
+      images.profileEdit;
+
   return (
     <KeyboardAvoidingView className='flex-1'>
       <View className='flex-1 bg-gray-50 p-20'>
@@ -42,6 +51,14 @@ export default function Settings() {
                 setInput={setName}
               />
             </View>
+            <TouchableOpacity
+              onPress={() => pickImage(setProfileImageUrl)}
+            >
+              <Image
+                source={profileDisplayUrl}
+                className='w-70 h-70 ml-12 mr-4 rounded-full'
+              />
+            </TouchableOpacity>
           </View>
           <TitledInput
             title='닉네임'
@@ -57,7 +74,7 @@ export default function Settings() {
           />
           <TitledInput
             title='소속'
-            placeholder='키를 입력해주세요'
+            placeholder='소속을 입력해주세요'
             input={data?.introduction.data.affiliation ?? ''}
             setInput={setAffiliation}
           />
