@@ -18,7 +18,7 @@ function TitledInput({ title, placeholder, input, setInput }: TitledInputProps) 
         className={`${tokens.rg_14} color-gray-800`}
         placeholder={placeholder}
         onChangeText={(value) => setInput(value)}
-        value={input}
+        defaultValue={input}
       />
       <GrayLine />
     </View>
