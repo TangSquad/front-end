@@ -5,7 +5,7 @@ import { getMyProfile } from '../../api/user/profile';
 import { getMyIntroduction } from '../../api/user/introduction';
 import { getMyEquipment } from '../../api/user/equipment';
 import pickImage from '../../utils/pickImage';
-import { TitledInput } from '../../components/ProfileEdit/CustomInputs';
+import { TitledInput, HeightWeightInput } from '../../components/ProfileEdit/CustomInputs';
 import { images } from '../../constants';
 
 export default function Settings() {
@@ -15,6 +15,8 @@ export default function Settings() {
   const [introduction, setIntroduction] = useState('');
   const [affiliation, setAffiliation] = useState('');
   const [link, setLink] = useState('');
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['profileAndIntroductionAndEquipment'],
@@ -83,6 +85,12 @@ export default function Settings() {
             placeholder='링크를 추가해주세요'
             input={data?.introduction.data.link ?? ''}
             setInput={setLink}
+          />
+          <HeightWeightInput
+            height={data?.equipment.data.height ? `${data?.equipment.data.height}` : ''}
+            setHeight={setHeight}
+            weight={data?.equipment.data.weight ? `${data?.equipment.data.weight}` : ''}
+            setWeight={setWeight}
           />
         </View>
       </View>
