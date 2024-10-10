@@ -7,7 +7,12 @@ import { tokens } from '../../constants';
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function TopNavigationBar() {
+interface TopNavigationBarProps {
+  isLogBookPublic: boolean;
+  isEquipmentPublic: boolean;
+}
+
+export default function TopNavigationBar({ isLogBookPublic, isEquipmentPublic }: TopNavigationBarProps) {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -24,7 +29,7 @@ export default function TopNavigationBar() {
           ),
         }}
       />
-      <Tab.Screen
+      {isLogBookPublic && <Tab.Screen
         name='로그북'
         component={LogbookList}
         options={{
@@ -32,8 +37,8 @@ export default function TopNavigationBar() {
             <Text className={`${tokens.md_16}`} style={{ color: color }}>로그북</Text>
           ),
         }}
-      />
-      <Tab.Screen
+      />}
+      {isEquipmentPublic && <Tab.Screen
         name='장비'
         component={Equipment}
         options={{
@@ -41,7 +46,7 @@ export default function TopNavigationBar() {
             <Text className={`${tokens.md_16}`} style={{ color: color }}>장비</Text>
           ),
         }}
-      />
+      />}
     </Tab.Navigator>
   );
 }

@@ -6,6 +6,7 @@ import { getMyIntroduction } from '../../api/user/introduction';
 import { getMyEquipment } from '../../api/user/equipment';
 import pickImage from '../../utils/pickImage';
 import { TitledInput, HeightWeightInput } from '../../components/ProfileEdit/CustomInputs';
+import PublicitySwitches from '../../components/ProfileEdit/PublicitySwitches';
 import { images } from '../../constants';
 
 export default function Settings() {
@@ -33,6 +34,9 @@ export default function Settings() {
 
   if (isLoading) return <View />;
   if (error) return <View />;
+
+  const [isLogBookPublic, setIsLogBookPublic] = useState(data?.profile.data.isLogbookOpen ?? false);
+  const [isEquipmentPublic, setIsEquipmentPublic] = useState(data?.profile.data.isEquipmentOpen ?? false);
 
   // 사용자가 선택한 프로필 이미지가 있으면 그 이미지를, 없으면 서버에서 받아온 이미지 확인 후 있으면 그 이미지를, 둘 다 없으면 기본 이미지를 사용
   const profileDisplayUrl = profileImageUrl ?
@@ -85,6 +89,12 @@ export default function Settings() {
             placeholder='링크를 추가해주세요'
             input={data?.introduction.data.link ?? ''}
             setInput={setLink}
+          />
+          <PublicitySwitches
+            isLogBookPublic={isLogBookPublic}
+            isEquipmentPublic={isEquipmentPublic}
+            setIsLogBookPublic={setIsLogBookPublic}
+            setIsEquipmentPublic={setIsEquipmentPublic}
           />
           <HeightWeightInput
             height={data?.equipment.data.height ? `${data?.equipment.data.height}` : ''}

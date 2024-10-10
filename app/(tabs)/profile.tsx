@@ -50,7 +50,10 @@ const Profile = () => {
           </TouchableOpacity>
         </View>
         <View className='w-full h-full'>
-          <TopNavigationBar />
+          <TopNavigationBar
+            isEquipmentPublic={data?.data.isEquipmentOpen ?? true}
+            isLogBookPublic={data?.data.isLogbookOpen ?? true}
+          />
           <Text>hi</Text>
         </View>
       </View>
