@@ -51,7 +51,7 @@ const RootLayout = () => {
       />
     ),
   };
-  
+
   return (
     <QueryClientProvider client={queryClient}>
       <TokenProvider>
@@ -106,12 +106,7 @@ const RootLayout = () => {
                   <Image source={icons.x} style={{ width: 16, height: 16 }} />
                 </TouchableOpacity>
               ),
-              headerRight: () => (
-                <TouchableOpacity onPress={() => router.back()} className='w-32 h-24 flex justify-center'>
-                  <Text className={`${tokens.md_16} color-primary`}>완료</Text>
-                </TouchableOpacity>
-              ),
-            }}/>
+            }} />
           </Stack>
           <Toast config={toastConfig}/>
         </SheetProvider>
