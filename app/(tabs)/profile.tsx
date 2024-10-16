@@ -13,7 +13,7 @@ const Profile = () => {
     queryFn: getMyProfile,
   });
 
-  const goToSettings = () => {
+  const goToProfileEdit = () => {
     router.push('/profile-edit');
   };
 
@@ -43,7 +43,7 @@ const Profile = () => {
           </View>
           <TouchableOpacity
             className='rounded-50 px-8 py-4 justify-center items-center border border-primary-300'
-            onPress={goToSettings}
+            onPress={goToProfileEdit}
             activeOpacity={0.8}
           >
             <Text className={`${tokens.md_12} color-gray-700`}>프로필 편집</Text>
