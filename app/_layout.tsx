@@ -82,6 +82,7 @@ const RootLayout = () => {
             <Stack.Screen name="(tabs)" options={{
               headerShown: false,
               title: '',
+              animation: 'none',
             }}/>
             <Stack.Screen name="(screens)/create-group" options={{
               title: '모임 등록',

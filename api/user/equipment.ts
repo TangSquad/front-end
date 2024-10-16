@@ -2,9 +2,9 @@ import axios from 'axios';
 import apiClient from '../apiClient';
 import { api } from '../../constants';
 
-interface Equipment {
-  height: number;
-  weight: number;
+interface EquipmentType {
+  height: string;
+  weight: string;
   suit: string;
   weightBelt: number;
   bc: string;
@@ -15,7 +15,7 @@ interface Equipment {
 interface EquipmentResponse {
   success: boolean;
   message: string;
-  data: Equipment;
+  data: EquipmentType;
 }
 
 const getMyEquipment = async (): Promise<EquipmentResponse> => {
@@ -32,4 +32,5 @@ const getMyEquipment = async (): Promise<EquipmentResponse> => {
 
 export {
   getMyEquipment,
+  EquipmentType,
 };
