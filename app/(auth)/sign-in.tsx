@@ -1,23 +1,33 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
 import { Link, router } from 'expo-router';
 import CustomInput from '../../components/Auth/CustomInput';
 import showToast from '../../utils/toast';
-import { TokenContext } from '../../contexts/TokenContext';
 import { emailSignIn } from '../../api/auth/singin';
 import { tokens } from '../../constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setAccessToken, setRefreshToken } = useContext(TokenContext);
+  
+  useEffect(() => {
+    AsyncStorage.getItem('accessToken').then((token) => {
+      if (token) AsyncStorage.removeItem('accessToken');
+    });
+  }, []);
 
   const mutation = useMutation({
     mutationFn: emailSignIn,
     onSuccess: (res) => {
-      setAccessToken(res.data.accessToken);
-      setRefreshToken(res.data.refreshToken);
+      try {
+        AsyncStorage.setItem('accessToken', res.data.accessToken);
+        AsyncStorage.setItem('refreshToken', res.data.refreshToken);
+      } catch (e) {
+        showToast('error', '토큰을 저장하는데 실패했습니다.');
+      }
+
       showToast('success', '로그인 성공');
       router.push('/home');
     },

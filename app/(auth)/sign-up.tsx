@@ -1,9 +1,9 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { SafeAreaView, TouchableWithoutFeedback, Keyboard, TouchableOpacity, View, Text, Alert } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
 import { router } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TitledInput, PasswordInput, PhonenumInput } from '../../components/Auth/SignupInput';
-import { TokenContext } from '../../contexts/TokenContext';
 import { PhoneNumberContext } from '../../contexts/PhoneNumberContext';
 import signup from '../../api/auth/signup';
 import { tokens } from '../../constants';
@@ -18,15 +18,13 @@ function SignUp() {
   const [isCodeSent, setIsCodeSent] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
 
-  const { setAccessToken, setRefreshToken } = useContext(TokenContext);
-
   const disabled = !(name && phoneNumber && code && email && password && passwordConfirm && isVerified);
 
   const mutation = useMutation({
     mutationFn: signup,
     onSuccess: (res) => {
-      setAccessToken(res.data.accessToken);
-      setRefreshToken(res.data.refreshToken);
+      AsyncStorage.setItem('accessToken', res.data.accessToken);
+      AsyncStorage.setItem('refreshToken', res.data.refreshToken);
       router.push('/signup-finished');
     },
     onError: (error) => {
