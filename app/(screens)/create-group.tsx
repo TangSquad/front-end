@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import AddPhoto from '../../components/CreateGathering/AddPhoto';
@@ -7,6 +7,7 @@ import PublicPrivateSwitch from '../../components/CreateGathering/PublicPrivateS
 import TagGroup from '../../components/CreateGathering/TagGroup';
 import { tokens } from '../../constants';
 import { tags } from '../../data';
+import MainButton from '../../components/common/MainButton';
 
 function CreateGroup() {
   const router = useRouter();
@@ -103,12 +104,9 @@ function CreateGroup() {
           selectedTags={selectedMood}
           setSelectedTags={setSelectedMood}
         />
-        <TouchableOpacity
-          className='rounded-10 bg-primary mb-70 py-16 justify-center items-center'
-          onPress={handleSubmit}
-        >
-          <Text className={`${tokens.md_16} color-white`}>완료</Text>
-        </TouchableOpacity>
+        <View className='mb-30'>
+          <MainButton title='완료' handlePress={handleSubmit} />
+        </View>
       </View>
     </ScrollView>
   );

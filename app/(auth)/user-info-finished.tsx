@@ -1,8 +1,9 @@
-import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, Image, SafeAreaView } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
 import { getMyProfile } from '../../api/user/profile';
 import { router } from 'expo-router';
 import { tokens, images } from '../../constants';
+import MainButton from '../../components/common/MainButton';
 
 function SignupFinished() {
   const { data } = useQuery({
@@ -22,13 +23,7 @@ function SignupFinished() {
         </Text>
       </View>
       <View className='w-full px-24 pb-16'>
-        <TouchableOpacity
-          onPress={() => router.push('/home')}
-          className='flex items-center justify-center py-16 bg-primary rounded-10'
-          activeOpacity={0.8}
-        >
-          <Text className={`${tokens.bd_16} color-white`}>시작하기</Text>
-        </TouchableOpacity>
+        <MainButton title='시작하기' handlePress={() => router.push('/home')} />
       </View>
     </SafeAreaView>
   );
