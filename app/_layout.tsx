@@ -5,9 +5,9 @@ import { useFonts } from 'expo-font';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { SheetProvider } from 'react-native-actions-sheet';
-import '../components/common/sheets';
+import 'components/common/sheets';
 import { NativeWindStyleSheet } from 'nativewind';
-import { tokens, icons } from '../constants';
+import { tokens, icons } from 'constants/';
 
 NativeWindStyleSheet.setOutput({
   default: 'native',

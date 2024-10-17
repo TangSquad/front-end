@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import ActionSheet, { SheetProps } from 'react-native-actions-sheet';
 import CustomCameraView from './CustomCameraView';
-import pickImage from '../../utils/pickImage';
-import { tokens } from '../../constants';
+import pickImage from 'utils/pickImage';
+import { tokens } from 'constants/';
 
 function ImageActionSheet({ payload }: SheetProps<'certificate-image-sheet'>) {
   if (!payload) return null;

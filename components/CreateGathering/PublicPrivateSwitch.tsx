@@ -1,5 +1,5 @@
 import { View, Text, Switch } from 'react-native';
-import { tokens } from '../../constants';
+import { tokens } from 'constants/';
 
 interface PublicPrivateSwitchProps {
   type: string;

@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
-import { PhoneNumberContext } from '../../contexts/PhoneNumberContext';
+import * as DupCheck from 'api/auth/duplication-check';
+import { PhoneNumberContext } from 'contexts/PhoneNumberContext';
 import PswdToggleBtn from './PswdToggleBtn';
-import * as DupCheck from '../../api/auth/duplication-check';
 import { SendVerificationBtn, VerifyCodeBtn } from './PhoneVerification';
-import { inputTypes } from '../../data';
-import { tokens } from '../../constants';
+import { inputTypes } from 'data/';
+import { tokens } from 'constants/';
 
 interface BaseInputProps {
   type: 'email' | 'password' | 'phone' | 'name' | 'nickname' | 'passwordConfirm' | 'verificationCode';

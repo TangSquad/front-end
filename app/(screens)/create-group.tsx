@@ -1,13 +1,13 @@
 import { ScrollView, View, Text } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import AddPhoto from '../../components/CreateGathering/AddPhoto';
-import CreateGatheringInputSection from '../../components/CreateGatheringInputSection';
-import PublicPrivateSwitch from '../../components/CreateGathering/PublicPrivateSwitch';
-import TagGroup from '../../components/CreateGathering/TagGroup';
-import { tokens } from '../../constants';
-import { tags } from '../../data';
-import MainButton from '../../components/common/MainButton';
+import AddPhoto from 'components/CreateGathering/AddPhoto';
+import CreateGatheringInputSection from 'components/CreateGatheringInputSection';
+import PublicPrivateSwitch from 'components/CreateGathering/PublicPrivateSwitch';
+import TagGroup from 'components/CreateGathering/TagGroup';
+import MainButton from 'components/common/MainButton';
+import { tokens } from 'constants/';
+import { tags } from 'data/';
 
 function CreateGroup() {
   const router = useRouter();

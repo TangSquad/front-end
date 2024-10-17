@@ -1,6 +1,6 @@
-import { View, Text } from 'react-native'
-import { tokens } from '../../constants';
+import { View, Text } from 'react-native';
 import Tag from './Tag';
+import { tokens } from 'constants/';
 
 interface TagGroupProps {
   data: string[];

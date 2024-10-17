@@ -3,10 +3,10 @@ import { SafeAreaView, TouchableWithoutFeedback, Keyboard, View, Alert } from 'r
 import { useMutation } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import MainButton from '../../components/common/MainButton';
-import { TitledInput, PasswordInput, PhonenumInput } from '../../components/Auth/SignupInput';
-import { PhoneNumberContext } from '../../contexts/PhoneNumberContext';
-import signup from '../../api/auth/signup';
+import signup from 'api/auth/signup';
+import MainButton from 'components/common/MainButton';
+import { TitledInput, PasswordInput, PhonenumInput } from 'components/Auth/SignupInput';
+import { PhoneNumberContext } from 'contexts/PhoneNumberContext';
 
 function SignUp() {
   const [name, setName] = useState('');

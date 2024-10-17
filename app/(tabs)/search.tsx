@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native';
-import ToggleNavigationBar from '../../components/ToggleNavigationBar';
-import TopNavigationBar from '../../components/TopNavigationBar';
-import CreateGatheringBtn from '../../components/CreateGatheringBtn';
+import ToggleNavigationBar from 'components/ToggleNavigationBar';
+import TopNavigationBar from 'components/TopNavigationBar';
+import CreateGatheringBtn from 'components/CreateGatheringBtn';
 
 const Search = () => {
   const [selectedTab, setSelectedTab] = useState('모임');  

@@ -1,9 +1,9 @@
 import { View, Text, Image, SafeAreaView } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
-import { getMyProfile } from '../../api/user/profile';
 import { router } from 'expo-router';
-import { tokens, images } from '../../constants';
-import MainButton from '../../components/common/MainButton';
+import { getMyProfile } from 'api/user/profile';
+import MainButton from 'components/common/MainButton';
+import { tokens, images } from 'constants/';
 
 function SignupFinished() {
   const { data } = useQuery({

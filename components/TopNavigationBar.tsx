@@ -1,7 +1,7 @@
 import { Text } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import GatheringList from './GatheringList';
-import tokens from '../constants/tokens';
+import { tokens }  from 'constants/';
 
 interface TopNavigationBarProps {
   type: string;

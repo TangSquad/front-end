@@ -1,7 +1,7 @@
 import { View, Text, Image, SafeAreaView } from 'react-native';
 import { router } from 'expo-router';
-import { tokens, images } from '../../constants';
-import MainButton from '../../components/common/MainButton';
+import { tokens, images } from 'constants/';
+import MainButton from 'components/common/MainButton';
 
 function SignupFinished() {
   return (

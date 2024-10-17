@@ -1,6 +1,6 @@
 import { View, Text, TextInput } from 'react-native';
 import { useRef } from 'react';
-import { tokens } from '../constants';
+import { tokens } from 'constants/';
 
 interface CreateGatheringInputSectionProps {
   flex?: 'row' | '';

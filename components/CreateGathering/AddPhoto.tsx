@@ -1,6 +1,6 @@
 import { TouchableOpacity, Image } from 'react-native';
-import pickImage from '../../utils/pickImage';
-import { images } from '../../constants';
+import pickImage from 'utils/pickImage';
+import { images } from 'constants/';
 
 interface AddPhotoProps {
   uri: string;

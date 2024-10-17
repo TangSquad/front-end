@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
-import { tokens } from '../../constants';
+import { tokens } from 'constants/';
 
 interface TagProps {
   tag: string;

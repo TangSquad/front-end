@@ -1,5 +1,5 @@
 import { Image, TouchableOpacity } from 'react-native';
-import { icons } from '../../constants';
+import { icons } from 'constants/';
 
 interface PswdToggleBtnProps {
   showPswd: boolean;

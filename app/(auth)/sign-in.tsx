@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { SafeAreaView, Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
 import { Link, router } from 'expo-router';
-import CustomInput from '../../components/Auth/CustomInput';
-import showToast from '../../utils/toast';
-import { emailSignIn } from '../../api/auth/singin';
-import MainButton from '../../components/common/MainButton';
-import { tokens } from '../../constants';
+import CustomInput from 'components/Auth/CustomInput';
+import showToast from 'utils/toast';
+import { emailSignIn } from 'api/auth/singin';
+import MainButton from 'components/common/MainButton';
+import { tokens } from 'constants/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SignIn() {

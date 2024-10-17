@@ -1,6 +1,6 @@
 import { TouchableOpacity, Image } from 'react-native';
 import { useRouter } from 'expo-router';
-import { icons } from '../constants';
+import { icons } from 'constants/';
 
 interface CreateGatheringBtnProps {
   type: string;

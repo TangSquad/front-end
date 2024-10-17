@@ -3,7 +3,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Introduction from './Introduction';
 import LogbookList from './LogbookList';
 import Equipment from './Equipment';
-import { tokens } from '../../constants';
+import { tokens } from 'constants/';
 
 const Tab = createMaterialTopTabNavigator();
 

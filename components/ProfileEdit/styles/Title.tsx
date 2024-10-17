@@ -1,5 +1,5 @@
 import { Text } from 'react-native';
-import { tokens } from '../../../constants';
+import { tokens } from 'constants/';
 
 interface TitleProps {
   title: string;

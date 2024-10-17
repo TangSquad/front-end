@@ -4,12 +4,12 @@ import { useRouter } from 'expo-router';
 import DateTimePicker, { DateType } from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
 import AddPhoto from '../../components/CreateGathering/AddPhoto';
-import CreateGatheringInputSection from '../../components/CreateGatheringInputSection';
-import PublicPrivateSwitch from '../../components/CreateGathering/PublicPrivateSwitch';
-import TagGroup from '../../components/CreateGathering/TagGroup';
-import MainButton from '../../components/common/MainButton';
-import { tokens } from '../../constants';
-import { tags } from '../../data';
+import CreateGatheringInputSection from 'components/CreateGatheringInputSection';
+import PublicPrivateSwitch from 'components/CreateGathering/PublicPrivateSwitch';
+import TagGroup from 'components/CreateGathering/TagGroup';
+import MainButton from 'components/common/MainButton';
+import { tokens } from 'constants/';
+import { tags } from 'data/';
 
 function CreateDiving() {
   const router = useRouter();

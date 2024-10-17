@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { TextInput, View, Text, TouchableOpacity, Image } from 'react-native';
-import { tokens } from '../../constants';
-import { icons } from '../../constants';
+import { tokens, icons } from 'constants/';
 
 interface CustomInputProps {
   title: string;
