@@ -6,5 +6,8 @@
     "strict": true,
     "noImplicitAny": false,
     "baseUrl": "./",
+    "paths": {
+      "/*": ["/*"]
+    },
   },
 }
