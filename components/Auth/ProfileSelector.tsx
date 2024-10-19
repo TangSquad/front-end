@@ -7,7 +7,7 @@ interface ProfileSelectorProps {
     setUri: (image: string) => void;
   }
 
-function ProfileSelector({ uri, setUri }: ProfileSelectorProps) {
+export default function ProfileSelector({ uri, setUri }: ProfileSelectorProps) {
   const handlePress = () => {
     pickImage(setUri);
   };
@@ -21,5 +21,3 @@ function ProfileSelector({ uri, setUri }: ProfileSelectorProps) {
     </TouchableOpacity>
   );
 }
-
-export default ProfileSelector;

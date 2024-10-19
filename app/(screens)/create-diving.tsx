@@ -11,7 +11,7 @@ import MainButton from 'components/common/MainButton';
 import { tokens } from 'constants/';
 import { tags } from 'data/';
 
-function CreateDiving() {
+export default function CreateDiving() {
   const router = useRouter();
   const [isPublic, setIsPublic] = useState(true);
   const [thumbnail, setThumbnail] = useState<string>('');
@@ -130,5 +130,3 @@ function CreateDiving() {
     </ScrollView>
   );
 }
-
-export default CreateDiving;

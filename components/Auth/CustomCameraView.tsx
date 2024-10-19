@@ -7,7 +7,7 @@ interface CustomCameraViewProps {
   hideSheet: () => void;
 }
 
-function CustomCameraView({ setUri, hideSheet }: CustomCameraViewProps) {
+export default function CustomCameraView({ setUri, hideSheet }: CustomCameraViewProps) {
   const [permission, requestPermission] = useCameraPermissions();
   const [isReady, setIsReady] = useState(false);
   const MyCameraViewRef = useRef<CameraView>(null);
@@ -46,5 +46,3 @@ function CustomCameraView({ setUri, hideSheet }: CustomCameraViewProps) {
     </View>
   );
 }
-
-export default CustomCameraView;

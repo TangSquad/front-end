@@ -6,7 +6,7 @@ import CountItem from 'components/Profile/CountItem';
 import TopNavigationBar from 'components/Profile/TopNavigationBar';
 import { tokens, images } from 'constants/';
 
-const Profile = () => {
+export default function Profile() {
   const { data, isLoading, error } = useQuery({
     queryKey: ['profile'],
     queryFn: getMyProfile,
@@ -58,6 +58,4 @@ const Profile = () => {
       </View>
     </SafeAreaView>
   );
-};
-
-export default Profile;
+}

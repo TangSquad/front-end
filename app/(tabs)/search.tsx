@@ -4,7 +4,7 @@ import ToggleNavigationBar from 'components/ToggleNavigationBar';
 import TopNavigationBar from 'components/TopNavigationBar';
 import CreateGatheringBtn from 'components/CreateGatheringBtn';
 
-const Search = () => {
+export default function Search() {
   const [selectedTab, setSelectedTab] = useState('모임');  
   
   return (
@@ -14,6 +14,4 @@ const Search = () => {
       <CreateGatheringBtn type={selectedTab}/>
     </SafeAreaView>
   );
-};
-
-export default Search;
+}

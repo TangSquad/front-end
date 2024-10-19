@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import { tokens, images } from 'constants/';
 import MainButton from 'components/common/MainButton';
 
-function SignupFinished() {
+export default function SignupFinished() {
   return (
     <SafeAreaView className='flex-1 items-center justify-center bg-primary-100'>
       <View className='flex-1 items-center justify-center'>
@@ -19,5 +19,3 @@ function SignupFinished() {
     </SafeAreaView>
   );
 }
-
-export default SignupFinished;

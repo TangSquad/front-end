@@ -16,7 +16,7 @@ NativeWindStyleSheet.setOutput({
 // Prevent splash screen from auto hiding before asset loading is complete
 SplashScreen.preventAutoHideAsync();
 
-const RootLayout = () => {
+export default function RootLayout() {
   const [fontsLoaded, err] = useFonts({
     'SpoqaHanSansNeo-Bold': require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
     'SpoqaHanSansNeo-Medium': require('../assets/fonts/SpoqaHanSansNeo-Medium.ttf'),
@@ -111,6 +111,4 @@ const RootLayout = () => {
       </SheetProvider>
     </QueryClientProvider>
   );
-};
-
-export default RootLayout;
+}

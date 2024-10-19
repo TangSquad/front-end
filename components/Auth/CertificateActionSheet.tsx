@@ -47,7 +47,7 @@ const CertificateItem = ({ type, item, handleSelect }: CertificateItemProps) => 
   );
 };
 
-function CertificateActionSheet({ payload }: SheetProps<'certificate-sheet'>) {
+export default function CertificateActionSheet({ payload }: SheetProps<'certificate-sheet'>) {
   if (!payload) return null;
 
   const ref = payload.ref;
@@ -132,5 +132,3 @@ function CertificateActionSheet({ payload }: SheetProps<'certificate-sheet'>) {
     </ActionSheet>
   );
 }
-
-export default CertificateActionSheet;

@@ -9,7 +9,7 @@ interface CustomInputProps {
   setInput: (value: string) => void;
 }
 
-function CustomInput({ title, type, placeholder, setInput }: CustomInputProps) {
+export default function CustomInput({ title, type, placeholder, setInput }: CustomInputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [showPswd, setShowPswd] = useState(false);
 
@@ -40,5 +40,3 @@ function CustomInput({ title, type, placeholder, setInput }: CustomInputProps) {
     </View>
   );
 }
-
-export default CustomInput;

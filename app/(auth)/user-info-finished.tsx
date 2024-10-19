@@ -5,7 +5,7 @@ import { getMyProfile } from 'api/user/profile';
 import MainButton from 'components/common/MainButton';
 import { tokens, images } from 'constants/';
 
-function SignupFinished() {
+export default function SignupFinished() {
   const { data } = useQuery({
     queryKey: ['my-profile'],
     queryFn: getMyProfile,
@@ -28,5 +28,3 @@ function SignupFinished() {
     </SafeAreaView>
   );
 }
-
-export default SignupFinished;

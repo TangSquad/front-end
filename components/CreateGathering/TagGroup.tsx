@@ -10,8 +10,7 @@ interface TagGroupProps {
   setSelectedTags: (selectedTags: string[]) => void;
 }
 
-function TagGroup({ data, title, limit=null, selectedTags, setSelectedTags }: TagGroupProps) {
-
+export default function TagGroup({ data, title, limit=null, selectedTags, setSelectedTags }: TagGroupProps) {
   const handleSelect = (label: string) => {
     const newSelected = selectedTags.includes(label) ? selectedTags.filter(selected => selected !== label) : [...selectedTags, label];
     setSelectedTags(newSelected);
@@ -40,5 +39,3 @@ function TagGroup({ data, title, limit=null, selectedTags, setSelectedTags }: Ta
     </View>
   );
 }
-
-export default TagGroup;

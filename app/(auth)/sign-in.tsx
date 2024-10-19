@@ -9,7 +9,7 @@ import MainButton from 'components/common/MainButton';
 import { tokens } from 'constants/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function SignIn() {
+export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
@@ -82,5 +82,3 @@ function SignIn() {
     </TouchableWithoutFeedback>
   );
 }
-
-export default SignIn;

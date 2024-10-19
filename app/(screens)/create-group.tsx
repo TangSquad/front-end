@@ -9,7 +9,7 @@ import MainButton from 'components/common/MainButton';
 import { tokens } from 'constants/';
 import { tags } from 'data/';
 
-function CreateGroup() {
+export default function CreateGroup() {
   const router = useRouter();
   const [isPublic, setIsPublic] = useState(true);
   const [thumbnail, setThumbnail] = useState<string>('');
@@ -111,5 +111,3 @@ function CreateGroup() {
     </ScrollView>
   );
 }
-
-export default CreateGroup;

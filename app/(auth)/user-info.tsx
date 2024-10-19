@@ -21,7 +21,7 @@ const DefaultView = ({ type }: { type: '단체' | '레벨' } ) => {
   );
 };
 
-function UserInfo() {
+export default function UserInfo() {
   const [uri, setUri] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [selectedOrganization, setSelectedOrganization] = useState<{
@@ -122,5 +122,3 @@ function UserInfo() {
     </View>
   );
 }
-
-export default UserInfo;

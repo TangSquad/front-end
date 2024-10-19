@@ -6,7 +6,7 @@ interface PswdToggleBtnProps {
   setShowPswd: (showPswd: boolean) => void;
 }
 
-function PswdToggleBtn({ showPswd, setShowPswd }: PswdToggleBtnProps) {
+export default function PswdToggleBtn({ showPswd, setShowPswd }: PswdToggleBtnProps) {
   const togglePswd = () => {
     setShowPswd(!showPswd);
   };
@@ -17,5 +17,3 @@ function PswdToggleBtn({ showPswd, setShowPswd }: PswdToggleBtnProps) {
     </TouchableOpacity>
   );
 }
-
-export default PswdToggleBtn;

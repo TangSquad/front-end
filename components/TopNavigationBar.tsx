@@ -9,7 +9,7 @@ interface TopNavigationBarProps {
 
 const Tab = createMaterialTopTabNavigator();
 
-function TopNavigationBar({ type }: TopNavigationBarProps) {
+export default function TopNavigationBar({ type }: TopNavigationBarProps) {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -47,5 +47,3 @@ function TopNavigationBar({ type }: TopNavigationBarProps) {
     </Tab.Navigator>
   );
 }
-
-export default TopNavigationBar;

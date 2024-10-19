@@ -6,7 +6,7 @@ interface ToggleNavigationBarProps {
   setSelectedTab: (tab: string) => void;
 }
 
-function ToggleNavigationBar({ selectedTab, setSelectedTab }: ToggleNavigationBarProps) {
+export default function ToggleNavigationBar({ selectedTab, setSelectedTab }: ToggleNavigationBarProps) {
   const isGroup = (type: string) => type === '모임';
 
   const SelectedItem = ( { title }: { title: string } ) => {
@@ -55,5 +55,3 @@ function ToggleNavigationBar({ selectedTab, setSelectedTab }: ToggleNavigationBa
     </View>
   );
 }
-
-export default ToggleNavigationBar;

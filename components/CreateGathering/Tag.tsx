@@ -8,7 +8,7 @@ interface TagProps {
   handleSelect: (tag: string) => void;
 }
 
-function Tag({ tag, disabled, handleSelect }: TagProps) {
+export default function Tag({ tag, disabled, handleSelect }: TagProps) {
   const [isChecked, setIsChecked] = useState(false);
   const checkedStyle = `${tokens.md_14} bg-white border border-primary-600`;
   const uncheckedStyle = `bg-gray-50 ${tokens.rg_14} border border-gray-50`;
@@ -28,5 +28,3 @@ function Tag({ tag, disabled, handleSelect }: TagProps) {
     </TouchableOpacity>
   );
 }
-
-export default Tag;

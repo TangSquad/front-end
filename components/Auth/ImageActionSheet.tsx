@@ -6,7 +6,7 @@ import CustomCameraView from './CustomCameraView';
 import pickImage from 'utils/pickImage';
 import { tokens } from 'constants/';
 
-function ImageActionSheet({ payload }: SheetProps<'certificate-image-sheet'>) {
+export default function ImageActionSheet({ payload }: SheetProps<'certificate-image-sheet'>) {
   if (!payload) return null;
 
   const { ref, setUri } = payload;
@@ -52,5 +52,3 @@ function ImageActionSheet({ payload }: SheetProps<'certificate-image-sheet'>) {
     </ActionSheet>
   );
 }
-
-export default ImageActionSheet;

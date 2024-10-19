@@ -65,7 +65,7 @@ const mockData = [
   },
 ];
 
-const GatheringList = () => {
+export default function GatheringList() {
   return (
     <FlatList
       data={mockData}
@@ -102,6 +102,4 @@ const GatheringList = () => {
       )}
     />
   );
-};
-
-export default GatheringList;
+}

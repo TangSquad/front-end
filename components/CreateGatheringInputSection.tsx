@@ -11,7 +11,14 @@ interface CreateGatheringInputSectionProps {
   setInput: (value: string) => void;
 }
 
-function CreateGatheringInputSection({ flex='', title, placeholder='', limit=2000, input, setInput }: CreateGatheringInputSectionProps) {
+export default function CreateGatheringInputSection({
+  flex='',
+  title,
+  placeholder='',
+  limit=2000,
+  input,
+  setInput,
+}: CreateGatheringInputSectionProps) {
   const flexRow = 'flex-row justify-between items-center';
   const inputRef = useRef<TextInput>(null);
   const isFlexRow = flex === 'row';
@@ -47,5 +54,3 @@ function CreateGatheringInputSection({ flex='', title, placeholder='', limit=200
     </View>
   );
 }
-
-export default CreateGatheringInputSection;

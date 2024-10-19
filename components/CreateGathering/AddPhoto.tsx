@@ -7,7 +7,7 @@ interface AddPhotoProps {
   setUri: (image: string) => void;
 }
 
-function AddPhoto({ uri, setUri }: AddPhotoProps) {
+export default function AddPhoto({ uri, setUri }: AddPhotoProps) {
   const handlePress = () => {
     pickImage(setUri);
   };
@@ -18,5 +18,3 @@ function AddPhoto({ uri, setUri }: AddPhotoProps) {
     </TouchableOpacity>
   );
 }
-
-export default AddPhoto;

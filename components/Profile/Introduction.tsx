@@ -29,4 +29,4 @@ export default function Introduction() {
       <SubTitle title='이전 다이빙' />
     </ScrollView>
   );
-};
+}

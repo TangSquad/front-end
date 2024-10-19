@@ -8,7 +8,7 @@ import MainButton from 'components/common/MainButton';
 import { TitledInput, PasswordInput, PhonenumInput } from 'components/Auth/SignupInput';
 import { PhoneNumberContext } from 'contexts/PhoneNumberContext';
 
-function SignUp() {
+export default function SignUp() {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [code, setCode] = useState('');
@@ -75,5 +75,3 @@ function SignUp() {
     </TouchableWithoutFeedback>
   );
 }
-
-export default SignUp;

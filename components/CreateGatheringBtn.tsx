@@ -6,7 +6,7 @@ interface CreateGatheringBtnProps {
   type: string;
 }
 
-function CreateGatheringBtn( { type } : CreateGatheringBtnProps ) {
+export default function CreateGatheringBtn( { type } : CreateGatheringBtnProps ) {
   const router = useRouter();
   
   const handlePress = () => {
@@ -26,6 +26,4 @@ function CreateGatheringBtn( { type } : CreateGatheringBtnProps ) {
       <Image source={icons.plus} className='w-38 h-38'/>
     </TouchableOpacity>
   );
-};
-
-export default CreateGatheringBtn;
+}
