@@ -1,9 +1,12 @@
-import { View, Text } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
+import TopNavigationBar from 'components/Logbook/TopNavigationBar';
 
 export default function Logbook() {
   return (
-    <View>
-      <Text>Logbook</Text>
-    </View>
+    <SafeAreaView className='bg-white'>
+      <View className='h-full'>
+        <TopNavigationBar />
+      </View>
+    </SafeAreaView>
   );
 }
