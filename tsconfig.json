@@ -4,6 +4,7 @@
     "jsx": "react-native",
     "module": "commonjs",
     "strict": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "baseUrl": "./",
   },
 }

@@ -1,8 +1,7 @@
 import { Text, View, Image } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
-import { getMyEquipment } from '../../api/user/equipment';
-import { tokens } from '../../constants';
-import { images } from '../../constants';
+import { getMyEquipment } from 'api/user/equipment';
+import { tokens, images } from 'constants/';
 
 const BodyText = ({ children }: { children: React.ReactNode }) => {
   return (

@@ -1,7 +1,7 @@
 import { Text, ScrollView } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
-import { getMyIntroduction } from '../../api/user/introduction';
-import { tokens } from '../../constants';
+import { getMyIntroduction } from 'api/user/introduction';
+import { tokens } from 'constants/';
 
 const SubTitle = ({ title }: { title: string }) => {
   return (
@@ -29,4 +29,4 @@ export default function Introduction() {
       <SubTitle title='이전 다이빙' />
     </ScrollView>
   );
-};
+}

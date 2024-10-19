@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { TextInput, View, Text, TouchableOpacity, Image } from 'react-native';
-import { tokens } from '../../constants';
-import { icons } from '../../constants';
+import { tokens, icons } from 'constants/';
 
 interface CustomInputProps {
   title: string;
@@ -10,7 +9,7 @@ interface CustomInputProps {
   setInput: (value: string) => void;
 }
 
-function CustomInput({ title, type, placeholder, setInput }: CustomInputProps) {
+export default function CustomInput({ title, type, placeholder, setInput }: CustomInputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [showPswd, setShowPswd] = useState(false);
 
@@ -41,5 +40,3 @@ function CustomInput({ title, type, placeholder, setInput }: CustomInputProps) {
     </View>
   );
 }
-
-export default CustomInput;

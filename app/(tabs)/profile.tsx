@@ -1,13 +1,12 @@
 import { Text, View, Image, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
 import { router } from 'expo-router';
-import { getMyProfile } from '../../api/user/profile';
 import { useQuery } from '@tanstack/react-query';
-import CountItem from '../../components/Profile/CountItem';
-import TopNavigationBar from '../../components/Profile/TopNavigationBar';
-import { images } from '../../constants';
-import { tokens } from '../../constants';
+import { getMyProfile } from 'api/user/profile';
+import CountItem from 'components/Profile/CountItem';
+import TopNavigationBar from 'components/Profile/TopNavigationBar';
+import { tokens, images } from 'constants/';
 
-const Profile = () => {
+export default function Profile() {
   const { data, isLoading, error } = useQuery({
     queryKey: ['profile'],
     queryFn: getMyProfile,
@@ -59,6 +58,4 @@ const Profile = () => {
       </View>
     </SafeAreaView>
   );
-};
-
-export default Profile;
+}

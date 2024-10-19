@@ -1,14 +1,15 @@
 import { useState, useRef } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import ProfileSelector from '../../components/Auth/ProfileSelector';
-import { TitledInput } from '../../components/Auth/SignupInput';
 import { ActionSheetRef, SheetManager } from 'react-native-actions-sheet';
 import { useMutation } from '@tanstack/react-query';
-import postAdditional from '../../api/auth/addtional';
 import { router } from 'expo-router';
-import showToast from '../../utils/toast';
-import Plus from '../../assets/icons/plus.png';
-import { tokens, icons } from '../../constants';
+import postAdditional from 'api/auth/addtional';
+import ProfileSelector from 'components/Auth/ProfileSelector';
+import { TitledInput } from 'components/Auth/SignupInput';
+import MainButton from 'components/common/MainButton';
+import showToast from 'utils/toast';
+import Plus from 'assets/icons/plus.png';
+import { tokens, icons } from 'constants/';
 
 
 const DefaultView = ({ type }: { type: '단체' | '레벨' } ) => {
@@ -20,7 +21,7 @@ const DefaultView = ({ type }: { type: '단체' | '레벨' } ) => {
   );
 };
 
-function UserInfo() {
+export default function UserInfo() {
   const [uri, setUri] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [selectedOrganization, setSelectedOrganization] = useState<{
@@ -115,15 +116,9 @@ function UserInfo() {
           }
         </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        className={`w-full py-16 mb-16 ${disabled ? 'bg-gray-300' : 'bg-primary'} rounded-10 flex justify-center items-center`}
-        disabled={disabled}
-        onPress={handleSubmit}
-      >
-        <Text className={`${tokens.bd_16} color-white`}>입력 완료</Text>
-      </TouchableOpacity>
+      <View className='w-full py-16 mb-16'>
+        <MainButton title='입력 완료' handlePress={handleSubmit} disabled={disabled} />
+      </View>
     </View>
   );
 }
-
-export default UserInfo;

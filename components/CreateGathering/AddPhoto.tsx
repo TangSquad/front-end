@@ -1,13 +1,13 @@
 import { TouchableOpacity, Image } from 'react-native';
-import pickImage from '../../utils/pickImage';
-import { images } from '../../constants';
+import pickImage from 'utils/pickImage';
+import { images } from 'constants/';
 
 interface AddPhotoProps {
   uri: string;
   setUri: (image: string) => void;
 }
 
-function AddPhoto({ uri, setUri }: AddPhotoProps) {
+export default function AddPhoto({ uri, setUri }: AddPhotoProps) {
   const handlePress = () => {
     pickImage(setUri);
   };
@@ -18,5 +18,3 @@ function AddPhoto({ uri, setUri }: AddPhotoProps) {
     </TouchableOpacity>
   );
 }
-
-export default AddPhoto;

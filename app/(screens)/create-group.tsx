@@ -1,14 +1,15 @@
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import AddPhoto from '../../components/CreateGathering/AddPhoto';
-import CreateGatheringInputSection from '../../components/CreateGatheringInputSection';
-import PublicPrivateSwitch from '../../components/CreateGathering/PublicPrivateSwitch';
-import TagGroup from '../../components/CreateGathering/TagGroup';
-import { tokens } from '../../constants';
-import { tags } from '../../data';
+import AddPhoto from 'components/CreateGathering/AddPhoto';
+import CreateGatheringInputSection from 'components/CreateGatheringInputSection';
+import PublicPrivateSwitch from 'components/CreateGathering/PublicPrivateSwitch';
+import TagGroup from 'components/CreateGathering/TagGroup';
+import MainButton from 'components/common/MainButton';
+import { tokens } from 'constants/';
+import { tags } from 'data/';
 
-function CreateGroup() {
+export default function CreateGroup() {
   const router = useRouter();
   const [isPublic, setIsPublic] = useState(true);
   const [thumbnail, setThumbnail] = useState<string>('');
@@ -103,15 +104,10 @@ function CreateGroup() {
           selectedTags={selectedMood}
           setSelectedTags={setSelectedMood}
         />
-        <TouchableOpacity
-          className='rounded-10 bg-primary mb-70 py-16 justify-center items-center'
-          onPress={handleSubmit}
-        >
-          <Text className={`${tokens.md_16} color-white`}>완료</Text>
-        </TouchableOpacity>
+        <View className='mb-30'>
+          <MainButton title='완료' handlePress={handleSubmit} />
+        </View>
       </View>
     </ScrollView>
   );
 }
-
-export default CreateGroup;

@@ -1,6 +1,6 @@
 import { registerSheet, SheetDefinition, ActionSheetRef } from 'react-native-actions-sheet';
-import CertificateActionSheet from '../Auth/CertificateActionSheet';
-import ImageActionSheet from '../Auth/ImageActionSheet';
+import CertificateActionSheet from 'components/Auth/CertificateActionSheet';
+import ImageActionSheet from 'components/Auth/ImageActionSheet';
  
 registerSheet('certificate-sheet', CertificateActionSheet);
 registerSheet('certificate-image-sheet', ImageActionSheet);

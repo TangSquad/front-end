@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
-import { SafeAreaView, Text, TouchableOpacity, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { SafeAreaView, Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
 import { Link, router } from 'expo-router';
-import CustomInput from '../../components/Auth/CustomInput';
-import showToast from '../../utils/toast';
-import { emailSignIn } from '../../api/auth/singin';
-import { tokens } from '../../constants';
+import CustomInput from 'components/Auth/CustomInput';
+import showToast from 'utils/toast';
+import { emailSignIn } from 'api/auth/singin';
+import MainButton from 'components/common/MainButton';
+import { tokens } from 'constants/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function SignIn() {
+export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
@@ -62,13 +63,7 @@ function SignIn() {
             placeholder='비밀번호를 입력해주세요.'
             setInput={setPassword}
           />
-          <TouchableOpacity
-            className='flex items-center justify-center w-full h-60 bg-primary rounded-10'
-            activeOpacity={0.8}
-            onPress={emailSignin}
-          >
-            <Text className={`${tokens.bd_16} color-white`}>로그인</Text>
-          </TouchableOpacity>
+          <MainButton title='로그인' handlePress={emailSignin} />
           <View className='flex-row justify-center items-center my-9'>
             <Link href='/find-email'>
               <Text className={`color-gray-300 ${tokens.rg_14}`}>이메일 찾기</Text>
@@ -87,5 +82,3 @@ function SignIn() {
     </TouchableWithoutFeedback>
   );
 }
-
-export default SignIn;

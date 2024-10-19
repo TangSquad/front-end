@@ -1,14 +1,12 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import tokens from '../constants/tokens';
-import GroupIcon from '../assets/icons/group.png';
-import DivingIcon from '../assets/icons/diving.png';
+import { tokens, icons } from 'constants/';
 
 interface ToggleNavigationBarProps {
   selectedTab: string;
   setSelectedTab: (tab: string) => void;
 }
 
-function ToggleNavigationBar({ selectedTab, setSelectedTab }: ToggleNavigationBarProps) {
+export default function ToggleNavigationBar({ selectedTab, setSelectedTab }: ToggleNavigationBarProps) {
   const isGroup = (type: string) => type === '모임';
 
   const SelectedItem = ( { title }: { title: string } ) => {
@@ -20,7 +18,7 @@ function ToggleNavigationBar({ selectedTab, setSelectedTab }: ToggleNavigationBa
         onPress={() => setSelectedTab(title)}
         style={{ shadowColor: tokens.primary_600, shadowOffset: { width:0, height:0 }, shadowOpacity: 0.3, shadowRadius: 8 }}
       >
-        <Image source={isGroup(title) ? GroupIcon : DivingIcon} tintColor={tokens.primary_600} />
+        <Image source={isGroup(title) ? icons.group : icons.diving} tintColor={tokens.primary_600} />
         <Text className={`${tokens.bd_14} color-primary-500 pl-5`}>{title}</Text>
       </TouchableOpacity>
     );
@@ -34,7 +32,7 @@ function ToggleNavigationBar({ selectedTab, setSelectedTab }: ToggleNavigationBa
         className={`z-0 flex-row ${justifyContent} items-center w-full h-30 px-15 bg-primary-300 rounded-50`}
         onPress={() => setSelectedTab(title)}
       >
-        <Image source={isGroup(title) ? GroupIcon : DivingIcon} tintColor={tokens.primary_100} />
+        <Image source={isGroup(title) ? icons.group : icons.diving} tintColor={tokens.primary_100} />
         <Text className={`${tokens.md_14} color-primary-100 pl-5`}>{title}</Text>
       </TouchableOpacity>
     );
@@ -57,5 +55,3 @@ function ToggleNavigationBar({ selectedTab, setSelectedTab }: ToggleNavigationBa
     </View>
   );
 }
-
-export default ToggleNavigationBar;

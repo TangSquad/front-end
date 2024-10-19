@@ -5,9 +5,9 @@ import { useFonts } from 'expo-font';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { SheetProvider } from 'react-native-actions-sheet';
-import '../components/common/sheets';
+import 'components/common/sheets';
 import { NativeWindStyleSheet } from 'nativewind';
-import { tokens, icons } from '../constants';
+import { tokens, icons } from 'constants/';
 
 NativeWindStyleSheet.setOutput({
   default: 'native',
@@ -16,7 +16,7 @@ NativeWindStyleSheet.setOutput({
 // Prevent splash screen from auto hiding before asset loading is complete
 SplashScreen.preventAutoHideAsync();
 
-const RootLayout = () => {
+export default function RootLayout() {
   const [fontsLoaded, err] = useFonts({
     'SpoqaHanSansNeo-Bold': require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
     'SpoqaHanSansNeo-Medium': require('../assets/fonts/SpoqaHanSansNeo-Medium.ttf'),
@@ -111,6 +111,4 @@ const RootLayout = () => {
       </SheetProvider>
     </QueryClientProvider>
   );
-};
-
-export default RootLayout;
+}

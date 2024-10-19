@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import { tokens } from '../../constants';
+import { tokens } from 'constants/';
 
 interface CountItemProps {
   title: string;

@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { Alert, Text, TouchableOpacity } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
-import { PhoneNumberContext } from '../../contexts/PhoneNumberContext';
-import { sendVerificationCode, verifyPhoneNumber } from '../../api/auth/phone-verification';
-import { tokens } from '../../constants';
+import { sendVerificationCode, verifyPhoneNumber } from 'api/auth/phone-verification';
+import { PhoneNumberContext } from 'contexts/PhoneNumberContext';
+import { tokens } from 'constants/';
 
 interface BaseButtonProps {
   title: string;

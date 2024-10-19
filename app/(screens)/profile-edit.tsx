@@ -2,15 +2,15 @@ import { View, KeyboardAvoidingView, Image, TouchableOpacity } from 'react-nativ
 import { useState, useLayoutEffect } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { router, useNavigation } from 'expo-router';
-import { getMyProfile, editMyProfile } from '../../api/user/profile';
-import { getMyIntroduction } from '../../api/user/introduction';
-import { getMyEquipment } from '../../api/user/equipment';
-import pickImage from '../../utils/pickImage';
-import { TitledInput, HeightWeightInput } from '../../components/ProfileEdit/CustomInputs';
-import PublicitySwitches from '../../components/ProfileEdit/PublicitySwitches';
-import TopRightSubmitBtn from '../../components/common/TopRightSubmitBtn';
-import { images } from '../../constants';
-import showToast from '../../utils/toast';
+import { getMyProfile, editMyProfile } from 'api/user/profile';
+import { getMyIntroduction } from 'api/user/introduction';
+import { getMyEquipment } from 'api/user/equipment';
+import { TitledInput, HeightWeightInput } from 'components/ProfileEdit/CustomInputs';
+import PublicitySwitches from 'components/ProfileEdit/PublicitySwitches';
+import TopRightSubmitBtn from 'components/common/TopRightSubmitBtn';
+import showToast from 'utils/toast';
+import pickImage from 'utils/pickImage';
+import { images } from 'constants/';
 
 export default function ProfileEdit() {
   const navigation = useNavigation();

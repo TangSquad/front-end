@@ -1,7 +1,7 @@
 import { Text } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import GatheringList from './GatheringList';
-import tokens from '../constants/tokens';
+import { tokens }  from 'constants/';
 
 interface TopNavigationBarProps {
   type: string;
@@ -9,7 +9,7 @@ interface TopNavigationBarProps {
 
 const Tab = createMaterialTopTabNavigator();
 
-function TopNavigationBar({ type }: TopNavigationBarProps) {
+export default function TopNavigationBar({ type }: TopNavigationBarProps) {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -47,5 +47,3 @@ function TopNavigationBar({ type }: TopNavigationBarProps) {
     </Tab.Navigator>
   );
 }
-
-export default TopNavigationBar;

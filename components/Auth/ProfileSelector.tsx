@@ -1,13 +1,13 @@
 import { TouchableOpacity, Image } from 'react-native';
-import pickImage from '../../utils/pickImage';
-import { images } from '../../constants';
+import pickImage from 'utils/pickImage';
+import { images } from 'constants/';
 
 interface ProfileSelectorProps {
     uri: string;
     setUri: (image: string) => void;
   }
 
-function ProfileSelector({ uri, setUri }: ProfileSelectorProps) {
+export default function ProfileSelector({ uri, setUri }: ProfileSelectorProps) {
   const handlePress = () => {
     pickImage(setUri);
   };
@@ -21,5 +21,3 @@ function ProfileSelector({ uri, setUri }: ProfileSelectorProps) {
     </TouchableOpacity>
   );
 }
-
-export default ProfileSelector;

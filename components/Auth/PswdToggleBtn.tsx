@@ -1,12 +1,12 @@
 import { Image, TouchableOpacity } from 'react-native';
-import { icons } from '../../constants';
+import { icons } from 'constants/';
 
 interface PswdToggleBtnProps {
   showPswd: boolean;
   setShowPswd: (showPswd: boolean) => void;
 }
 
-function PswdToggleBtn({ showPswd, setShowPswd }: PswdToggleBtnProps) {
+export default function PswdToggleBtn({ showPswd, setShowPswd }: PswdToggleBtnProps) {
   const togglePswd = () => {
     setShowPswd(!showPswd);
   };
@@ -17,5 +17,3 @@ function PswdToggleBtn({ showPswd, setShowPswd }: PswdToggleBtnProps) {
     </TouchableOpacity>
   );
 }
-
-export default PswdToggleBtn;

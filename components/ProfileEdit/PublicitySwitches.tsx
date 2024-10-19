@@ -1,7 +1,7 @@
 import { View, Text, Switch } from 'react-native';
 import Title from './styles/Title';
 import GrayLine from './styles/GrayLine';
-import { tokens } from '../../constants';
+import { tokens } from 'constants/';
 
 interface PublicitySwitchesProps {
   isLogBookPublic: boolean;

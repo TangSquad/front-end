@@ -1,7 +1,6 @@
 import { View, Text, Image, FlatList } from 'react-native';
 import TagBox from './styles/TagBox';
-import { tokens } from '../constants';
-import DefaultImg from '../assets/images/default-image.png';
+import { tokens, images } from 'constants/';
 
 const mockData = [
   {
@@ -28,17 +27,53 @@ const mockData = [
     age: ['20대', '30대', '40대'],
     tags: ['편안한', '열정적인'],
   },
+  {
+    id: '3',
+    title: '건국대 스쿠버다이빙 동아리',
+    description: '건국대 스쿠버다이빙 동아리입니다.',
+    src: null,
+    level: ['오픈워터','어드밴스'],
+    date: '2024.03~04',
+    type: ['스쿼드'],
+    members: ['user1', 'user2', 'user3'],
+    age: ['20대', '30대', '40대'],
+    tags: ['편안한', '열정적인'],
+  },
+  {
+    id: '4',
+    title: '건국대 스쿠버다이빙 동아리',
+    description: '건국대 스쿠버다이빙 동아리입니다.',
+    src: null,
+    level: ['오픈워터','어드밴스'],
+    date: '2024.03~04',
+    type: ['스쿼드'],
+    members: ['user1', 'user2', 'user3'],
+    age: ['20대', '30대', '40대'],
+    tags: ['편안한', '열정적인'],
+  },
+  {
+    id: '5',
+    title: '건국대 스쿠버다이빙 동아리',
+    description: '건국대 스쿠버다이빙 동아리입니다.',
+    src: null,
+    level: ['오픈워터','어드밴스'],
+    date: '2024.03~04',
+    type: ['스쿼드'],
+    members: ['user1', 'user2', 'user3'],
+    age: ['20대', '30대', '40대'],
+    tags: ['편안한', '열정적인'],
+  },
 ];
 
-const GatheringList = () => {
+export default function GatheringList() {
   return (
     <FlatList
       data={mockData}
       keyExtractor={(item) => item.id}
       className='h-full'
-      renderItem={({ item }) => (
-        <View className='flex-row items-center gap-x-14 px-24 py-16'>
-          <Image source={item.src ? { uri: item.src } : DefaultImg} className='w-70 h-70 rounded-10' />
+      renderItem={({ item, index }) => (
+        <View key={index} className='flex-row items-center gap-x-14 px-24 py-16'>
+          <Image source={item.src ? { uri: item.src } : images.defaultImage} className='w-70 h-70 rounded-10' />
           <View className='flex-1'>
             <View className='flex-row justify-between'>
               <View className='flex-row'>
@@ -67,6 +102,4 @@ const GatheringList = () => {
       )}
     />
   );
-};
-
-export default GatheringList;
+}

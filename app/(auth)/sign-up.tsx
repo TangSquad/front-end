@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { SafeAreaView, TouchableWithoutFeedback, Keyboard, TouchableOpacity, View, Text, Alert } from 'react-native';
+import { SafeAreaView, TouchableWithoutFeedback, Keyboard, View, Alert } from 'react-native';
 import { useMutation } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { TitledInput, PasswordInput, PhonenumInput } from '../../components/Auth/SignupInput';
-import { PhoneNumberContext } from '../../contexts/PhoneNumberContext';
-import signup from '../../api/auth/signup';
-import { tokens } from '../../constants';
+import signup from 'api/auth/signup';
+import MainButton from 'components/common/MainButton';
+import { TitledInput, PasswordInput, PhonenumInput } from 'components/Auth/SignupInput';
+import { PhoneNumberContext } from 'contexts/PhoneNumberContext';
 
-function SignUp() {
+export default function SignUp() {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [code, setCode] = useState('');
@@ -69,17 +69,9 @@ function SignUp() {
               />
             </View>
           </PhoneNumberContext.Provider>
-          <TouchableOpacity
-            className={`${disabled ? 'bg-gray-300' : 'bg-primary'} w-full py-16 flex items-center justify-center rounded-10`}
-            onPress={handleSignup}
-            disabled={disabled}
-          >
-            <Text className={`${tokens.bd_16} color-white`}>회원가입</Text>
-          </TouchableOpacity>
+          <MainButton title='회원가입' handlePress={handleSignup} disabled={disabled} />
         </View>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 }
-
-export default SignUp;

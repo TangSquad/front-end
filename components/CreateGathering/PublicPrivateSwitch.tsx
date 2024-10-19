@@ -1,5 +1,5 @@
 import { View, Text, Switch } from 'react-native';
-import { tokens } from '../../constants';
+import { tokens } from 'constants/';
 
 interface PublicPrivateSwitchProps {
   type: string;
@@ -7,7 +7,7 @@ interface PublicPrivateSwitchProps {
   setIsPublic: (isPublic: boolean) => void;
 }
 
-function PublicPrivateSwitch({ type, isPublic, setIsPublic }: PublicPrivateSwitchProps) {
+export default function PublicPrivateSwitch({ type, isPublic, setIsPublic }: PublicPrivateSwitchProps) {
   const toggleSwitch = (changedValue) => setIsPublic(changedValue);
   
   return (
@@ -22,5 +22,3 @@ function PublicPrivateSwitch({ type, isPublic, setIsPublic }: PublicPrivateSwitc
     </View>
   );
 }
-
-export default PublicPrivateSwitch;

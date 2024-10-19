@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import ActionSheet, { SheetProps } from 'react-native-actions-sheet';
 import { useMutation } from '@tanstack/react-query';
-import { getOrganizations, OrganizationType } from '../../api/certificate/organizations';
-import { getLevels, LevelType } from '../../api/certificate/levels';
-import { tokens } from '../../constants';
+import { getOrganizations, OrganizationType } from 'api/certificate/organizations';
+import { getLevels, LevelType } from 'api/certificate/levels';
+import { tokens } from 'constants/';
 
 interface OrganizationProps {
   type: 'organization';
@@ -47,7 +47,7 @@ const CertificateItem = ({ type, item, handleSelect }: CertificateItemProps) => 
   );
 };
 
-function CertificateActionSheet({ payload }: SheetProps<'certificate-sheet'>) {
+export default function CertificateActionSheet({ payload }: SheetProps<'certificate-sheet'>) {
   if (!payload) return null;
 
   const ref = payload.ref;
@@ -132,5 +132,3 @@ function CertificateActionSheet({ payload }: SheetProps<'certificate-sheet'>) {
     </ActionSheet>
   );
 }
-
-export default CertificateActionSheet;

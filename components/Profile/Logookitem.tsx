@@ -1,5 +1,5 @@
 import { View, Text, Image } from 'react-native';
-import { tokens, icons } from '../../constants';
+import { tokens, icons } from 'constants/';
 
 interface LogbookItemProps {
   id: string;
