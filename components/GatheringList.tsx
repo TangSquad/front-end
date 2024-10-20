@@ -1,10 +1,11 @@
-import { View, Text, Image, FlatList } from 'react-native';
+import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
+import { router } from 'expo-router';
 import TagBox from './styles/TagBox';
 import { tokens, images } from 'constants/';
 
 const mockData = [
   {
-    id: '1',
+    id: 1,
     title: '서울과기대 스쿠버다이빙 동아리', 
     description: '서울과기대 스쿠버다이빙 동아리입니다.',
     src: 'https://images.unsplash.com/photo-1499390155271-23e4667060f5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -16,7 +17,7 @@ const mockData = [
     tags: ['스쿠버다이빙', '호기심이 많은'],
   },
   {
-    id: '2',
+    id: 2,
     title: '건국대 스쿠버다이빙 동아리',
     description: '건국대 스쿠버다이빙 동아리입니다.',
     src: null,
@@ -28,7 +29,7 @@ const mockData = [
     tags: ['편안한', '열정적인'],
   },
   {
-    id: '3',
+    id: 3,
     title: '건국대 스쿠버다이빙 동아리',
     description: '건국대 스쿠버다이빙 동아리입니다.',
     src: null,
@@ -40,7 +41,7 @@ const mockData = [
     tags: ['편안한', '열정적인'],
   },
   {
-    id: '4',
+    id: 4,
     title: '건국대 스쿠버다이빙 동아리',
     description: '건국대 스쿠버다이빙 동아리입니다.',
     src: null,
@@ -52,7 +53,7 @@ const mockData = [
     tags: ['편안한', '열정적인'],
   },
   {
-    id: '5',
+    id: 5,
     title: '건국대 스쿠버다이빙 동아리',
     description: '건국대 스쿠버다이빙 동아리입니다.',
     src: null,
@@ -66,13 +67,21 @@ const mockData = [
 ];
 
 export default function GatheringList() {
+  const handlePress = (id: number) => {
+    router.push(`diving/${id}`);
+  };
+
   return (
     <FlatList
       data={mockData}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.id.toString()}
       className='h-full'
       renderItem={({ item, index }) => (
-        <View key={index} className='flex-row items-center gap-x-14 px-24 py-16'>
+        <TouchableOpacity
+          key={index}
+          className='flex-row items-center gap-x-14 px-24 py-16'
+          onPress={() => handlePress(item.id)}
+        >
           <Image source={item.src ? { uri: item.src } : images.defaultImage} className='w-70 h-70 rounded-10' />
           <View className='flex-1'>
             <View className='flex-row justify-between'>
@@ -98,7 +107,7 @@ export default function GatheringList() {
               </Text>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       )}
     />
   );

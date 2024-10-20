@@ -28,6 +28,9 @@ const ENDPOINTS = {
     VERIFY_CODE: '/password/verifyCode',
     RESET: '/password/reset',
   },
+  DIVING: {
+    DIVING_BY_ID: '/diving/{divingId}',
+  },
 };
 
 const api = {

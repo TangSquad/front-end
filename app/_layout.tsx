@@ -112,6 +112,14 @@ export default function RootLayout() {
                 </TouchableOpacity>
               ),
             }} />
+            <Stack.Screen name="(screens)/diving/[id]" options={{
+              title: '',
+              headerStyle: {
+                backgroundColor: 'transparent',
+              },
+              headerTintColor: tokens.gray_500,
+              headerTransparent: true,
+            }} />
           </Stack>
           <Toast config={toastConfig}/>
         </SheetProvider>
