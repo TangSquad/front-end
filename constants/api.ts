@@ -29,6 +29,7 @@ const ENDPOINTS = {
     RESET: '/password/reset',
   },
   DIVING: {
+    DIVING: '/diving',
     DIVING_BY_ID: '/diving/{divingId}',
   },
 };
