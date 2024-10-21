@@ -2,6 +2,7 @@ import { FlatList } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
 import { getMyDiving } from 'api/diving/diving';
 import DivingItem from './DivingItem';
+import { GatheringType } from 'types/Gatherings';
 
 const mockData = {
   divingId: 1,
@@ -20,7 +21,7 @@ const mockData = {
   src: '', // temporary
 };
 
-export default function GatheringList() {
+export default function GatheringList(type: GatheringType) {
   const { data, error } = useQuery({
     queryKey: ['diving'],
     queryFn: getMyDiving,

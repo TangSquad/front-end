@@ -1,0 +1,1 @@
+export type GatheringType = '다이빙' | '모임';

@@ -2,14 +2,11 @@ import { Text } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import GatheringList from './Search/GatheringList';
 import { tokens }  from 'constants/';
-
-interface TopNavigationBarProps {
-  type: string;
-}
+import { GatheringType } from 'types/Gatherings';
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function TopNavigationBar({ type }: TopNavigationBarProps) {
+export default function TopNavigationBar({ type }: { type: GatheringType }) {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -19,7 +16,7 @@ export default function TopNavigationBar({ type }: TopNavigationBarProps) {
     >
       <Tab.Screen
         name="찾기"
-        component={GatheringList}
+        component={() => GatheringList(type)}
         options={{
           tabBarLabel: ({ color }) => (
             <Text className={`${tokens.bd_16}`} style={{ color: color }}>{`${type} 찾기`}</Text>
@@ -28,7 +25,7 @@ export default function TopNavigationBar({ type }: TopNavigationBarProps) {
       />
       <Tab.Screen
         name="내"
-        component={GatheringList}
+        component={() => GatheringList(type)}
         options={{
           tabBarLabel: ({ color }) => (
             <Text className={`${tokens.bd_16}`} style={{ color: color }}>{`내 ${type}`}</Text>
@@ -37,7 +34,7 @@ export default function TopNavigationBar({ type }: TopNavigationBarProps) {
       />
       <Tab.Screen
         name="좋아요 한"
-        component={GatheringList}
+        component={() => GatheringList(type)}
         options={{
           tabBarLabel: ({ color }) => (
             <Text className={`${tokens.bd_16}`} style={{ color: color }}>{`좋아요 한 ${type}`}</Text>

@@ -1,15 +1,16 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { tokens, icons } from 'constants/';
+import { GatheringType } from 'types/Gatherings';
 
 interface ToggleNavigationBarProps {
-  selectedTab: string;
-  setSelectedTab: (tab: string) => void;
+  selectedTab: GatheringType;
+  setSelectedTab: (tab: GatheringType) => void;
 }
 
 export default function ToggleNavigationBar({ selectedTab, setSelectedTab }: ToggleNavigationBarProps) {
-  const isGroup = (type: string) => type === '모임';
+  const isGroup = (type: GatheringType) => type === '모임';
 
-  const SelectedItem = ( { title }: { title: string } ) => {
+  const SelectedItem = ( { title }: { title: GatheringType } ) => {
     const position = isGroup(title) ? 'left-0' : 'right-0';
 
     return (
@@ -24,7 +25,7 @@ export default function ToggleNavigationBar({ selectedTab, setSelectedTab }: Tog
     );
   };
   
-  const UnselectedItem = ( { title }: { title: string } ) => {
+  const UnselectedItem = ( { title }: { title: GatheringType } ) => {
     const justifyContent = isGroup(title) ? 'justify-start' : 'justify-end';
     
     return (
