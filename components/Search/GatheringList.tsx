@@ -6,6 +6,7 @@ import { getMyMoim, getMoimAll } from 'api/moim/moim';
 import { getMoimLiked } from 'api/moim/moim-liked';
 import DivingItem from './DivingItem';
 import MoimItem from './MoimItem';
+import NullDataView from './NullDataView';
 import { GatheringType, SectionType } from 'types/Gatherings';
 
 const mockDivingData = {
@@ -44,7 +45,7 @@ const MoimList = ({ sectionType }: GatheringItemProps) => {
     queryFn: getMoimData,
   });
 
-  if (!data) return <Text>{`${sectionType}`} 모임이 없습니다.</Text>;
+  if (!data) return <NullDataView type='모임' sectionType={sectionType} />;
 
   return (
     <FlatList
@@ -72,7 +73,7 @@ const DivingList = ({ sectionType }: GatheringItemProps) => {
     queryFn: getDivingData,
   });
 
-  if (!data) return <Text>{`${sectionType}`} 다이빙이 없습니다.</Text>;
+  if (!data) return <NullDataView type='다이빙' sectionType={sectionType} />;
 
   return (
     <FlatList
