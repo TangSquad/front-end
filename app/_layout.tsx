@@ -106,6 +106,13 @@ export default function RootLayout() {
               </TouchableOpacity>
             ),
           }} />
+          <Stack.Screen name="(screens)/settings" options={{
+            title: '설정',
+            headerTitleStyle: {
+              fontFamily: 'SpoqaHanSansNeo-Medium',
+              color: tokens.gray_700,
+            },
+          }} />
         </Stack>
         <Toast config={toastConfig}/>
       </SheetProvider>

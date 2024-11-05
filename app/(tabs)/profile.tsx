@@ -22,7 +22,7 @@ export default function Profile() {
   return (
     <SafeAreaView className='flex-1 bg-white'>
       {Platform.OS === 'android' && <View className='h-50' />}
-      <View className='p-24'>
+      <View className='px-24 pb-24'>
         <View className='flex-row items-center gap-x-16'>
           <Image
             source={data?.data.profileImageUrl ? { uri: data.data.profileImageUrl } : images.defaultImage}

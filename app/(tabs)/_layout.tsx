@@ -2,6 +2,7 @@ import { View, Text, Image } from 'react-native';
 import { Tabs } from 'expo-router';
 import { icons } from 'constants/';
 import { ImageSourcePropType } from 'react-native';
+import SettingsBtn from 'components/Profile/SettingsBtn';
 
 interface TabIconProps {
   icon: ImageSourcePropType;
@@ -85,8 +86,15 @@ function TabLayout(): JSX.Element {
       <Tabs.Screen 
         name="profile"
         options={{
-          title: 'Profile',
-          headerShown: false,
+          title: '',
+          headerShown: true,
+          headerRight: () => <SettingsBtn />,
+          headerStyle: {
+            shadowColor: 'transparent',
+          },
+          headerRightContainerStyle: {
+            paddingRight: 32,
+          },
           tabBarIcon: ({ color }) => (
             <TabIcon 
               icon={icons.profile}
