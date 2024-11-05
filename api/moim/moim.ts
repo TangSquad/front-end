@@ -44,8 +44,21 @@ const getMoimById = async (moimId: number) => {
   }
 };
 
+const getMoimAll = async () => {
+  try {
+    const response = await apiClient.get<MoimType[]>(api.ENDPOINTS.MOIM.MOIM_ALL);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error))
+      throw new Error(error.response?.data.message || 'Failed to get all moim');
+    else
+      throw new Error('Failed to get all moim');
+  }
+};
+
 export {
   MoimType,
   getMyMoim,
   getMoimById,
+  getMoimAll,
 };

@@ -16,31 +16,43 @@ export default function TopNavigationBar({ type }: { type: GatheringType }) {
     >
       <Tab.Screen
         name="찾기"
-        component={() => GatheringList(type)}
         options={{
           tabBarLabel: ({ color }) => (
             <Text className={`${tokens.bd_16}`} style={{ color: color }}>{`${type} 찾기`}</Text>
           ),
         }}
-      />
+      >
+        {() => GatheringList({
+          type: type,
+          sectionType: '찾기',
+        })}
+      </Tab.Screen>
       <Tab.Screen
         name="내"
-        component={() => GatheringList(type)}
         options={{
           tabBarLabel: ({ color }) => (
             <Text className={`${tokens.bd_16}`} style={{ color: color }}>{`내 ${type}`}</Text>
           ),
         }}
-      />
+      >
+        {() => GatheringList({
+          type: type,
+          sectionType: '내',
+        })}
+      </Tab.Screen>
       <Tab.Screen
         name="좋아요 한"
-        component={() => GatheringList(type)}
         options={{
           tabBarLabel: ({ color }) => (
             <Text className={`${tokens.bd_16}`} style={{ color: color }}>{`좋아요 한 ${type}`}</Text>
           ),
         }}
-      />
+      >
+        {() => GatheringList({
+          type: type,
+          sectionType: '좋아요 한',
+        })}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 }

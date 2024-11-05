@@ -42,8 +42,21 @@ const getDivingById = async (divingId: number) => {
   }
 };
 
+const getDivingAll = async () => {
+  try {
+    const response = await apiClient.get<DivingType[]>(api.ENDPOINTS.DIVING.DIVING_ALL);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error))
+      throw new Error(error.response?.data.message || 'Failed to get all diving');
+    else
+      throw new Error('Failed to get all diving');
+  }
+};
+
 export {
   DivingType,
   getMyDiving,
   getDivingById,
+  getDivingAll,
 };
