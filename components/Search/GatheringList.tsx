@@ -1,10 +1,12 @@
-import { FlatList } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
 import { getMyDiving } from 'api/diving/diving';
+import { getMyMoim } from 'api/moim/moim';
 import DivingItem from './DivingItem';
+import MoimItem from './MoimItem';
 import { GatheringType } from 'types/Gatherings';
 
-const mockData = {
+const mockDivingData = {
   divingId: 1,
   userId: 1,
   divingName: '서울과기대 스쿠버다이빙 동아리', 
@@ -21,19 +23,67 @@ const mockData = {
   src: '', // temporary
 };
 
-export default function GatheringList(type: GatheringType) {
+const mockMoimData = {
+  id: 1,
+  userId: 1,
+  anonymous: false,
+  moimName: '서울과기대 스쿠버다이빙 동아리', 
+  moimIntro: '서울과기대 스쿠버다이빙 동아리입니다.',
+  limitPeople: 10,
+  licenseLimit: '전체',
+  age: 20,
+  moimDetails: '',
+  expense: 0,
+  locationOne: '서울',
+  locationTwo: '경기',
+  locationThree: '',
+  moodOne: '스쿠버다이빙',
+  moodTwo: '호기심이 많은',
+  src: '', // temporary
+};
+
+const MoimList = () => {
+  const { data, error } = useQuery({
+    queryKey: ['moim'],
+    queryFn: getMyMoim,
+  });
+
+  if (!data) return <Text>Loading...</Text>;
+
+  return (
+    <FlatList
+      data={[mockMoimData]}
+      className='h-full bg-white'
+      renderItem={({ item, index }) => (
+        <MoimItem item={item} index={index} />
+      )}
+    />
+  );
+};
+
+const DivingList = () => {
   const { data, error } = useQuery({
     queryKey: ['diving'],
     queryFn: getMyDiving,
   });
 
+  if (!data) return <Text>Loading...</Text>;
+
   return (
     <FlatList
-      data={[mockData]}
+      data={[mockDivingData]}
       className='h-full bg-white'
       renderItem={({ item, index }) => (
         <DivingItem item={item} index={index} />
       )}
     />
+  );
+};
+
+export default function GatheringList(type: GatheringType) {
+  return (
+    <View>
+      {type === '모임' ? <MoimList /> : <DivingList />}
+    </View>
   );
 }

@@ -120,6 +120,14 @@ export default function RootLayout() {
               headerTintColor: tokens.gray_500,
               headerTransparent: true,
             }} />
+            <Stack.Screen name="(screens)/moim/[id]" options={{
+              title: '',
+              headerStyle: {
+                backgroundColor: 'transparent',
+              },
+              headerTintColor: tokens.gray_500,
+              headerTransparent: true,
+            }} />
           </Stack>
           <Toast config={toastConfig}/>
         </SheetProvider>

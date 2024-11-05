@@ -28,6 +28,10 @@ const ENDPOINTS = {
     VERIFY_CODE: '/password/verifyCode',
     RESET: '/password/reset',
   },
+  MOIM: {
+    MOIM: '/moim',
+    MOIM_BY_ID: '/moim/{moimId}',
+  },
   DIVING: {
     DIVING: '/diving',
     DIVING_BY_ID: '/diving/{divingId}',

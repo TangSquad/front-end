@@ -3,9 +3,10 @@ import { SafeAreaView } from 'react-native';
 import ToggleNavigationBar from 'components/ToggleNavigationBar';
 import TopNavigationBar from 'components/TopNavigationBar';
 import CreateGatheringBtn from 'components/CreateGatheringBtn';
+import { GatheringType } from 'types/Gatherings';
 
 export default function Search() {
-  const [selectedTab, setSelectedTab] = useState('모임');  
+  const [selectedTab, setSelectedTab] = useState<GatheringType>('모임');  
   
   return (
     <SafeAreaView className='flex-1'>
