@@ -11,6 +11,7 @@ import x from 'assets/icons/x.png';
 import location from 'assets/icons/location.png';
 import emptyHeart from 'assets/icons/empty-heart.png';
 import settings from 'assets/icons/settings.png';
+import arrowRight from 'assets/icons/arrow-right.png';
 
 export default {
   home,
@@ -26,4 +27,5 @@ export default {
   location,
   emptyHeart,
   settings,
+  arrowRight,
 };
