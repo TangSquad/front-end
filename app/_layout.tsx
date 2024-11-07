@@ -141,6 +141,9 @@ export default function RootLayout() {
                 headerTintColor: tokens.gray_500,
                 headerTransparent: true,
               }} />
+              <Stack.Screen name="(screens)/chat-list" options={{
+                title: '채팅',
+              }}/>
             </Stack>
             <Toast config={toastConfig}/>
           </LogbookProvider>

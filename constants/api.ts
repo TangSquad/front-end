@@ -52,6 +52,11 @@ const ENDPOINTS = {
     DIVING_UNLIKE: '/diving/unlike/{divingId}',
     DIVING_JOIN: '/diving/join/{divingId}',
   },
+  CHAT: {
+    ROOM: {
+      MY: '/chat/myrooms',
+    },
+  },
   UPLOAD: '/upload',
 };
 
