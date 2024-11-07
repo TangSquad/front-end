@@ -21,6 +21,11 @@ const ENDPOINTS = {
     INTRODUCTION: '/user/introduction',
     EQUIPMENT: '/user/equipment',
   },
+  CHAT: {
+    ROOM: {
+      MY: '/chat/myrooms',
+    },
+  },
 };
 
 const api = {

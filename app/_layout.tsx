@@ -84,6 +84,9 @@ export default function RootLayout() {
               title: '',
               animation: 'none',
             }}/>
+            <Stack.Screen name="(screens)/chat-list" options={{
+              title: '채팅',
+            }}/>
             <Stack.Screen name="(screens)/create-group" options={{
               title: '모임 등록',
               animation: 'slide_from_bottom',

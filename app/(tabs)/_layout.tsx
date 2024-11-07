@@ -1,7 +1,8 @@
 import { View, Text, Image } from 'react-native';
-import { Tabs } from 'expo-router';
+import { Tabs, router } from 'expo-router';
 import { icons } from 'constants/';
 import { ImageSourcePropType } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface TabIconProps {
   icon: ImageSourcePropType;
@@ -43,8 +44,16 @@ function TabLayout(): JSX.Element {
       <Tabs.Screen
         name="home"
         options={{
-          title: 'Home',
-          headerShown: false,
+          title: '',
+          headerShown: true,
+          headerRight: () => (
+            <TouchableOpacity onPress={() => router.push('chat-list')}>
+              <Text>채팅</Text>
+            </TouchableOpacity>
+          ),
+          headerRightContainerStyle: {
+            paddingRight: 32,
+          },
           tabBarIcon: ({ color }) => (
             <TabIcon 
               icon={icons.home}
