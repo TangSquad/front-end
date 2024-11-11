@@ -8,7 +8,9 @@ export default function MenuList() {
   const renderSideComponent = (item: string) => {
     switch (item) {
     case '알림 허용': return <Switch />;
-    case '로그아웃': return null;
+    case '로그아웃':
+    case '회원탈퇴':
+      return null;
     default: return <Image source={icons.arrowRight} />;
     }
   };
