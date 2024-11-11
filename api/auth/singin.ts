@@ -36,6 +36,21 @@ const emailSignIn = async ({ email, password }: LoginRequestData): Promise<Login
   }
 };
 
+const kakaoSignIn = async (): Promise<LoginResponseData> => {
+  try {
+    const response = await apiClient.post<LoginResponseData>(api.ENDPOINTS.AUTH.KAKAO_LOGIN);
+
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data.message || 'Failed to login');
+    } else {
+      throw new Error('Failed to login');
+    }
+  }
+};
+
 export {
   emailSignIn,
+  kakaoSignIn,
 };

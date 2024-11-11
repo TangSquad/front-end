@@ -1,9 +1,10 @@
-const baseUrl = 'http://13.125.41.75:8080';
+const baseUrl = 'https://api.tangsquad.com';
 const getBaseUrl = () => { return baseUrl; };
 
 const ENDPOINTS = {
   AUTH: {
     EMAIL_LOGIN: '/auth/login',
+    KAKAO_LOGIN: '/auth/login/kakao',
     SEND_VERIFICATION_CODE: '/auth/verification/phone/send',
     VERIFY_PHONE_NUMBER: '/auth/verification/phone/verify',
     PHONE_DUPLICATION_CHECK: '/auth/check/phone',
