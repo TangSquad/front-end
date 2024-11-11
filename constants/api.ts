@@ -12,6 +12,7 @@ const ENDPOINTS = {
     NICKNAME_DUPLICATION_CHECK: '/auth/check/nickname',
     SIGNUP: '/auth/register',
     ADDITIONAL: '/auth/additional',
+    DELETE_ACCOUNT: '/auth/withdraw',
   },
   CERTIFICATE: {
     ORGANIZATION: '/certificate/public/organization',
