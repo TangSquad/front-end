@@ -1,4 +1,4 @@
-import { Text, SectionList, Image, TouchableOpacity, Switch } from 'react-native';
+import { Text, SectionList, Image, TouchableOpacity, Switch, Alert } from 'react-native';
 import { router } from 'expo-router';
 import { deleteAccount } from 'api/auth/delete-acct';
 import { resetToken } from 'utils/tokenHandler';
@@ -24,13 +24,25 @@ export default function MenuList() {
     }
   };
 
+  const showAcctDeleteAlert = () => {
+    Alert.alert('회원탈퇴', '정말 탈퇴하시겠습니까? 탈퇴 시 모든 정보가 삭제됩니다.', [
+      {
+        text: '취소',
+      },
+      {
+        text: '확인',
+        onPress: () => handleDeleteAccount(),
+      },
+    ]);
+  };
+
   const handlePress = (item: string) => {
     switch (item) {
     case '로그아웃':
       handleLogout();
       break;
     case '회원탈퇴':
-      handleDeleteAccount();
+      showAcctDeleteAlert();
       break;
     default:
       break;
@@ -47,6 +59,8 @@ export default function MenuList() {
     }
   };
 
+  const isDeleteAccount = (item: string) => item === '회원탈퇴';
+
   return (
     <SectionList
       sections={settingsMenuList}
@@ -61,7 +75,9 @@ export default function MenuList() {
           disabled={isDisabled(item)}
           onPress={() => handlePress(item)}
         >
-          <Text className={`${tokens.rg_14} color-gray-800`}>{item}</Text>
+          <Text className={`${tokens.rg_14} ${isDeleteAccount(item) ? 'color-[#ff0000]': 'color-gray-800'}`}>
+            {item}
+          </Text>
           {renderSideComponent(item)}
         </TouchableOpacity>
       )}
