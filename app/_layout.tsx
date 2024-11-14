@@ -62,7 +62,11 @@ export default function RootLayout() {
             <Stack.Screen name="index" options={{ headerShown: false }}/>
             <Stack.Screen name="(auth)/sign-in" options={{
               animation: 'slide_from_bottom',
+              title: '',
               headerShown: false,
+            }} />
+            <Stack.Screen name="(auth)/reset-password" options={{
+              title: '비밀번호 찾기',
             }} />
             <Stack.Screen name="(auth)/sign-up" options={{
               animation: 'slide_from_right',

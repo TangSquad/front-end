@@ -107,7 +107,7 @@ export default function SignIn() {
               <Text className={`color-gray-500 ${tokens.rg_14}`}>이메일 찾기</Text>
             </Link>
             <Text className='color-gray-300 px-12'>|</Text>
-            <Link href='/find-password'>
+            <Link href='/reset-password'>
               <Text className={`color-gray-500 ${tokens.rg_14}`}>비밀번호 찾기</Text>
             </Link>
             <Text className='color-gray-300 px-12'>|</Text>
