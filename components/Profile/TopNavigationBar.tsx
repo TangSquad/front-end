@@ -1,7 +1,7 @@
 import { Text } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Introduction from './Introduction';
-import LogbookList from './LogbookList';
+import LogbookList from 'components/Logbook/LogbookList';
 import Equipment from './Equipment';
 import { tokens } from 'constants/';
 

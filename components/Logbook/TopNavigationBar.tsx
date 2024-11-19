@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import LogbookList from './LogbookList';
 import { tokens } from 'constants/';
 
 const Tab = createMaterialTopTabNavigator();
@@ -16,7 +17,7 @@ export default function TopNavigationBar() {
         }}
       >
         <Tab.Screen name='내 로그북'
-          component={Dummy}
+          component={LogbookList}
           options={{
             tabBarLabel: ({ color }) => (
               <Text className={`${tokens.bd_16}`} style={{ color: color }}>내 로그북</Text>
