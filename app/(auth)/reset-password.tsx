@@ -42,11 +42,12 @@ export default function ResetPassword() {
 
   const mutationForCode = useMutation({
     mutationFn: sendCode,
-    onSuccess: () => {
-      handleTransition(1);
+    onSuccess: (data) => {
+      if (data.success) handleTransition(1);
+      else showToast('error', '이메일이 올바르지 않거나 존재하지 않습니다.');
     },
     onError: () => {
-      showToast('error', '코드 전송에 실패했습니다. 올바른 이메일을 입력해주세요.');
+      showToast('error', '데이터 전송 중 에러가 발생했습니다. 잠시후 다시 시도해주세요.');
     },
   });
 
