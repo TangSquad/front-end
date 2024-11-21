@@ -6,8 +6,6 @@ import { tokens } from 'constants/';
 const Tab = createMaterialTopTabNavigator();
 
 export default function TopNavigationBar() {
-  const Dummy = () => ( <View><Text>hihi</Text></View> );
-
   return (
     <View className='flex-1'>
       <Tab.Navigator
@@ -17,22 +15,24 @@ export default function TopNavigationBar() {
         }}
       >
         <Tab.Screen name='내 로그북'
-          component={LogbookList}
           options={{
             tabBarLabel: ({ color }) => (
               <Text className={`${tokens.bd_16}`} style={{ color: color }}>내 로그북</Text>
             ),
           }}
-        />
+        >
+          {() => <LogbookList type='my' />}
+        </Tab.Screen>
         <Tab.Screen
           name='좋아요 한 로그북'
-          component={Dummy}
           options={{
             tabBarLabel: ({ color }) => (
               <Text className={`${tokens.bd_16}`} style={{ color: color }}>좋아요 한 로그북</Text>
             ),
           }}
-        />
+        >
+          {() => <LogbookList type='liked' />}
+        </Tab.Screen>
       </Tab.Navigator>
     </View>
   );

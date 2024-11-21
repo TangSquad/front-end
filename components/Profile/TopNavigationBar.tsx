@@ -1,7 +1,6 @@
 import { Text } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Introduction from './Introduction';
-import LogbookList from 'components/Logbook/LogbookList';
 import Equipment from './Equipment';
 import { tokens } from 'constants/';
 
@@ -31,7 +30,7 @@ export default function TopNavigationBar({ isLogBookPublic, isEquipmentPublic }:
       />
       {isLogBookPublic && <Tab.Screen
         name='로그북'
-        component={LogbookList}
+        component={() => <></>}
         options={{
           tabBarLabel: ({ color }) => (
             <Text className={`${tokens.md_16}`} style={{ color: color }}>로그북</Text>

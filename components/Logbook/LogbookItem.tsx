@@ -1,9 +1,10 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Logbook } from 'api/logbook/my-logbook';
+import { LikedLogbook } from 'api/logbook/liked-logbook';
 import { tokens, icons, images } from 'constants/';
 
 interface LogbookItemProps {
-  item: Logbook;
+  item: Logbook | LikedLogbook;
   index: number;
 }
 

@@ -30,6 +30,7 @@ const ENDPOINTS = {
   },
   LOGBOOK: {
     MY_LOGBOOK: '/logbook',
+    LIKED_LOGBOOK: '/logbook/like',
   },
   MOIM: {
     MOIM: '/moim',
