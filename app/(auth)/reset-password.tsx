@@ -1,10 +1,14 @@
-import { View, KeyboardAvoidingView, Text, Alert } from 'react-native';
+import { View, KeyboardAvoidingView, Text, ActivityIndicator } from 'react-native';
 import { useState } from 'react';
 import { router } from 'expo-router';
+import { useMutation } from '@tanstack/react-query';
+import { sendCode } from 'api/auth/password/reset-pswd';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, runOnJS } from 'react-native-reanimated';
+
 import Input from 'components/Auth/ResetPassword/Input';
 import MainButton from 'components/common/MainButton';
 import { tokens } from 'constants/';
+import showToast from 'utils/toast';
 
 export default function ResetPassword() {
   const [email, setEmail] = useState('');
@@ -36,9 +40,18 @@ export default function ResetPassword() {
     });
   };
 
+  const mutationForCode = useMutation({
+    mutationFn: sendCode,
+    onSuccess: () => {
+      handleTransition(1);
+    },
+    onError: () => {
+      showToast('error', '코드 전송에 실패했습니다. 올바른 이메일을 입력해주세요.');
+    },
+  });
+
   const handleSendCode = () => {
-    // 이메일로 코드 전송
-    handleTransition(1);
+    mutationForCode.mutate(email);
   };
 
   const handleVerifyCode = () => {
@@ -47,28 +60,29 @@ export default function ResetPassword() {
   };
 
   const handleResetPassword = () => {
+    // 비밀번호 재설정
     handleTransition(3);
   };
 
   return (
     <KeyboardAvoidingView className='w-full h-full items-center bg-white px-26 py-20'>
+      {mutationForCode.isPending && <ActivityIndicator className='absolute top-[280]' size='large' color={tokens.primary_700} />}
       <View className='w-full flex-1'>
         <Animated.View className='w-full h-full flex-1 justify-center items-center mb-100' style={currentScreenStyle}>
           {step === 0 && 
             <>
-              <Input type='email' />
+              <Input type='email' input={email} setInput={setEmail} />
               <View className='h-20'/>
               <MainButton title='이메일로 코드 전송' handlePress={handleSendCode} />
             </> }
           {step === 1 && 
             <>
-              <Input type='code' />
+              <Input type='code' input={code} setInput={setCode}/>
               <View className='h-20'/>
               <MainButton title='인증하기' handlePress={handleVerifyCode} />
             </> }
           {step === 2 && 
             <>
-              <Input type='email' />
               <View className='h-10'/>
               <MainButton title='비밀번호 재설정' handlePress={handleResetPassword} />
             </> }

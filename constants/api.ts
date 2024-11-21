@@ -23,6 +23,11 @@ const ENDPOINTS = {
     INTRODUCTION: '/user/introduction',
     EQUIPMENT: '/user/equipment',
   },
+  PASSWORD: {
+    SEND_CODE: '/password/sendCode',
+    VERIFY_CODE: '/password/verifyCode',
+    RESET: '/password/reset',
+  },
 };
 
 const api = {
