@@ -2,7 +2,7 @@ import { View, KeyboardAvoidingView, Text, ActivityIndicator } from 'react-nativ
 import { useState } from 'react';
 import { router } from 'expo-router';
 import { useMutation } from '@tanstack/react-query';
-import { sendCode } from 'api/auth/password/reset-pswd';
+import { sendCode, verifyCode } from 'api/auth/password/reset-pswd';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, runOnJS } from 'react-native-reanimated';
 
 import Input from 'components/Auth/ResetPassword/Input';
@@ -11,8 +11,8 @@ import { tokens } from 'constants/';
 import showToast from 'utils/toast';
 
 export default function ResetPassword() {
-  const [email, setEmail] = useState('');
-  const [code, setCode] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [code, setCode] = useState<string>('');
   const [step, setStep] = useState(0); // 화면 단계를 관리하는 상태
 
   // 애니메이션을 위한 변수
@@ -54,9 +54,19 @@ export default function ResetPassword() {
     mutationForCode.mutate(email);
   };
 
+  const mutationForVerify = useMutation({
+    mutationFn: verifyCode,
+    onSuccess: (data) => {
+      if (data.success) handleTransition(2);
+      else showToast('error', '인증에 실패했습니다. 올바른 코드를 입력해주세요.');
+    },
+    onError: () => {
+      showToast('error', '데이터 전송 중 에러가 발생했습니다. 잠시후 다시 시도해주세요.');
+    },
+  });
+
   const handleVerifyCode = () => {
-    // 코드 인증
-    handleTransition(2);
+    mutationForVerify.mutate({ email, code });
   };
 
   const handleResetPassword = () => {
@@ -64,9 +74,11 @@ export default function ResetPassword() {
     handleTransition(3);
   };
 
+  const isPending = mutationForCode.isPending || mutationForVerify.isPending;
+
   return (
     <KeyboardAvoidingView className='w-full h-full items-center bg-white px-26 py-20'>
-      {mutationForCode.isPending && <ActivityIndicator className='absolute top-[280]' size='large' color={tokens.primary_700} />}
+      {isPending && <ActivityIndicator className='absolute top-[280]' size='large' color={tokens.primary_700} />}
       <View className='w-full flex-1'>
         <Animated.View className='w-full h-full flex-1 justify-center items-center mb-100' style={currentScreenStyle}>
           {step === 0 && 
