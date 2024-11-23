@@ -47,7 +47,38 @@ const verifyCode = async ({ email, code }: { email: string; code: string; }): Pr
   }
 };
 
+interface ResetPasswrdInput {
+  email: string;
+  code: string;
+  password: string;
+}
+
+interface ResetPasswrdResponseData {
+  success: boolean;
+  message: string;
+  data: null;
+}
+
+const resetPassword = async ({ email, code, password }: ResetPasswrdInput): Promise<ResetPasswrdResponseData> => {
+  try {
+    const response = await apiClient.post<ResetPasswrdResponseData>(api.ENDPOINTS.PASSWORD.RESET, {
+      email,
+      code,
+      password,
+    });
+
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data.message || 'Failed to reset password');
+    } else {
+      throw new Error('Failed to reset password');
+    }
+  }
+};
+
 export {
   sendCode,
   verifyCode,
+  resetPassword,
 };

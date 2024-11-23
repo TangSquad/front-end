@@ -2,7 +2,7 @@ import { View, KeyboardAvoidingView, Text, ActivityIndicator } from 'react-nativ
 import { useState } from 'react';
 import { router } from 'expo-router';
 import { useMutation } from '@tanstack/react-query';
-import { sendCode, verifyCode } from 'api/auth/password/reset-pswd';
+import { sendCode, verifyCode, resetPassword } from 'api/auth/password/reset-pswd';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, runOnJS } from 'react-native-reanimated';
 
 import Input from 'components/Auth/ResetPassword/Input';
@@ -13,6 +13,9 @@ import showToast from 'utils/toast';
 export default function ResetPassword() {
   const [email, setEmail] = useState<string>('');
   const [code, setCode] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
+
   const [step, setStep] = useState(0); // 화면 단계를 관리하는 상태
 
   // 애니메이션을 위한 변수
@@ -70,9 +73,19 @@ export default function ResetPassword() {
     mutationForVerify.mutate({ email, code });
   };
 
+  const mutationForReset = useMutation({
+    mutationFn: resetPassword,
+    onSuccess: (data) => {
+      if (data.success) handleTransition(3);
+      else showToast('error', '비밀번호 재설정에 실패했습니다. 다시 시도해주세요.');
+    },
+    onError: () => {
+      showToast('error', '데이터 전송 중 에러가 발생했습니다. 잠시후 다시 시도해주세요.');
+    },
+  });
+
   const handleResetPassword = () => {
-    // 비밀번호 재설정
-    handleTransition(3);
+    mutationForReset.mutate({ email, code, password });
   };
 
   const isPending = mutationForCode.isPending || mutationForVerify.isPending;
@@ -96,8 +109,17 @@ export default function ResetPassword() {
             </> }
           {step === 2 && 
             <>
+              <Input
+                type='password'
+                input={password}
+                setInput={setPassword}
+                setIsValid={setIsPasswordValid} />
               <View className='h-10'/>
-              <MainButton title='비밀번호 재설정' handlePress={handleResetPassword} />
+              <MainButton
+                title='비밀번호 재설정'
+                handlePress={handleResetPassword}
+                disabled={!isPasswordValid}
+              />
             </> }
           {step === 3 && 
             <>
