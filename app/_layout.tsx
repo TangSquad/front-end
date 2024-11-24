@@ -96,6 +96,10 @@ export default function RootLayout() {
               title: '다이빙 일정 등록',
               animation: 'slide_from_bottom',
             }}/>
+            <Stack.Screen name="(screens)/create-logbook" options={{
+              title: '다이빙 로그북',
+              animation: 'slide_from_bottom',
+            }} />
             <Stack.Screen name="(screens)/profile-edit" options={{
               title: '프로필 편집',
               headerTitleStyle: {
