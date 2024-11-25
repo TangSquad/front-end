@@ -1,5 +1,5 @@
 import { TouchableOpacity, Image } from 'react-native';
-import pickImage from 'utils/pickImage';
+import { pickImage } from 'utils/pickImage';
 import { images } from 'constants/';
 
 interface AddPhotoProps {
@@ -9,7 +9,7 @@ interface AddPhotoProps {
 
 export default function AddPhoto({ uri, setUri }: AddPhotoProps) {
   const handlePress = () => {
-    pickImage(setUri);
+    pickImage({ setUri });
   };
 
   return (

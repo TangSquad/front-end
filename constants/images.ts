@@ -6,6 +6,7 @@ import equipment from 'assets/images/equipment.png';
 import profileEdit from 'assets/images/profile-edit.png';
 import kakaoLogin from 'assets/images/kakao-login.png';
 import defaultGathering from 'assets/images/default-gathering-image.png';
+import camera from 'assets/images/camera.png';
 
 export default {
   defaultImage,
@@ -16,4 +17,5 @@ export default {
   profileEdit,
   kakaoLogin,
   defaultGathering,
+  camera,
 };
