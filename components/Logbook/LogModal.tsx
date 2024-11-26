@@ -10,7 +10,6 @@ interface MyModalProps {
   setModalVisible: (modalVisible: boolean) => void;
 }
 
-
 export default function LogModal({ modalVisible, setModalVisible }: MyModalProps) {
   const [count, setCount] = useState(0);
 
@@ -24,7 +23,7 @@ export default function LogModal({ modalVisible, setModalVisible }: MyModalProps
   };
 
   const handleNext = () => {
-    router.push({ pathname: '/create-logbook', params: { count } });
+    router.push({ pathname: '/create-logbook', params: { count: count } });
     handleBack();
   };
 

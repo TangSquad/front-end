@@ -100,6 +100,10 @@ export default function RootLayout() {
               title: '다이빙 로그북',
               animation: 'slide_from_bottom',
             }} />
+            <Stack.Screen name="(screens)/create-logs" options={{
+              title: '다이빙 로그북',
+              headerBackTitleVisible: false,
+            }} />
             <Stack.Screen name="(screens)/profile-edit" options={{
               title: '프로필 편집',
               headerTitleStyle: {
