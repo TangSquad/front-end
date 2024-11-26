@@ -1,5 +1,6 @@
 import tags from './tags';
 import inputTypes from './signupInputTypes';
 import settingsMenuList from './settings';
+import equipmentSizes from './equipmentSizes';
 
-export { tags, inputTypes, settingsMenuList };
+export { tags, inputTypes, settingsMenuList, equipmentSizes };

@@ -38,9 +38,9 @@ export default function Record() {
   };
 
   return (
-    <View className='mt-20'>
+    <View className='my-16'>
       <Title content='기록' />
-      <View className='flex justify-center items-center mx-10 rounded-10 overflow-auto'>
+      <View className='flex justify-center items-center mx-10 mt-16 rounded-10 overflow-auto'>
         {uris.length === 0 ? <ImagePickContainer /> : <ImageDisplayView />}
       </View>
       <TextInput
