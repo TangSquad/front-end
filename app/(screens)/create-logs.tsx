@@ -1,8 +1,11 @@
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { useState } from 'react';
 import { useGlobalSearchParams } from 'expo-router';
+import RequiredSection from 'components/Logbook/Create/RequiredSection';
 import LogStepIndicator from 'components/Logbook/Create/LogStepIndicator';
 import DivingThemeSection from 'components/Logbook/Create/DivingThemeSection';
+import EtcSection from 'components/Logbook/Create/EtcSection';
+import EnvironmentSection from 'components/Logbook/Create/EnvironmentSection';
 
 export default function CreateLogs() {
   const { count } = useGlobalSearchParams();
@@ -12,7 +15,10 @@ export default function CreateLogs() {
     <KeyboardAvoidingView className='h-full bg-white'>
       <ScrollView className='p-24'>
         <LogStepIndicator maxStep={Number(count)} currentStep={currentStep} setCurrentStep={setCurrentStep} />
+        <RequiredSection />
         <DivingThemeSection />
+        <EtcSection />
+        <EnvironmentSection />
       </ScrollView>
     </KeyboardAvoidingView>
   );
