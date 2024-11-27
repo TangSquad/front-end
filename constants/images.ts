@@ -7,6 +7,14 @@ import profileEdit from 'assets/images/profile-edit.png';
 import kakaoLogin from 'assets/images/kakao-login.png';
 import defaultGathering from 'assets/images/default-gathering-image.png';
 import camera from 'assets/images/camera.png';
+import theme1 from 'assets/images/theme1.png';
+import theme2 from 'assets/images/theme2.png';
+import theme3 from 'assets/images/theme3.png';
+import theme4 from 'assets/images/theme4.png';
+import theme5 from 'assets/images/theme5.png';
+import theme6 from 'assets/images/theme6.png';
+import theme7 from 'assets/images/theme7.png';
+import theme8 from 'assets/images/theme8.png';
 
 export default {
   defaultImage,
@@ -18,4 +26,12 @@ export default {
   kakaoLogin,
   defaultGathering,
   camera,
+  theme1,
+  theme2,
+  theme3,
+  theme4,
+  theme5,
+  theme6,
+  theme7,
+  theme8,
 };

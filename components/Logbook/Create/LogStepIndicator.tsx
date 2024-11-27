@@ -11,7 +11,7 @@ interface LogStepIndicatorProps {
 export default function LogStepIndicator({ maxStep, currentStep, setCurrentStep } : LogStepIndicatorProps) {
   // if maxStep is less than 5, the view is horizontal, otherwise vertical
   const flexDirection = maxStep < 5 ? 'flex-row' : 'flex-col';
-  const indicatorBoxStyle = `w-[${maxStep < 5 ? maxStep*50 : 320}] ${maxStep < 5 ? 'ml-8' : 'mt-8'}`;
+  const indicatorContainerStyle = `${maxStep < 5 ? 'w-1/2' : 'w-full'} ${maxStep < 5 ? 'ml-8' : 'mt-8'}`;
 
   const customeStyles = {  
     // Stroke style
@@ -37,7 +37,7 @@ export default function LogStepIndicator({ maxStep, currentStep, setCurrentStep 
   return(
     <View className={`w-full ${flexDirection} justify-center items-center py-16 bg-white rounded-10 shadow`}>
       <Text className={`${tokens.md_14} color-gray-700`}>다이빙 로그</Text>
-      <View className={indicatorBoxStyle}>
+      <View className={indicatorContainerStyle}>
         <StepIndicator
           stepCount={maxStep}
           currentPosition={currentStep}
