@@ -15,6 +15,19 @@ import theme5 from 'assets/images/theme5.png';
 import theme6 from 'assets/images/theme6.png';
 import theme7 from 'assets/images/theme7.png';
 import theme8 from 'assets/images/theme8.png';
+import weather1 from 'assets/images/weather1.png';
+import weather2 from 'assets/images/weather2.png';
+import weather3 from 'assets/images/weather3.png';
+import weather4 from 'assets/images/weather4.png';
+import weather5 from 'assets/images/weather5.png';
+
+const weathers = [
+  weather1,
+  weather2,
+  weather3,
+  weather4,
+  weather5,
+];
 
 export default {
   defaultImage,
@@ -34,4 +47,5 @@ export default {
   theme6,
   theme7,
   theme8,
+  weathers,
 };

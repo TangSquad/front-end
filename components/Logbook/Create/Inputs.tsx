@@ -53,7 +53,31 @@ const EtcInput = ({ title, unit, value, setValue }: EtcInputProps) => {
   );
 };
 
+interface WeatherInputProps {
+  title: string;
+  value: string;
+  setValue: (value: string) => void;
+}
+
+const WeatherInput = ({ title, value, setValue }: WeatherInputProps) => {
+  const extraMr = title === '기온' ? 'mr-30' : '';
+  return(
+    <View className='flex-row'>
+      <Text className={`${tokens.md_16} color-gray-600 ${extraMr}`}>{title}</Text>
+      <TextInput
+        value={value}
+        onChange={(event) => setValue(event.nativeEvent.text)}
+        className={`w-[40] bg-gray-50 ml-8 mr-4`}
+        textAlign='center'
+        keyboardType='numeric'
+      />
+      <Text className={`${tokens.rg_14} color-gray-400`}>ºC</Text>
+    </View>
+  );
+};
+
 export {
   BasicInput,
   EtcInput,
+  WeatherInput,
 };
