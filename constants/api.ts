@@ -28,6 +28,18 @@ const ENDPOINTS = {
     VERIFY_CODE: '/password/verifyCode',
     RESET: '/password/reset',
   },
+  MOIM: {
+    MOIM: '/moim',
+    MOIM_BY_ID: '/moim/{moimId}',
+    MOIM_ALL: '/moim/all',
+    MOIM_LIKED: '/moim/like',
+  },
+  DIVING: {
+    DIVING: '/diving',
+    DIVING_BY_ID: '/diving/{divingId}',
+    DIVING_ALL: '/diving/all',
+    DIVING_LIKED: '/diving/like',
+  },
 };
 
 const api = {
