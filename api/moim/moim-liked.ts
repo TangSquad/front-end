@@ -2,27 +2,27 @@ import axios from 'axios';
 import apiClient from '../apiClient';
 import { api } from '../../constants';
 
-interface MoimType {
+interface Moim {
   id: number,
   userId: number,
-  anonymous: boolean,
+  isPublic: boolean,
+  thumbnailUrl: string,
   moimName: string,
   moimIntro: string,
   moimDetails: string,
+  currentPeople: number,
   limitPeople: number,
   expense: number,
   licenseLimit: string,
-  locationOne: string,
-  locationTwo: string,
-  locationThree: string,
-  age: number,
-  moodOne: string,
-  moodTwo: string,
+  locations: string[],
+  moods: string[],
+  registeredUserIds: number[],
+  age: string,
 }
 
 const getMoimLiked = async () => {
   try {
-    const response = await apiClient.get<MoimType[]>(api.ENDPOINTS.MOIM.MOIM_LIKED);
+    const response = await apiClient.get<Moim[]>(api.ENDPOINTS.MOIM.MOIM_LIKED);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))

@@ -1,30 +1,14 @@
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
-import { getMyDiving, getDivingAll } from 'api/diving/diving';
+import { getMyDiving, getDivingAll, Diving } from 'api/diving/diving';
 import { getDivingLiked } from 'api/diving/diving-liked';
-import { getMyMoim, getMoimAll } from 'api/moim/moim';
+import { getMyMoim, getMoimAll, Moim } from 'api/moim/moim';
 import { getMoimLiked } from 'api/moim/moim-liked';
 import DivingItem from './DivingItem';
 import MoimItem from './MoimItem';
 import NullDataView from './NullDataView';
 import { GatheringType, SectionType } from 'types/Gatherings';
-
-const mockDivingData = {
-  divingId: 1,
-  userId: 1,
-  divingName: '서울과기대 스쿠버다이빙 동아리', 
-  divingIntro: '서울과기대 스쿠버다이빙 동아리입니다.',
-  level: ['전체'],
-  startDate: '2024-03-28',
-  endDate: '2024-04-01',
-  location: '서울',
-  limitPeople: 10,
-  limitLicense: '전체',
-  age: '20대',
-  moodOne: '스쿠버다이빙',
-  moodTwo: '호기심이 많은',
-  src: '', // temporary
-};
 
 interface GatheringItemProps {
   sectionType: SectionType;
@@ -45,11 +29,26 @@ const MoimList = ({ sectionType }: GatheringItemProps) => {
     queryFn: getMoimData,
   });
 
-  if (!data) return <NullDataView type='모임' sectionType={sectionType} />;
+  if (data === undefined || data.length === 0) return <NullDataView type='모임' sectionType={sectionType} />;
+
+  // SearchQuery
+  let { query } = useLocalSearchParams();
+  query = Array.isArray(query) ? query[0] : query === undefined ? '' : query;
+
+  const includesQuery = (attribute: Moim) => {
+    return (
+      attribute.moimName.toLowerCase().includes(query) || 
+      attribute.moimIntro.toLowerCase().includes(query) || 
+      attribute.age.toLowerCase().includes(query) || 
+      attribute.locations.some((location) => location.toLowerCase().includes(query)) || 
+      attribute.moods.some((mood) => mood.toLowerCase().includes(query)) || 
+      attribute.licenseLimit.toLowerCase().includes(query)
+    );
+  };
 
   return (
     <FlatList
-      data={data}
+      data={data.filter((item) => includesQuery(item))}
       className='h-full bg-white'
       renderItem={({ item, index }) => (
         <MoimItem item={item} index={index} />
@@ -73,11 +72,28 @@ const DivingList = ({ sectionType }: GatheringItemProps) => {
     queryFn: getDivingData,
   });
 
-  if (!data) return <NullDataView type='다이빙' sectionType={sectionType} />;
+  if (data === undefined || data.length === 0) return <NullDataView type='다이빙' sectionType={sectionType} />;
+
+  // SearchQuery
+  let { query } = useLocalSearchParams();
+  query = Array.isArray(query) ? query[0] : query === undefined ? '' : query;
+
+  const includesQuery = (attribute: Diving) => {
+    return (
+      attribute.divingName.toLowerCase().includes(query) ||
+      attribute.divingIntro.toLowerCase().includes(query) ||
+      attribute.age.toLowerCase().includes(query) ||
+      attribute.location.toLowerCase().includes(query) ||
+      attribute.moods?.some((mood) => mood.toLowerCase().includes(query)) ||
+      attribute.licenseLimit.toLowerCase().includes(query) ||
+      attribute.startDate.includes(query) ||
+      attribute.endDate.includes(query)
+    );
+  };
 
   return (
     <FlatList
-      data={[mockDivingData]}
+      data={data.filter((item) => includesQuery(item))}
       className='h-full bg-white'
       renderItem={({ item, index }) => (
         <DivingItem item={item} index={index} />

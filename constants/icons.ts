@@ -13,7 +13,6 @@ import emptyHeart from 'assets/icons/empty-heart.png';
 import settings from 'assets/icons/settings.png';
 import arrowRight from 'assets/icons/arrow-right.png';
 import member from 'assets/icons/member.png';
-import defaultPhoto from 'assets/icons/default-photo.png';
 
 export default {
   home,
@@ -31,5 +30,4 @@ export default {
   settings,
   arrowRight,
   member,
-  defaultPhoto,
 };

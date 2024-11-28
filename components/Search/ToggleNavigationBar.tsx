@@ -40,7 +40,7 @@ export default function ToggleNavigationBar({ selectedTab, setSelectedTab }: Tog
   };
 
   return (
-    <View className='flex items-center w-full h-fit py-24 bg-primary-100'>
+    <View className='flex items-center w-full h-fit pt-12 pb-24 bg-primary-100'>
       <View className='flex justify-center w-183 h-fit'>
         {isGroup(selectedTab) ? 
           <>

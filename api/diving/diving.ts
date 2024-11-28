@@ -2,25 +2,27 @@ import axios from 'axios';
 import apiClient from '../apiClient';
 import { api } from '../../constants';
 
-// DivingImgUrl to be added
-interface DivingType {
-  divingId: number;
+interface Diving {
+  id: number;
   userId: number;
+  isPublic: boolean;
+  thumbnailUrl: string;
   divingName: string;
   divingIntro: string;
-  limitPeople: number;
-  limitLicense: string;
-  location: string;
   age: string;
-  moodOne: string;
-  moodTwo: string;
+  moods: string[];
+  currentPeople: number;
+  limitPeople: number;
+  licenseLimit: string;
   startDate: string;
   endDate: string;
+  location: string;
+  registedUserIds: number[];
 }
 
 const getMyDiving = async () => {
   try {
-    const response = await apiClient.get<DivingType[]>(api.ENDPOINTS.DIVING.DIVING);
+    const response = await apiClient.get<Diving[]>(api.ENDPOINTS.DIVING.DIVING);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))
@@ -32,7 +34,7 @@ const getMyDiving = async () => {
 
 const getDivingById = async (divingId: number) => {
   try {
-    const response = await apiClient.get<DivingType>(api.ENDPOINTS.DIVING.DIVING_BY_ID.replace('{divingId}', divingId.toString()));
+    const response = await apiClient.get<Diving>(api.ENDPOINTS.DIVING.DIVING_BY_ID.replace('{divingId}', divingId.toString()));
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))
@@ -44,7 +46,7 @@ const getDivingById = async (divingId: number) => {
 
 const getDivingAll = async () => {
   try {
-    const response = await apiClient.get<DivingType[]>(api.ENDPOINTS.DIVING.DIVING_ALL);
+    const response = await apiClient.get<Diving[]>(api.ENDPOINTS.DIVING.DIVING_ALL);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))
@@ -55,7 +57,7 @@ const getDivingAll = async () => {
 };
 
 export {
-  DivingType,
+  Diving,
   getMyDiving,
   getDivingById,
   getDivingAll,

@@ -2,25 +2,27 @@ import axios from 'axios';
 import apiClient from '../apiClient';
 import { api } from '../../constants';
 
-// DivingImgUrl to be added
-interface DivingType {
-  divingId: number;
+interface Diving {
+  id: number;
   userId: number;
+  isPublic: boolean;
+  thumbnailUrl: string;
   divingName: string;
   divingIntro: string;
-  limitPeople: number;
-  limitLicense: string;
-  location: string;
   age: string;
-  moodOne: string;
-  moodTwo: string;
+  moods: string[];
+  currentPeople: number;
+  limitPeople: number;
+  licenseLimit: string;
   startDate: string;
   endDate: string;
+  location: string;
+  registedUserIds: number[];
 }
 
 const getDivingLiked = async () => {
   try {
-    const response = await apiClient.get<DivingType[]>(api.ENDPOINTS.DIVING.DIVING_LIKED);
+    const response = await apiClient.get<Diving[]>(api.ENDPOINTS.DIVING.DIVING_LIKED);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))
