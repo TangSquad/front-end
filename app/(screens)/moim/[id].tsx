@@ -1,7 +1,9 @@
 import { Text, View, Image, Alert, ScrollView } from 'react-native';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { router, useLocalSearchParams } from 'expo-router';
 import { getMoimById } from 'api/moim/moim';
+import { joinMoim } from 'api/moim/moim-join';
+import showToast from 'utils/toast';
 import MainButton from 'components/common/MainButton';
 import { tokens, images, icons } from 'constants/';
 
@@ -18,6 +20,22 @@ export default function MoimDetails() {
     router.back();
 
     return(<View className='h-full bg-wthie'/>);
+  };
+
+  // 모임 가입
+  const mutation = useMutation({
+    mutationFn: joinMoim,
+    onSuccess: () => {
+      showToast('success', '모임 참여가 완료되었습니다.');
+      router.back();
+    },
+    onError: () => {
+      Alert.alert('에러가 발생하였습니다. 다시 시도해주세요.');
+    },
+  });
+
+  const handlePress = () => {
+    mutation.mutate(Number(id));
   };
 
   return (
@@ -55,7 +73,7 @@ export default function MoimDetails() {
           <View className='h-100'></View>
           <MainButton
             title='참여하기'
-            handlePress={() => {}}
+            handlePress={handlePress}
           />
         </View>
       </View>
