@@ -1,10 +1,11 @@
 import { FlatList, View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
-import { getMyDiving, getDivingAll, Diving } from 'api/diving/diving';
+import { getMyDiving, getDivingAll } from 'api/diving/diving';
 import { getDivingLiked } from 'api/diving/diving-liked';
-import { getMyMoim, getMoimAll, Moim } from 'api/moim/moim';
+import { getMyMoim, getMoimAll } from 'api/moim/moim';
 import { getMoimLiked } from 'api/moim/moim-liked';
+import { Diving, Moim } from 'types/Gatherings';
 import DivingItem from './DivingItem';
 import MoimItem from './MoimItem';
 import NullDataView from './NullDataView';

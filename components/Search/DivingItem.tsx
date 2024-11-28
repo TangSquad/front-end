@@ -1,7 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import TagBox from './styles/TagBox';
 import { router } from 'expo-router';
-import { Diving } from 'api/diving/diving';
+import { Diving } from 'types/Gatherings';
 import { tokens, images, icons } from 'constants/';
 
 interface DivingItemProps {

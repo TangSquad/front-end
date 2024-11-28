@@ -1,24 +1,7 @@
 import axios from 'axios';
 import apiClient from '../apiClient';
 import { api } from '../../constants';
-
-interface Moim {
-  id: number,
-  userId: number,
-  isPublic: boolean,
-  thumbnailUrl: string,
-  moimName: string,
-  moimIntro: string,
-  moimDetails: string,
-  currentPeople: number,
-  limitPeople: number,
-  expense: number,
-  licenseLimit: string,
-  locations: string[],
-  moods: string[],
-  registeredUserIds: number[],
-  age: string,
-}
+import { Moim } from 'types/Gatherings';
 
 const getMyMoim = async () => {
   try {
@@ -57,7 +40,6 @@ const getMoimAll = async () => {
 };
 
 export {
-  Moim,
   getMyMoim,
   getMoimById,
   getMoimAll,

@@ -1,24 +1,7 @@
 import axios from 'axios';
 import apiClient from '../apiClient';
 import { api } from '../../constants';
-
-interface Diving {
-  id: number;
-  userId: number;
-  isPublic: boolean;
-  thumbnailUrl: string;
-  divingName: string;
-  divingIntro: string;
-  age: string;
-  moods: string[];
-  currentPeople: number;
-  limitPeople: number;
-  licenseLimit: string;
-  startDate: string;
-  endDate: string;
-  location: string;
-  registedUserIds: number[];
-}
+import { Diving } from 'types/Gatherings';
 
 const getDivingLiked = async () => {
   try {
