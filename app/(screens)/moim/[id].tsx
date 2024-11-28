@@ -3,7 +3,9 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 import { router, useLocalSearchParams } from 'expo-router';
 import { getMoimById } from 'api/moim/moim';
 import { joinMoim } from 'api/moim/moim-join';
+import { getMoimLiked, likeMoim, unlikeMoim } from 'api/moim/moim-liked';
 import showToast from 'utils/toast';
+import LikeBtn from 'components/common/LikeBtn';
 import MainButton from 'components/common/MainButton';
 import { tokens, images, icons } from 'constants/';
 
@@ -20,6 +22,32 @@ export default function MoimDetails() {
     router.back();
 
     return(<View className='h-full bg-wthie'/>);
+  };
+
+  // 좋아요 버튼
+  const { data: likedMoims, error: likedError } = useQuery({
+    queryKey: ['liked-moims'],
+    queryFn: () => getMoimLiked(),
+  });
+
+  const isLiked = likedMoims?.some((moim) => moim.id === Number(id)) ?? false;
+
+  const mutationLike = useMutation({
+    mutationFn: () => {
+      if (isLiked) return unlikeMoim(Number(id));
+      else return likeMoim(Number(id));
+    },
+    onSuccess: () => {
+      if (isLiked) Alert.alert('좋아요가 취소되었습니다.');
+      else Alert.alert('좋아요가 완료되었습니다.');
+    },
+    onError: () => {
+      Alert.alert('에러가 발생하였습니다. 다시 시도해주세요.');
+    },
+  });
+
+  const handleLike = () => {
+    mutationLike.mutate();
   };
 
   // 모임 가입
@@ -56,11 +84,11 @@ export default function MoimDetails() {
             </View>
             <View className='flex-row'>
               {/* member, like-btn */}
-              <View className={`flex-row items-center ${tokens.md_12} color-gray-500`}>
+              <View className={`flex-row items-center ${tokens.md_12} color-gray-500 mr-10`}>
                 <Image source={icons.member} className='mr-4' />
                 <Text className={`${tokens.rg_14} color-gray-500`}>{data?.currentPeople}/{data?.limitPeople}</Text>
               </View>
-              {/* like-btn to be added */}
+              <LikeBtn liked={isLiked} handlePress={handleLike} />
             </View>
           </View>
           <Text className={`${tokens.md_16} color-primary`}>

@@ -10,6 +10,7 @@ import closedEyes from 'assets/icons/closed-eyes.png';
 import x from 'assets/icons/x.png';
 import location from 'assets/icons/location.png';
 import emptyHeart from 'assets/icons/empty-heart.png';
+import fullHeart from 'assets/icons/full-heart.png';
 import settings from 'assets/icons/settings.png';
 import arrowRight from 'assets/icons/arrow-right.png';
 import member from 'assets/icons/member.png';
@@ -30,4 +31,5 @@ export default {
   settings,
   arrowRight,
   member,
+  fullHeart,
 };
