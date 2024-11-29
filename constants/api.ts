@@ -33,13 +33,20 @@ const ENDPOINTS = {
     MOIM_BY_ID: '/moim/{moimId}',
     MOIM_ALL: '/moim/all',
     MOIM_LIKED: '/moim/like',
+    MOIM_LIKE: '/moim/like/{moimId}',
+    MOIM_UNLIKE: '/moim/unlike/{moimId}',
+    MOIM_JOIN: '/moim/join/{moimId}',
   },
   DIVING: {
     DIVING: '/diving',
     DIVING_BY_ID: '/diving/{divingId}',
     DIVING_ALL: '/diving/all',
     DIVING_LIKED: '/diving/like',
+    DIVING_LIKE: '/diving/like/{divingId}',
+    DIVING_UNLIKE: '/diving/unlike/{divingId}',
+    DIVING_JOIN: '/diving/join/{divingId}',
   },
+  UPLOAD: '/upload',
 };
 
 const api = {

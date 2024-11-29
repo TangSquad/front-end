@@ -1,28 +1,11 @@
 import axios from 'axios';
 import apiClient from '../apiClient';
-import { api } from '../../constants';
-
-interface MoimType {
-  id: number,
-  userId: number,
-  anonymous: boolean,
-  moimName: string,
-  moimIntro: string,
-  moimDetails: string,
-  limitPeople: number,
-  expense: number,
-  licenseLimit: string,
-  locationOne: string,
-  locationTwo: string,
-  locationThree: string,
-  age: number,
-  moodOne: string,
-  moodTwo: string,
-}
+import { api } from 'constants/';
+import { Moim, CreateMoim } from 'types/Gatherings';
 
 const getMyMoim = async () => {
   try {
-    const response = await apiClient.get<MoimType[]>(api.ENDPOINTS.MOIM.MOIM);
+    const response = await apiClient.get<Moim[]>(api.ENDPOINTS.MOIM.MOIM);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))
@@ -34,7 +17,7 @@ const getMyMoim = async () => {
 
 const getMoimById = async (moimId: number) => {
   try {
-    const response = await apiClient.get<MoimType>(api.ENDPOINTS.MOIM.MOIM_BY_ID.replace('{moimId}', moimId.toString()));
+    const response = await apiClient.get<Moim>(api.ENDPOINTS.MOIM.MOIM_BY_ID.replace('{moimId}', moimId.toString()));
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))
@@ -46,7 +29,7 @@ const getMoimById = async (moimId: number) => {
 
 const getMoimAll = async () => {
   try {
-    const response = await apiClient.get<MoimType[]>(api.ENDPOINTS.MOIM.MOIM_ALL);
+    const response = await apiClient.get<Moim[]>(api.ENDPOINTS.MOIM.MOIM_ALL);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))
@@ -56,9 +39,21 @@ const getMoimAll = async () => {
   }
 };
 
+const createMoim = async (moim: CreateMoim) => {
+  try {
+    const response = await apiClient.post<Moim>(api.ENDPOINTS.MOIM.MOIM, moim);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error))
+      throw new Error(error.response?.data.message || 'Failed to create moim');
+    else
+      throw new Error('Failed to create moim');
+  }
+};
+
 export {
-  MoimType,
   getMyMoim,
   getMoimById,
   getMoimAll,
+  createMoim,
 };

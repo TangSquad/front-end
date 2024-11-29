@@ -1,6 +1,9 @@
 import { ScrollView, View, Text } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { useMutation } from '@tanstack/react-query';
+import { translateUrl } from 'api/upload/image';
+import { createDiving } from 'api/diving/diving';
 import DateTimePicker, { DateType } from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
 import AddPhoto from '../../components/CreateGathering/AddPhoto';
@@ -18,7 +21,6 @@ export default function CreateDiving() {
   const [name, setName] = useState('');
   const [line, setLine] = useState('');
   const [limit, setLimit] = useState('');
-  const [cost, setCost] = useState('');
 
   const [selectedAge, setSelectedAge] = useState<string[]>([]);
   const [selectedMood, setSelectedMood] = useState<string[]>([]);
@@ -27,13 +29,72 @@ export default function CreateDiving() {
 
   const isEmpty = (arr: string[]) => arr.length === 0;
 
+  // 다이빙 생성
+  const imageMutation = useMutation({
+    mutationFn: translateUrl,
+    onError: () => {
+      alert('이미지 업로드에 실패했습니다. 다시 시도해 주세요.');
+    },
+  });
+
+  const createDivingMutation = useMutation({
+    mutationFn: createDiving,
+    onSuccess: () => {
+      alert('다이빙 생성 완료');
+      router.back();
+    },
+    onError: () => {
+      alert('다이빙 생성에 실패했습니다. 다시 시도해 주세요.');
+    },
+  });
+
+  const refineArrayData = (arr: string[]) => {
+    let result = '';
+    arr.forEach((age, index) => {
+      result += index === arr.length - 1 ? age : age + '·';
+    });
+    return result;
+  };
+
   const handleSubmit = () => {
-    if (!name || !line || !limit || !cost || isEmpty(selectedCert) || isEmpty(selectedMood) || isEmpty(selectedAge) || !date) {
+    if (!name || !line || !limit || isEmpty(selectedCert) || !date?.startDate|| !date?.endDate ) {
       alert('입력하지 않은 항목이 있습니다.');
       return;
     }
-    alert('다이빙 생성 완료');
-    router.back();
+
+    if (!thumbnail) {
+      createDivingMutation.mutate({
+        divingName: name,
+        divingIntro: line,
+        limitPeople: Number(limit),
+        isPublic,
+        thumbnailUrl: thumbnail,
+        licenseLimit: refineArrayData(selectedCert),
+        location: selectedLocation[0],
+        age: refineArrayData(selectedAge),
+        moods: selectedMood,
+        startDate: date.startDate ? date.startDate.toString() : '',
+        endDate: date.endDate ? date.endDate.toString() : '',
+      });
+    } else {
+      imageMutation.mutate(thumbnail, {
+        onSuccess: (data) => {
+          createDivingMutation.mutate({
+            divingName: name,
+            divingIntro: line,
+            limitPeople: Number(limit),
+            isPublic,
+            thumbnailUrl: data.data.url,
+            licenseLimit: refineArrayData(selectedCert),
+            location: selectedLocation[0],
+            age: refineArrayData(selectedAge),
+            moods: selectedMood,
+            startDate: date.startDate?.toString() || '',
+            endDate: date.endDate?.toString() || '',
+          });
+        },
+      });
+    }
   };
 
   const [date, setDate] = useState<{startDate: DateType, endDate: DateType}>();
@@ -90,12 +151,6 @@ export default function CreateDiving() {
           flex='row'
           input={limit}
           setInput={setLimit}
-        />
-        <CreateGatheringInputSection
-          title='1인 활동 예상 비용'
-          flex='row'
-          input={cost}
-          setInput={setCost}
         />
         <TagGroup
           data={tags.certificates}

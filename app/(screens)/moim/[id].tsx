@@ -1,9 +1,13 @@
-import { Text, View, SafeAreaView, Image } from 'react-native';
-import { useQuery } from '@tanstack/react-query';
-import { useLocalSearchParams } from 'expo-router';
+import { Text, View, Image, Alert, ScrollView } from 'react-native';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { router, useLocalSearchParams } from 'expo-router';
 import { getMoimById } from 'api/moim/moim';
+import { joinMoim } from 'api/moim/moim-join';
+import { getMoimLiked, likeMoim, unlikeMoim } from 'api/moim/moim-liked';
+import showToast from 'utils/toast';
+import LikeBtn from 'components/common/LikeBtn';
 import MainButton from 'components/common/MainButton';
-import { tokens, icons } from 'constants/';
+import { tokens, images, icons } from 'constants/';
 
 export default function MoimDetails() {
   const { id } = useLocalSearchParams() as { id: string };
@@ -13,40 +17,94 @@ export default function MoimDetails() {
     queryFn: () => getMoimById(Number(id)),
   });
 
+  if (error) {
+    Alert.alert('에러가 발생하였습니다. 다시 시도해주세요.');
+    router.back();
+
+    return(<View className='h-full bg-wthie'/>);
+  };
+
+  // 좋아요 버튼
+  const { data: likedMoims, error: likedError } = useQuery({
+    queryKey: ['liked-moims'],
+    queryFn: () => getMoimLiked(),
+  });
+
+  const isLiked = likedMoims?.some((moim) => moim.id === Number(id)) ?? false;
+
+  const mutationLike = useMutation({
+    mutationFn: () => {
+      if (isLiked) return unlikeMoim(Number(id));
+      else return likeMoim(Number(id));
+    },
+    onSuccess: () => {
+      if (isLiked) Alert.alert('좋아요가 취소되었습니다.');
+      else Alert.alert('좋아요가 완료되었습니다.');
+    },
+    onError: () => {
+      Alert.alert('에러가 발생하였습니다. 다시 시도해주세요.');
+    },
+  });
+
+  const handleLike = () => {
+    mutationLike.mutate();
+  };
+
+  // 모임 가입
+  const mutation = useMutation({
+    mutationFn: joinMoim,
+    onSuccess: () => {
+      showToast('success', '모임 참여가 완료되었습니다.');
+      router.back();
+    },
+    onError: () => {
+      Alert.alert('에러가 발생하였습니다. 다시 시도해주세요.');
+    },
+  });
+
+  const handlePress = () => {
+    mutation.mutate(Number(id));
+  };
+
   return (
-    // ScrollView to be added
-    <SafeAreaView className='items-center bg-gray-50'>
-      <Image source={icons.defaultPhoto} className='mt-[40] mb-100' />
-      <View className='h-full w-full bg-white p-24 rounded-20'>  
-        <View className='flex-row justify-between mb-26'>
-          <View className='flex-row'>
-            {/* location, license */}
-            <Text className={`${tokens.md_12} color-gray-500`}>{data?.locationOne}</Text>
-            <Text className={`${tokens.rg_12} color-gray-500`}>자격조건</Text>
-            <Text className={`${tokens.md_12} color-gray-500`}>{data?.licenseLimit}</Text>
-          </View>
-          <View className='flex-row'>
-            {/* member, like-btn */}
-            <View className={`flex-row items-center ${tokens.md_12} color-gray-500`}>
-              <Image source={icons.member} className='mr-4' />
-              <Text className={`${tokens.rg_14} color-gray-500`}>2/{data?.limitPeople}</Text>
+    <ScrollView className='bg-white'>
+      <View className='items-center'>
+        <Image source={data?.thumbnailUrl ? { uri: data?.thumbnailUrl } : images.defaultGathering} className='w-full h-[320]' />
+        <View className='h-full w-full bg-white p-24 rounded-20'>  
+          <View className='flex-row justify-between mb-26'>
+            <View className='flex-row items-center'>
+              {/* location, license */}
+              <View className='bg-gray-100 rounded-10 px-8 py-1 mr-16'>
+                <Text className={`${tokens.md_12} color-gray-500`}>{data?.locations}</Text>
+              </View>
+              <Text className={`${tokens.rg_12} color-gray-500`}>자격조건  </Text>
+              <View className='bg-gray-100 rounded-20 px-10 py-1 mr-8'>
+                <Text className={`${tokens.md_12} color-gray-500`}>{data?.licenseLimit}</Text>
+              </View>
             </View>
-            {/* like-btn to be added */}
+            <View className='flex-row'>
+              {/* member, like-btn */}
+              <View className={`flex-row items-center ${tokens.md_12} color-gray-500 mr-10`}>
+                <Image source={icons.member} className='mr-4' />
+                <Text className={`${tokens.rg_14} color-gray-500`}>{data?.currentPeople}/{data?.limitPeople}</Text>
+              </View>
+              <LikeBtn liked={isLiked} handlePress={handleLike} />
+            </View>
           </View>
+          <Text className={`${tokens.md_16} color-primary`}>
+            # {data?.age}     # {data?.moods[0]} {data?.moods[1] && `# ${data?.moods[1]}`}
+          </Text>
+          <Text className={`${tokens.bd_24} color-gray-800 my-8`}>{data?.moimName}</Text>
+          <Text className={`${tokens.md_14} color-gray-600 my-16`}>{data?.moimIntro}moim test intro</Text>
+          <Text className={`${tokens.md_14} color-gray-600 my-16`}>{data?.moimDetails}</Text>
+          <Text className={`${tokens.bd_20} color-gray-700 mt-50`}>1인 예상 활동 비용</Text>
+          <View className='h-100'></View>
+          <MainButton
+            title='참여하기'
+            handlePress={handlePress}
+          />
         </View>
-        <Text className={`${tokens.md_16} color-primary`}>
-          # {data?.age} # {data?.moodOne} # {data?.moodTwo}
-        </Text>
-        <Text className={`${tokens.bd_24} color-gray-800`}>{data?.moimName}Moim Test title</Text>
-        <Text className={`${tokens.md_14} color-gray-600`}>{data?.moimIntro}moim test intro</Text>
-        <Text className={`${tokens.md_14} color-gray-600`}>{data?.moimDetails}moim test details</Text>
-        <Text className={`${tokens.bd_20} color-gray-700 mt-50`}>1인 예상 활동 비용</Text>
-        <View className='h-200'></View>
-        <MainButton
-          title='참여하기'
-          handlePress={() => {}}
-        />
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }

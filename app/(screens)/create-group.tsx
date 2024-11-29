@@ -1,6 +1,9 @@
 import { ScrollView, View, Text } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { useMutation } from '@tanstack/react-query';
+import { translateUrl } from 'api/upload/image';
+import { createMoim } from 'api/moim/moim';
 import AddPhoto from 'components/CreateGathering/AddPhoto';
 import CreateGatheringInputSection from 'components/CreateGatheringInputSection';
 import PublicPrivateSwitch from 'components/CreateGathering/PublicPrivateSwitch';
@@ -26,13 +29,72 @@ export default function CreateGroup() {
 
   const isEmpty = (arr: string[]) => arr.length === 0;
 
+  // 다이빙 생성
+  const imageMutation = useMutation({
+    mutationFn: translateUrl,
+    onSuccess: (data) => {
+      setThumbnail(data.data.url);
+      createMoimMutation.mutate({
+        moimName: name,
+        moimIntro: line,
+        moimDetails: desc,
+        limitPeople: Number(limit),
+        expense: Number(cost),
+        isPublic,
+        thumbnailUrl: data.data.url,
+        licenseLimit: refineArrayData(selectedCert),
+        locations: selectedLocation,
+        age: refineArrayData(selectedAge),
+        moods: selectedMood,
+      });
+    },
+    onError: () => {
+      alert('이미지 업로드에 실패했습니다. 다시 시도해 주세요.');
+    },
+  });
+
+  const createMoimMutation = useMutation({
+    mutationFn: createMoim,
+    onSuccess: () => {
+      alert('모임 생성 완료');
+      router.back();
+    },
+    onError: () => {
+      alert('모임 생성에 실패했습니다. 다시 시도해 주세요.');
+    },
+  });
+
+  const refineArrayData = (arr: string[]) => {
+    let result = '';
+    arr.forEach((age, index) => {
+      result += index === arr.length - 1 ? age : age + '·';
+    });
+    return result;
+  };
+
   const handleSubmit = () => {
-    if (!name || !line || !desc || !limit || !cost || isEmpty(selectedCert) || isEmpty(selectedMood) || isEmpty(selectedAge)) {
+    if (!name || !line || !desc || !limit || !cost || isEmpty(selectedCert)) {
       alert('입력하지 않은 항목이 있습니다.');
       return;
     }
-    alert('모임 생성 완료');
-    router.back();
+
+    if (!thumbnail) {
+      createMoimMutation.mutate({
+        moimName: name,
+        moimIntro: line,
+        moimDetails: desc,
+        limitPeople: Number(limit),
+        expense: Number(cost),
+        isPublic,
+        thumbnailUrl: thumbnail,
+        licenseLimit: refineArrayData(selectedCert),
+        locations: selectedLocation,
+        age: refineArrayData(selectedAge),
+        moods: selectedMood,
+      });
+    } else {
+      imageMutation.mutate(thumbnail);
+    }
   };
 
   return (
