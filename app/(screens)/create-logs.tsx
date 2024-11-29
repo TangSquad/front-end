@@ -1,6 +1,7 @@
 import { KeyboardAvoidingView, ScrollView, SafeAreaView } from 'react-native';
 import { useState } from 'react';
 import { useGlobalSearchParams } from 'expo-router';
+import { LogsProvider } from 'contexts/LogsContext';
 import RequiredSection from 'components/Logbook/Create/RequiredSection';
 import LogStepIndicator from 'components/Logbook/Create/LogStepIndicator';
 import DivingThemeSection from 'components/Logbook/Create/DivingThemeSection';
@@ -16,12 +17,14 @@ export default function CreateLogs() {
     <SafeAreaView className='h-full bg-white'>
       <KeyboardAvoidingView>
         <ScrollView className='p-24'>
-          <LogStepIndicator maxStep={Number(count)} currentStep={currentStep} setCurrentStep={setCurrentStep} />
-          <RequiredSection />
-          <DivingThemeSection />
-          <WeatherSection />
-          <EtcSection />
-          <EnvironmentSection />
+          <LogsProvider count={Number(count)}>
+            <LogStepIndicator maxStep={Number(count)} currentStep={currentStep} setCurrentStep={setCurrentStep} />
+            <RequiredSection currentStep={currentStep} />
+            <DivingThemeSection currentStep={currentStep} />
+            <WeatherSection currentStep={currentStep} />
+            <EtcSection currentStep={currentStep} />
+            <EnvironmentSection currentStep={currentStep} />
+          </LogsProvider>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

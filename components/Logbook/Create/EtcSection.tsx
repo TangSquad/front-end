@@ -1,28 +1,24 @@
 import { View } from 'react-native';
-import { useState } from 'react';
+import { useContext } from 'react';
+import { LogsContext } from 'contexts/LogsContext';
 import { EtcInput } from './Inputs';
 
-export default function EctSection() {
-  const [etc, setEtc] = useState({
-    avgDepth: '',
-    maxDepth: '',
-    startBar: '',
-    endBar: '',
-  });
+export default function EctSection({ currentStep }: { currentStep: number }) {
+  const { logs, updateLogs } = useContext(LogsContext);
 
   return(
     <View className='w-full my-16'>
       <View className='flex-row justify-between'>
         <EtcInput
           title='평균 수심'
-          value={etc.avgDepth}
-          setValue={(value) => setEtc({ ...etc, avgDepth: value })}
+          value={logs[currentStep].avgDepth}
+          setValue={(value) => updateLogs({ index: currentStep, key: 'avgDepth', value })}
           unit='M'
         />
         <EtcInput
           title='최대 수심'
-          value={etc.maxDepth}
-          setValue={(value) => setEtc({ ...etc, maxDepth: value })}
+          value={logs[currentStep].maxDepth}
+          setValue={(value) => updateLogs({ index: currentStep, key: 'maxDepth', value })}
           unit='M'
         />
       </View>
@@ -30,15 +26,14 @@ export default function EctSection() {
       <View className='flex-row justify-between'>
         <EtcInput
           title='공기(전)'
-          value={etc.startBar}
-          setValue={(value) => setEtc({ ...etc, startBar: value })} 
+          value={logs[currentStep].startBar}
+          setValue={(value) => updateLogs({ index: currentStep, key: 'startBar', value: value })} 
           unit='bar'
         />
-
         <EtcInput
           title='공기(후)'
-          value={etc.endBar}
-          setValue={(value) => setEtc({ ...etc, endBar: value })} 
+          value={logs[currentStep].endBar}
+          setValue={(value) => updateLogs({ index: currentStep, key: 'endBar', value })}
           unit='bar'
         />
       </View>

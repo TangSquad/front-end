@@ -1,15 +1,7 @@
 import axios from 'axios';
 import apiClient from '../apiClient';
 import { api } from 'constants/';
-
-type Logbook = {
-  id: number;
-  date: string;
-  thumbnailUrl: string | null;
-  title: string;
-  contents: string;
-  location: string;
-}
+import { Logbook } from 'types/Logbook';
 
 const getMyLogbook = async (): Promise<Logbook[]> => {
   try {

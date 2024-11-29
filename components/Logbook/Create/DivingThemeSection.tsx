@@ -1,13 +1,14 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { useState } from 'react';
+import { useContext } from 'react';
+import { LogsContext } from 'contexts/LogsContext';
 import Title from '../Title';
 import { tokens } from 'constants/';
 import { divingThemes } from 'data';
 
-export default function DivingThemeSection() {
-  const [selected, setSelected] = useState<string>('');
+export default function DivingThemeSection({ currentStep }: { currentStep: number }) {
+  const { logs, updateLogs } = useContext(LogsContext);
 
-  const isSelected = (theme: string) => selected === theme;
+  const isSelected = (theme: string) => logs[currentStep]?.subject === theme;
 
   const defaultBoxStyle = 'border border-gray-300';
   const selectedBoxStyle = 'bg-primary-100 border border-primary-200';
@@ -19,14 +20,14 @@ export default function DivingThemeSection() {
         {divingThemes.map((theme) => (
           <TouchableOpacity
             key={theme.title} 
-            onPress={() => setSelected(theme.title)}
+            onPress={() => updateLogs({ index: currentStep, key: 'subject', value: theme.title })}
             className={`
                 flex justify-center items-center w-[80] h-[80] rounded mb-16
                 ${isSelected(theme.title) ? selectedBoxStyle : defaultBoxStyle}
             `}
           >
             <Image
-              source={theme.image}
+              source={theme.src}
               resizeMode='contain'
               className='w-20 h-20'
               style={{ opacity: isSelected(theme.title) ? 1 : 0.3 }}

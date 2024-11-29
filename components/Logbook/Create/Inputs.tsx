@@ -5,9 +5,11 @@ import { tokens } from 'constants/';
 
 interface BasicInputProps {
   placeholder?: string;
+  value: string;
+  setValue: (value: string) => void;
 }
 
-const BasicInput = ({ placeholder }: BasicInputProps) => {
+const BasicInput = ({ placeholder, value, setValue }: BasicInputProps) => {
   const [focused, setFocused] = useState(false);
 
   const borderColor = focused ? 'border-primary' : 'border-gray-300';
@@ -17,6 +19,8 @@ const BasicInput = ({ placeholder }: BasicInputProps) => {
       <TextInput
         className={`${placeholder === '잠수시간' ? 'w-[220]' : 'w-full'}`}
         placeholder={placeholder}
+        value={value}
+        onChange={(event) => setValue(event.nativeEvent.text)}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         keyboardType={placeholder === '잠수시간' ? 'numeric' : 'default'}
@@ -29,20 +33,25 @@ const BasicInput = ({ placeholder }: BasicInputProps) => {
 interface EtcInputProps {
   title: string;
   unit: 'M' | 'bar';
-  value: string;
-  setValue: (value: string) => void;
+  value: number | null;
+  setValue: (value: number | null) => void;
 }
 
 const EtcInput = ({ title, unit, value, setValue }: EtcInputProps) => {
   const titleDisplay = title.includes('공기') ? ` ${title} ` : title;
+
+  const handleChange = (text: string) => {
+    if (text === '' || isNaN(Number(text))) setValue(null);
+    else setValue(Number(text));
+  };
 
   return(
     <View className='flex-row justify-between w-[45%]'>
       <Title content={titleDisplay} />
       <View className='flex-row ml-16'>
         <TextInput
-          value={value}
-          onChange={(event) => setValue(event.nativeEvent.text)}
+          value={value === null ? '' : value.toString()}
+          onChange={(event) => handleChange(event.nativeEvent.text)}
           className='flex-auto w-1/3 bg-gray-50'
           keyboardType='numeric'
           textAlign='center'
@@ -55,18 +64,24 @@ const EtcInput = ({ title, unit, value, setValue }: EtcInputProps) => {
 
 interface WeatherInputProps {
   title: string;
-  value: string;
-  setValue: (value: string) => void;
+  value: number | null;
+  setValue: (value: number | null) => void;
 }
 
 const WeatherInput = ({ title, value, setValue }: WeatherInputProps) => {
   const extraMr = title === '기온' ? 'mr-30' : '';
+
+  const handleChange = (text: string) => {
+    if (text === '' || isNaN(Number(text))) setValue(null);
+    else setValue(Number(text));
+  };
+
   return(
     <View className='flex-row'>
       <Text className={`${tokens.md_16} color-gray-600 ${extraMr}`}>{title}</Text>
       <TextInput
-        value={value}
-        onChange={(event) => setValue(event.nativeEvent.text)}
+        value={value === null ? '' : value.toString()}
+        onChange={(event) => handleChange(event.nativeEvent.text)}
         className={`w-[40] bg-gray-50 ml-8 mr-4`}
         textAlign='center'
         keyboardType='numeric'

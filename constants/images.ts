@@ -26,14 +26,6 @@ import condition3 from 'assets/images/condition3.png';
 import condition4 from 'assets/images/condition4.png';
 import condition5 from 'assets/images/condition5.png';
 
-const weathers = [
-  weather1,
-  weather2,
-  weather3,
-  weather4,
-  weather5,
-];
-
 const conditions = [
   condition1,
   condition2,
@@ -60,6 +52,10 @@ export default {
   theme6,
   theme7,
   theme8,
-  weathers,
+  weather1,
+  weather2,
+  weather3,
+  weather4,
+  weather5,
   conditions,
 };
