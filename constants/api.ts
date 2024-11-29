@@ -46,6 +46,7 @@ const ENDPOINTS = {
     DIVING_UNLIKE: '/diving/unlike/{divingId}',
     DIVING_JOIN: '/diving/join/{divingId}',
   },
+  UPLOAD: '/upload',
 };
 
 const api = {

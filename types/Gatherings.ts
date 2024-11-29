@@ -17,6 +17,7 @@ interface Moim {
   moods: string[],
   registeredUserIds: number[],
   age: string,
+  chatRoomId: string,
 }
 
 interface Diving {
@@ -34,12 +35,18 @@ interface Diving {
   startDate: string;
   endDate: string;
   location: string;
-  registedUserIds: number[];
+  registeredUserIds: number[];
+  chatRoomId: string;
 }
+
+type CreateDiving = Omit<Diving, 'id' | 'userId' | 'currentPeople' | 'registeredUserIds' | 'chatRoomId'>;
+type CreateMoim = Omit<Moim, 'id' | 'userId' | 'currentPeople' | 'registeredUserIds' | 'chatRoomId'>;
 
 export {
   Moim,
   Diving,
+  CreateMoim,
+  CreateDiving,
   GatheringType,
   SectionType,
-}
+};

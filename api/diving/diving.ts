@@ -1,7 +1,7 @@
 import axios from 'axios';
 import apiClient from '../apiClient';
-import { api } from '../../constants';
-import { Diving } from 'types/Gatherings';
+import { api } from 'constants/';
+import { Diving, CreateDiving } from 'types/Gatherings';
 
 const getMyDiving = async () => {
   try {
@@ -39,8 +39,21 @@ const getDivingAll = async () => {
   }
 };
 
+const createDiving = async (diving: CreateDiving) => {
+  try {
+    const response = await apiClient.post<Diving>(api.ENDPOINTS.DIVING.DIVING, diving);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error))
+      throw new Error(error.response?.data.message || 'Failed to create diving');
+    else
+      throw new Error('Failed to create diving');
+  }
+};
+
 export {
   getMyDiving,
   getDivingById,
   getDivingAll,
+  createDiving,
 };

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import apiClient from '../apiClient';
-import { api } from '../../constants';
-import { Moim } from 'types/Gatherings';
+import { api } from 'constants/';
+import { Moim, CreateMoim } from 'types/Gatherings';
 
 const getMyMoim = async () => {
   try {
@@ -39,8 +39,21 @@ const getMoimAll = async () => {
   }
 };
 
+const createMoim = async (moim: CreateMoim) => {
+  try {
+    const response = await apiClient.post<Moim>(api.ENDPOINTS.MOIM.MOIM, moim);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error))
+      throw new Error(error.response?.data.message || 'Failed to create moim');
+    else
+      throw new Error('Failed to create moim');
+  }
+};
+
 export {
   getMyMoim,
   getMoimById,
   getMoimAll,
+  createMoim,
 };
