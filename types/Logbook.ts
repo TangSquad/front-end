@@ -1,12 +1,17 @@
+import { Equipment } from './User';
+
 type Logbook = {
   id: number;
   date: string;
-  thumbnailUrl: string | null;
+  thumbnailUrl: string;
+  imageUrls: string[];
   title: string;
   contents: string;
-  location: string;
-  userConditiaon: string;
+  userCondition: string;
+  equipment: Omit<Equipment, 'weight' | 'height'>;
 }
+
+type CreateLogbook = Omit<Logbook, 'id' | 'location' | 'thumbnailUrl'>;
 
 type Log = {
   logbookId: number | null;
@@ -30,4 +35,5 @@ type Log = {
 export {
   Logbook,
   Log,
+  CreateLogbook,
 };

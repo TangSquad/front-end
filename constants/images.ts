@@ -26,14 +26,6 @@ import condition3 from 'assets/images/condition3.png';
 import condition4 from 'assets/images/condition4.png';
 import condition5 from 'assets/images/condition5.png';
 
-const conditions = [
-  condition1,
-  condition2,
-  condition3,
-  condition4,
-  condition5,
-];
-
 export default {
   defaultImage,
   addPhoto,
@@ -57,5 +49,9 @@ export default {
   weather3,
   weather4,
   weather5,
-  conditions,
+  condition1,
+  condition2,
+  condition3,
+  condition4,
+  condition5,
 };

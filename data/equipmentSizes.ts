@@ -66,11 +66,26 @@ const bc = [
 ];
 
 const equipmentSizes = {
-  '슈즈': shoes,
-  '수트': suit,
-  '마스크': mask,
-  '웨이트': weight,
-  'BC': bc,
+  '슈즈': {
+    key: 'shoes',
+    sizes: shoes,
+  },
+  '수트': {
+    key: 'suit',
+    sizes: suit,
+  },
+  '마스크': {
+    key: 'mask',
+    sizes: mask,
+  },
+  '웨이트': {
+    key: 'weightBelt',
+    sizes: weight,
+  },
+  'BC': {
+    key: 'bc',
+    sizes: bc,
+  },
 };
 
 export default equipmentSizes;
