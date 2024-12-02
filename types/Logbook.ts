@@ -8,13 +8,15 @@ type Logbook = {
   title: string;
   contents: string;
   userCondition: string;
+  location: string;
   equipment: Omit<Equipment, 'weight' | 'height'>;
+  logs: Log[];
 }
 
-type CreateLogbook = Omit<Logbook, 'id' | 'location' | 'thumbnailUrl'>;
+type CreateLogbook = Omit<Logbook, 'id' | 'location' | 'thumbnailUrl' | 'logs'>;
 
 type Log = {
-  logbookId: number | null;
+  logbookId: number;
   location: string;
   weather: 'SUNNY' | 'CLOUDY' | 'MISTY' | 'RAINY' | 'THUNDER' | '';
   airTemp: number | null;
@@ -32,8 +34,11 @@ type Log = {
   endBar: number | null;
 }
 
+type CreateLog = Omit<Log, 'logbookId'>;
+
 export {
   Logbook,
   Log,
   CreateLogbook,
+  CreateLog,
 };

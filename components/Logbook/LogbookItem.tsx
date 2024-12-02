@@ -1,10 +1,9 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { Logbook } from 'api/logbook/my-logbook';
-import { LikedLogbook } from 'api/logbook/liked-logbook';
+import { Logbook } from 'types/Logbook';
 import { tokens, icons, images } from 'constants/';
 
 interface LogbookItemProps {
-  item: Logbook | LikedLogbook;
+  item: Logbook;
   index: number;
 }
 
@@ -18,11 +17,11 @@ export default function LogbookItem({ item, index }: LogbookItemProps) {
         className='h-70 w-70 mr-20 rounded-20'/>
       <View>
         <Text className={`${tokens.bd_16} color-gray-800 my-4`}>#{index} {item.title}</Text>
-        <Text className={`${tokens.md_14} color-gray-500`}>{item.date.split('T')[0]}</Text>
+        <Text className={`${tokens.md_14} color-gray-500`}>{item.date && item.date.split('T')[0]}</Text>
         <View className='flex-row w-[235] justify-between items-center'>
           <View className='flex-row items-center'>
             <Image source={icons.location} className='w-14 h-14' />
-            <Text className={`${tokens.md_12} color-gray-500`}>{item.location}</Text>
+            <Text className={`${tokens.md_12} color-gray-500`}>{item.logs && item.logs[0].location}</Text>
           </View>
           <View className='flex-row items-center'>
             {/* Need to add "likes" for the number of likes */}

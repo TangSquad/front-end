@@ -1,6 +1,5 @@
 import { View, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { router, useGlobalSearchParams } from 'expo-router';
-import { LogbookProvider } from 'contexts/LogbookContext';
 import TitleSection from 'components/Logbook/Create/TitleSection';
 import RecordSection from 'components/Logbook/Create/RecordSection';
 import EquipmentSection from 'components/Logbook/Create/EquipmentSection';
@@ -17,15 +16,13 @@ export default function CreateLogbook() {
   return (
     <KeyboardAvoidingView className='h-full bg-white' behavior='padding'>
       <ScrollView>
-        <LogbookProvider>
-          <View className='p-26'>
-            <TitleSection />
-            <EquipmentSection />
-            <RecordSection />
-            <ConditionSection />
-            <MainButton title='다음' handlePress={handleNext} />
-          </View>
-        </LogbookProvider>
+        <View className='p-26'>
+          <TitleSection />
+          <EquipmentSection />
+          <RecordSection />
+          <ConditionSection />
+          <MainButton title='다음' handlePress={handleNext} />
+        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );

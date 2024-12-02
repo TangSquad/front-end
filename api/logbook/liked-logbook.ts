@@ -1,22 +1,11 @@
 import axios from 'axios';
 import apiClient from '../apiClient';
 import { api } from 'constants/';
+import { Logbook } from 'types/Logbook';
 
-type LikedLogbook = {
-  logbookId: number;
-  userId: number;
-  thumbnailUrl: string | null;
-  isPublic: boolean;
-  title: string;
-  contents: string;
-  date: string;
-  location: string;
-}
-
-const getLikedLogbook = async (): Promise<LikedLogbook[]> => {
+const getLikedLogbook = async (): Promise<Logbook[]> => {
   try {
-    const response = await apiClient.get<LikedLogbook[]>(api.ENDPOINTS.LOGBOOK.LIKED_LOGBOOK);
-
+    const response = await apiClient.get<Logbook[]>(api.ENDPOINTS.LOGBOOK.LIKED_LOGBOOK);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -29,5 +18,4 @@ const getLikedLogbook = async (): Promise<LikedLogbook[]> => {
 
 export {
   getLikedLogbook,
-  LikedLogbook,
 };

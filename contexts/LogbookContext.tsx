@@ -40,11 +40,11 @@ const LogbookProvider = ({ children }: { children: ReactNode }) => {
     data && setLogbook({
       ...logbook,
       equipment: {
-        suit: data.data.suit,
-        bc: data.data.bc,
-        mask: data.data.mask,
-        weightBelt: data.data.weightBelt,
-        shoes: data.data.shoes,
+        suit: data.data.suit || '',
+        bc: data.data.bc || '',
+        mask: data.data.mask || '',
+        weightBelt: data.data.weightBelt || '',
+        shoes: data.data.shoes || '',
       },
     });
   }, []);

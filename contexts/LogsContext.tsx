@@ -1,14 +1,14 @@
 import { createContext, ReactNode, useState } from 'react';
-import { Log } from 'types/Logbook';
+import { CreateLog } from 'types/Logbook';
 
 interface LogsContextType {
-  logs: Log[];
+  logs: CreateLog[];
   updateLogs: (props: UpdateLogsProps) => void;
 }
 
 type UpdateLogsProps = {
   index: number,
-  key: keyof Log,
+  key: keyof CreateLog,
   value: string | number | null
 };
 
@@ -18,9 +18,8 @@ const LogsContext = createContext<LogsContextType>({
 });
 
 const LogsProvider = ({ count, children }: { count: number; children: ReactNode}) => {
-  const [logs, setLogs] = useState<Log[]>(
+  const [logs, setLogs] = useState<CreateLog[]>(
     Array.from({ length: count }, () => ({
-      logbookId: null,
       location: '',
       weather: '',
       airTemp: null, // 기온
