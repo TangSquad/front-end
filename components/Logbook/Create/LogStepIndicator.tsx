@@ -1,4 +1,6 @@
 import { View, Text } from 'react-native';
+import { useEffect, useContext } from 'react';
+import { LogsContext } from 'contexts/LogsContext';
 import StepIndicator from 'react-native-step-indicator';
 import { tokens } from 'constants/';
 
@@ -9,6 +11,21 @@ interface LogStepIndicatorProps {
 }
 
 export default function LogStepIndicator({ maxStep, currentStep, setCurrentStep } : LogStepIndicatorProps) {
+  const { logs, updateLogs } = useContext(LogsContext);
+
+  useEffect(() => {
+    // 장소 자동 완성
+    if( currentStep !== 0 && logs[currentStep].location === '' ) {
+      updateLogs({ index: currentStep, key: 'location', value: logs[currentStep - 1].location });
+    }
+
+    // 잠수시간 자동 완성
+    if( currentStep !== 0 && logs[currentStep].diveTime === '' ) {
+      updateLogs({ index: currentStep, key: 'diveTime', value: logs[currentStep - 1].diveTime });
+    }
+  }, [currentStep]);
+
+
   // if maxStep is less than 5, the view is horizontal, otherwise vertical
   const flexDirection = maxStep < 5 ? 'flex-row' : 'flex-col';
   const indicatorContainerStyle = `${maxStep < 5 ? 'w-1/2' : 'w-full'} ${maxStep < 5 ? 'ml-8' : 'mt-8'}`;

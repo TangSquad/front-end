@@ -8,7 +8,7 @@ export default function RequiredSection({ currentStep }: { currentStep: number }
   const { logs, updateLogs } = useContext(LogsContext);
 
   return(
-    <View className='mt-32 mb-16'>
+    <View className='my-16'>
       <View className='mb-32 flex-row justify-between'>
         <Title content='장소' mandatory />
         <BasicInput

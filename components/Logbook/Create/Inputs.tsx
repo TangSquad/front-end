@@ -80,7 +80,7 @@ const WeatherInput = ({ title, value, setValue }: WeatherInputProps) => {
     <View className='flex-row'>
       <Text className={`${tokens.md_16} color-gray-600 ${extraMr}`}>{title}</Text>
       <TextInput
-        value={value === null ? '' : value.toString()}
+        value={value ? value.toString() : ''}
         onChange={(event) => handleChange(event.nativeEvent.text)}
         className={`w-[40] bg-gray-50 ml-8 mr-4`}
         textAlign='center'

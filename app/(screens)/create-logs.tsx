@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, ScrollView, SafeAreaView, View, Alert } from 'react-native';
+import { KeyboardAvoidingView, ScrollView, SafeAreaView, View, Alert, Text } from 'react-native';
 import { useState, useContext, ReactNode } from 'react';
 import { router, useGlobalSearchParams } from 'expo-router';
 import { LogsProvider } from 'contexts/LogsContext';
@@ -16,6 +16,7 @@ import WeatherSection from 'components/Logbook/Create/WeatherSection';
 import EtcSection from 'components/Logbook/Create/EtcSection';
 import EnvironmentSection from 'components/Logbook/Create/EnvironmentSection';
 import MainButton from 'components/common/MainButton';
+import { tokens } from 'constants/';
 
 const CreateLogsContents = ({ children } : { children: ReactNode }) => {
   const { logbook, setLogbook } = useContext(LogbookContext);
@@ -62,7 +63,7 @@ const CreateLogsContents = ({ children } : { children: ReactNode }) => {
     } else if (logs[0].diveTime === '') {
       Alert.alert('잠수시간을 입력해주세요.');
       return;
-    };
+    }
 
     try {
       const urls = await Promise.all(
@@ -100,6 +101,7 @@ export default function CreateLogs() {
           <LogsProvider count={Number(count)}>
             <CreateLogsContents>
               <LogStepIndicator maxStep={Number(count)} currentStep={currentStep} setCurrentStep={setCurrentStep} />
+              <Text className={`${tokens.bd_14} color-gray-600 mt-32 mb-16 text-center`}>다이빙 로그 #{currentStep+1}</Text>
               <RequiredSection currentStep={currentStep} />
               <DivingThemeSection currentStep={currentStep} />
               <WeatherSection currentStep={currentStep} />
