@@ -106,6 +106,9 @@ export default function RootLayout() {
                 title: '다이빙 로그북',
                 headerBackTitleVisible: false,
               }} />
+              <Stack.Screen name="(screens)/logbook/[id]" options={{
+                title: '로그북',
+              }} />
               <Stack.Screen name="(screens)/profile-edit" options={{
                 title: '프로필 편집',
                 headerTitleStyle: {

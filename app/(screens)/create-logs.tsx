@@ -5,18 +5,18 @@ import { LogsProvider } from 'contexts/LogsContext';
 import { LogbookContext } from 'contexts/LogbookContext';
 import { LogsContext } from 'contexts/LogsContext';
 import { useMutation } from '@tanstack/react-query';
-import { createLogbook } from 'api/logbook/my-logbook';
+import { createLogbook } from 'api/logbook/logbook';
 import { createLog } from 'api/logbook/log';
 import { translateUrl } from 'api/upload/image';
 import showToast from 'utils/toast';
 import RequiredSection from 'components/Logbook/Create/RequiredSection';
 import LogStepIndicator from 'components/Logbook/Create/LogStepIndicator';
-import DivingThemeSection from 'components/Logbook/Create/DivingThemeSection';
+import SetepIndicatorText from 'components/Logbook/StepIndicatorText';
+import DivingThemeSection from 'components/Logbook/DivingThemeSection';
 import WeatherSection from 'components/Logbook/Create/WeatherSection';
 import EtcSection from 'components/Logbook/Create/EtcSection';
 import EnvironmentSection from 'components/Logbook/Create/EnvironmentSection';
 import MainButton from 'components/common/MainButton';
-import { tokens } from 'constants/';
 
 const CreateLogsContents = ({ children } : { children: ReactNode }) => {
   const { logbook, setLogbook } = useContext(LogbookContext);
@@ -101,7 +101,7 @@ export default function CreateLogs() {
           <LogsProvider count={Number(count)}>
             <CreateLogsContents>
               <LogStepIndicator maxStep={Number(count)} currentStep={currentStep} setCurrentStep={setCurrentStep} />
-              <Text className={`${tokens.bd_14} color-gray-600 mt-32 mb-16 text-center`}>다이빙 로그 #{currentStep+1}</Text>
+              <SetepIndicatorText step={currentStep} />
               <RequiredSection currentStep={currentStep} />
               <DivingThemeSection currentStep={currentStep} />
               <WeatherSection currentStep={currentStep} />

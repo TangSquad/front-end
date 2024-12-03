@@ -1,23 +1,10 @@
-import { View, Text, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useContext } from 'react';
 import { LogbookContext } from 'contexts/LogbookContext';
 import { pickMultipleImages } from 'utils/pickImage';
 import Title from '../Title';
+import ImageDisplayView from '../ImageDisplayView';
 import { tokens, images } from 'constants/';
-
-const ImageDisplayView = () => {
-  const { logbook } = useContext(LogbookContext);  
-
-  return (
-    <ScrollView horizontal>
-      <View className='flex-row flex-wrap justify-center gap-x-10'>
-        {logbook.imageUrls.map((uri, index) => (
-          <Image source={{ uri: uri }} className='w-100 h-100 my-10' key={index} />
-        ))}
-      </View>
-    </ScrollView>
-  );
-};
 
 export default function Record() {
   const { logbook, setLogbook } = useContext(LogbookContext);
@@ -47,7 +34,7 @@ export default function Record() {
     <View className='my-16'>
       <Title content='기록' />
       <View className='flex justify-center items-center mx-10 mt-16 rounded-10 overflow-auto'>
-        {logbook.imageUrls.length === 0 ? <ImagePickContainer /> : <ImageDisplayView />}
+        {logbook.imageUrls.length === 0 ? <ImagePickContainer /> : <ImageDisplayView uris={logbook.imageUrls} size={100} />}
       </View>
       <TextInput
         className='w-full p-16 border border-gray-300 rounded-10'

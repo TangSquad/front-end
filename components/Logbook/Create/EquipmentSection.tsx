@@ -4,9 +4,9 @@ import Equipment from 'components/Equipment/Equipment';
 
 export default function EquipmentSection() {
   return(
-    <View className='mt-16 mb-16'>
+    <View className='my-16'>
       <Title content='장비' />
-      <Equipment pickable={true} />
+      <Equipment />
     </View>
   );
 }

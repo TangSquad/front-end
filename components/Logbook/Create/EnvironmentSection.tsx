@@ -8,6 +8,10 @@ import { tokens } from 'constants/';
 export default function EnvironmentSection({ currentStep }: { currentStep: number }) {
   const { logs, updateLogs } = useContext(LogsContext);
 
+  const handleViewSightChange = (value: string) => {
+    updateLogs({ index: currentStep, key: 'viewSight', value });
+  };
+
   return (
     <View className='flex-row justify-between my-16'>
       <Title content='수중환경' />
@@ -38,7 +42,7 @@ export default function EnvironmentSection({ currentStep }: { currentStep: numbe
               <TextInput
                 keyboardType='numeric'
                 value={logs[currentStep]?.viewSight}
-                onChange={(event) => updateLogs({ index: currentStep, key: 'viewSight', value: event.nativeEvent.text })}
+                onChange={(event) => handleViewSightChange(event.nativeEvent.text)}
                 className='w-[40] bg-gray-50'
                 textAlign='center'
               />

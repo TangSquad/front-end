@@ -2,7 +2,7 @@ import { View, Image, TouchableOpacity } from 'react-native';
 import { useContext } from 'react';
 import { LogsContext } from 'contexts/LogsContext';
 import Title from '../Title';
-import { WeatherInput } from './Inputs';
+import { WeatherInput } from '../Inputs';
 import { tokens } from 'constants/';
 import { weathers } from 'data/';
 

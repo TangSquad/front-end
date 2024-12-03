@@ -1,40 +1,12 @@
 import axios from 'axios';
 import apiClient from '../apiClient';
-import { api } from '../../constants';
-
-import { EquipmentType } from './equipment';
-import { IntroductionType } from './introduction';
-
-interface ProfileType {
-  userId: number;
-  profileImageUrl: string;
-  name: string;
-  nickname: string;
-  clubCount: number;
-  divingCount: number;
-  logBookCount: number;
-  certificationName: string;
-  certificationImageUrl: string;
-  isLogbookOpen: boolean;
-  isLikeOpen: boolean;
-  isEquipmentOpen: boolean;
-}
+import { api } from 'constants/';
+import { Profile, EditProfile } from 'types/User';
 
 interface ProfileResponse {
   success: boolean;
   message: string;
-  data: ProfileType;
-}
-
-type ProfileEditType = Partial<
-  Omit<ProfileType, 'userId' | 'clubCount' | 'divingCount' | 'logBookCount' | 'certificationName' | 'certificationImageUrl' | 'isLikeOpen'>>
-  & Partial<IntroductionType>
-  & Partial<EquipmentType>;
-
-interface ProfileEditResponse {
-  success: boolean;
-  message: string;
-  data: ProfileEditType;
+  data: Profile;
 }
 
 const getMyProfile = async (): Promise<ProfileResponse> => {
@@ -49,7 +21,25 @@ const getMyProfile = async (): Promise<ProfileResponse> => {
   }
 };
 
-const editMyProfile = async (profile: ProfileEditType): Promise<ProfileEditResponse> => {
+const getProfileById = async (userId: number): Promise<ProfileResponse> => {
+  try {
+    const response = await apiClient.get<ProfileResponse>(`${api.ENDPOINTS.USER.PROFILE}/${userId}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error))
+      throw new Error(error.response?.data.message || 'Axios failed to get profile');
+    else
+      throw new Error('Failed to get profile');
+  }
+};
+
+interface ProfileEditResponse {
+  success: boolean;
+  message: string;
+  data: EditProfile;
+}
+
+const editMyProfile = async (profile: Profile): Promise<ProfileEditResponse> => {
   try {
     const response = await apiClient.put<ProfileEditResponse>(api.ENDPOINTS.USER.PROFILE, profile);
     return response.data;
@@ -64,6 +54,5 @@ const editMyProfile = async (profile: ProfileEditType): Promise<ProfileEditRespo
 export { 
   getMyProfile,
   editMyProfile,
-  ProfileType,
-  ProfileEditType,
+  getProfileById,
 };

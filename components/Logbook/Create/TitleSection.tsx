@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import { useContext } from 'react';
 import { LogbookContext } from 'contexts/LogbookContext';
 import Title from '../Title';
-import { BasicInput } from './Inputs';
+import { BasicInput } from '../Inputs';
 
 export default function TitleSection() {
   const { logbook, setLogbook } = useContext(LogbookContext);

@@ -29,8 +29,10 @@ const ENDPOINTS = {
     RESET: '/password/reset', 
   },
   LOGBOOK: {
-    MY_LOGBOOK: '/logbook',
+    LOGBOOK: '/logbook',
     LIKED_LOGBOOK: '/logbook/like',
+    LOG: '/log',
+    LOG_BY_LOOGBOOK_ID: '/log/logbook',
   },
   MOIM: {
     MOIM: '/moim',

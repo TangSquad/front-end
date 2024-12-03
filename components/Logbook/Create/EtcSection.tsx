@@ -1,13 +1,13 @@
 import { View } from 'react-native';
 import { useContext } from 'react';
 import { LogsContext } from 'contexts/LogsContext';
-import { EtcInput } from './Inputs';
+import { EtcInput } from '../Inputs';
 
 export default function EctSection({ currentStep }: { currentStep: number }) {
   const { logs, updateLogs } = useContext(LogsContext);
 
   return(
-    <View className='w-full my-16'>
+    <View className='w-full my-32'>
       <View className='flex-row justify-between'>
         <EtcInput
           title='평균 수심'

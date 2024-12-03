@@ -5,20 +5,35 @@ import { Logbook, CreateLogbook } from 'types/Logbook';
 
 const getMyLogbook = async (): Promise<Logbook[]> => {
   try {
-    const response = await apiClient.get<Logbook[]>(api.ENDPOINTS.LOGBOOK.MY_LOGBOOK);
+    const response = await apiClient.get<Logbook[]>(api.ENDPOINTS.LOGBOOK.LOGBOOK);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.data.message || 'Failed to get logbooks');
+      throw new Error(error.response?.data.message || 'Axios failed to get logbooks');
     } else {
       throw new Error('Failed to get logbooks');
     }
   }
 };
 
+const getLogbookById = async (id: number): Promise<Logbook> => {
+  try{
+    const response = await apiClient.get<Logbook>(`${api.ENDPOINTS.LOGBOOK.LOGBOOK}/${id}`);
+    return response.data;
+  }
+  catch(error){
+    if(axios.isAxiosError(error)){
+      throw new Error(error.response?.data.message || 'Axios failed to get logbook');
+    }
+    else{
+      throw new Error('Failed to get logbook');
+    }
+  }
+};
+
 const createLogbook = async (logbook: CreateLogbook): Promise<Logbook> => {
   try {
-    const response = await apiClient.post<Logbook>(api.ENDPOINTS.LOGBOOK.MY_LOGBOOK, logbook);
+    const response = await apiClient.post<Logbook>(api.ENDPOINTS.LOGBOOK.LOGBOOK, logbook);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -31,5 +46,6 @@ const createLogbook = async (logbook: CreateLogbook): Promise<Logbook> => {
 
 export {
   getMyLogbook,
+  getLogbookById,
   createLogbook,
 };
