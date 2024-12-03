@@ -16,6 +16,8 @@ const shoes = [
   { label: '290', value: '290' },
   { label: '295', value: '295' },
   { label: '300', value: '300' },
+  { label: '305', value: '305' },
+  { label: '310', value: '310' },
 ];
 
 const suit = [
@@ -24,6 +26,8 @@ const suit = [
   { label: 'M', value: 'M' },
   { label: 'L', value: 'L' },
   { label: 'XL', value: 'XL' },
+  { label: '2XL', value: '2XL' },
+  { label: '3XL', value: '3XL' },
 ];
 
 const mask = [
@@ -32,6 +36,8 @@ const mask = [
   { label: 'M', value: 'M' },
   { label: 'L', value: 'L' },
   { label: 'XL', value: 'XL' },
+  { label: '2XL', value: '2XL' },
+  { label: '3XL', value: '3XL' },
 ];
 
 const weight = [
@@ -55,6 +61,16 @@ const weight = [
   { label: '18kg', value: '18' },
   { label: '19kg', value: '19' },
   { label: '20kg', value: '20' },
+  { label: '21kg', value: '21' },
+  { label: '22kg', value: '22' },
+  { label: '23kg', value: '23' },
+  { label: '24kg', value: '24' },
+  { label: '25kg', value: '25' },
+  { label: '26kg', value: '26' },
+  { label: '27kg', value: '27' },
+  { label: '28kg', value: '28' },
+  { label: '29kg', value: '29' },
+  { label: '30kg', value: '30' },
 ];
 
 const bc = [
@@ -63,6 +79,8 @@ const bc = [
   { label: 'M', value: 'M' },
   { label: 'L', value: 'L' },
   { label: 'XL', value: 'XL' },
+  { label: '2XL', value: '2XL' },
+  { label: '3XL', value: '3XL' },
 ];
 
 const equipmentSizes = {
