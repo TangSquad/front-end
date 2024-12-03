@@ -26,7 +26,13 @@ const ENDPOINTS = {
   PASSWORD: {
     SEND_CODE: '/password/sendCode',
     VERIFY_CODE: '/password/verifyCode',
-    RESET: '/password/reset',
+    RESET: '/password/reset', 
+  },
+  LOGBOOK: {
+    LOGBOOK: '/logbook',
+    LIKED_LOGBOOK: '/logbook/like',
+    LOG: '/log',
+    LOG_BY_LOOGBOOK_ID: '/log/logbook',
   },
   MOIM: {
     MOIM: '/moim',

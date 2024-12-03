@@ -1,18 +1,12 @@
 import axios from 'axios';
 import apiClient from '../apiClient';
-import { api } from '../../constants';
-
-interface IntroductionType {
-  introduction: string;
-  link: string;
-  affiliation: string;
-  prevDiving: string;
-}
+import { api } from 'constants/';
+import { Introduction } from 'types/User';
 
 interface IntroductionResponse {
   success: boolean;
   message: string;
-  data: IntroductionType;
+  data: Introduction;
 }
 
 const getMyIntroduction = async (): Promise<IntroductionResponse> => {
@@ -29,5 +23,4 @@ const getMyIntroduction = async (): Promise<IntroductionResponse> => {
 
 export { 
   getMyIntroduction,
-  IntroductionType,
 };
