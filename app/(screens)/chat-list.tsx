@@ -1,12 +1,21 @@
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
+import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import TopNavigationBar from 'components/Chat/List/TopNavigationBar';
 import { getMyChatRoom } from 'api/chat/chat-room';
+import { useWebSocket } from 'contexts/WebsocketContext';
 
 export default function ChatList() {
   const { data, error } = useQuery({
     queryKey: ['chat-list'],
     queryFn: getMyChatRoom,
   });
+
+  const { initializeWebsocket } = useWebSocket();
+
+  useEffect(() => {
+    initializeWebsocket();
+  }, []);
 
   if (!data) {
     return (
@@ -16,16 +25,12 @@ export default function ChatList() {
     );
   }
 
+  const moimList = data.filter((chatRoom) => chatRoom.type === 'MOIM');
+  const divingList = data.filter((chatRoom) => chatRoom.type === 'DIVING');
+
   return(
-    <ScrollView className='h-full bg-white'>
-      <View>
-        {data.map((chatRoom) => (
-          <View key={chatRoom.id}>
-            <Text>{chatRoom.name}</Text>
-            <Text>{chatRoom.type}</Text>
-          </View>  
-        ))}
-      </View>
-    </ScrollView>
+    <SafeAreaView className='h-full bg-white'>
+      <TopNavigationBar moimList={moimList} divingList={divingList} />
+    </SafeAreaView>
   );
 }

@@ -1,16 +1,11 @@
 import axios from 'axios';
 import apiClient from '../apiClient';
-import { api } from '../../constants';
-
-interface MyChatRoom {
-  id: string;
-  name: string;
-  type: string;
-}
+import { api } from 'constants/';
+import { ChatRoom } from 'types/Chat';
 
 const getMyChatRoom = async () => {
   try {
-    const response = await apiClient.get<MyChatRoom[]>(api.ENDPOINTS.CHAT.ROOM.MY);
+    const response = await apiClient.get<ChatRoom[]>(api.ENDPOINTS.CHAT.ROOM.MY);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error))

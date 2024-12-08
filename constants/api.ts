@@ -1,6 +1,9 @@
 const baseUrl = 'https://api.tangsquad.com';
 const getBaseUrl = () => { return baseUrl; };
 
+const websocketUrl = 'wss://api.tangsquad.com/ws/chat';
+const getWebsocketUrl = () => { return websocketUrl; };
+
 const ENDPOINTS = {
   AUTH: {
     EMAIL_LOGIN: '/auth/login',
@@ -57,6 +60,9 @@ const ENDPOINTS = {
       MY: '/chat/myrooms',
     },
   },
+  ROOM: {
+    MESSAGE: '/room/message',
+  },
   UPLOAD: '/upload',
 };
 
@@ -64,5 +70,5 @@ const api = {
   ENDPOINTS,
 };
 
-export { getBaseUrl };
+export { getBaseUrl, getWebsocketUrl };
 export default api;
