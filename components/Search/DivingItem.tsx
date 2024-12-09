@@ -17,7 +17,7 @@ export default function DivingItem({ item, index }: DivingItemProps) {
   return (
     <TouchableOpacity
       key={index}
-      className='flex-row items-center gap-x-14 px-24 py-16'
+      className='flex-row items-center gap-x-14 py-16'
       onPress={() => handlePress(item.id)}
     >
       <Image source={item.thumbnailUrl ? { uri: item.thumbnailUrl } : images.defaultImage} className='w-70 h-70 rounded-10' />

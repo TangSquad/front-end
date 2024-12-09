@@ -1,11 +1,16 @@
 import { View } from 'react-native';
-import { useState } from 'react';
-import { router } from 'expo-router';
+import { useState, useEffect } from 'react';
+import { router, useGlobalSearchParams } from 'expo-router';
 import { SearchBar } from '@rneui/themed';
 import { tokens } from 'constants/';
 
 export default function SearchBarSection() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const { query } = useGlobalSearchParams();
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  useEffect(() => {
+    setSearchQuery(Array.isArray(query) ? query[0] : query || '');
+  }, [query]);
 
   const handleChange = (input: string) => {
     setSearchQuery(input);
