@@ -32,6 +32,7 @@ import southsea from 'assets/images/southsea.png';
 import gangwon from 'assets/images/gangwon.png';
 import philippines from 'assets/images/philippines.png';
 import ulleung from 'assets/images/ulleungdo.png';
+import main from 'assets/images/main.png';
 
 export default {
   defaultImage,
@@ -68,4 +69,5 @@ export default {
   gangwon,
   philippines,
   ulleung,
+  main,
 };
