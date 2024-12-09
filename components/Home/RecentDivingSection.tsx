@@ -21,7 +21,7 @@ export default function RecentDivingSection() {
   }
   
   return (
-    <View>
+    <View className='mt-24 mb-12'>
       <Header title='신규 다이빙' path='/search' />
       <View>
         {data.map((diving) => (

@@ -1,5 +1,6 @@
 import { ScrollView, SafeAreaView, View, Image } from 'react-native';
 import RecentDivingSection from 'components/Home/RecentDivingSection';
+import ThisMonthMoimSection from 'components/Home/ThisMonthMoimSection';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
         <Image />
         <View className='px-24'>
           <RecentDivingSection />
+          <ThisMonthMoimSection />
         </View>
       </ScrollView>
     </SafeAreaView>
