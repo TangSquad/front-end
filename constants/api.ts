@@ -42,6 +42,7 @@ const ENDPOINTS = {
     MOIM_LIKE: '/moim/like/{moimId}',
     MOIM_UNLIKE: '/moim/unlike/{moimId}',
     MOIM_JOIN: '/moim/join/{moimId}',
+    MOIM_ACTIVE: '/moim/active',
   },
   DIVING: {
     DIVING: '/diving',
@@ -51,6 +52,8 @@ const ENDPOINTS = {
     DIVING_LIKE: '/diving/like/{divingId}',
     DIVING_UNLIKE: '/diving/unlike/{divingId}',
     DIVING_JOIN: '/diving/join/{divingId}',
+    DIVING_RECENT: '/diving/recent',
+    DIVING_POPULAR: '/diving/popular',
   },
   UPLOAD: '/upload',
 };

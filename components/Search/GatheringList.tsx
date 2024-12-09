@@ -50,7 +50,7 @@ const MoimList = ({ sectionType }: GatheringItemProps) => {
   return (
     <FlatList
       data={data.filter((item) => includesQuery(item))}
-      className='h-full bg-white'
+      className='h-full px-24 bg-white'
       renderItem={({ item, index }) => (
         <MoimItem item={item} index={index} />
       )}
@@ -95,7 +95,7 @@ const DivingList = ({ sectionType }: GatheringItemProps) => {
   return (
     <FlatList
       data={data.filter((item) => includesQuery(item))}
-      className='h-full bg-white'
+      className='h-full px-24 bg-white'
       renderItem={({ item, index }) => (
         <DivingItem item={item} index={index} />
       )}
