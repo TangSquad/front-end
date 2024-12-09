@@ -25,6 +25,13 @@ import condition2 from 'assets/images/condition2.png';
 import condition3 from 'assets/images/condition3.png';
 import condition4 from 'assets/images/condition4.png';
 import condition5 from 'assets/images/condition5.png';
+import seoul from 'assets/images/seoul.png';
+import jeju from 'assets/images/jeju.png';
+import okinawa from 'assets/images/okinawa.png';
+import southsea from 'assets/images/southsea.png';
+import gangwon from 'assets/images/gangwon.png';
+import philippines from 'assets/images/philippines.png';
+import ulleung from 'assets/images/ulleungdo.png';
 
 export default {
   defaultImage,
@@ -54,4 +61,11 @@ export default {
   condition3,
   condition4,
   condition5,
+  seoul,
+  jeju,
+  okinawa,
+  southsea,
+  gangwon,
+  philippines,
+  ulleung,
 };

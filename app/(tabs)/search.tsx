@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native';
 import ToggleNavigationBar from 'components/Search/ToggleNavigationBar';
-import SearchBarSection from 'components/Search/SearchBar';
+import SearchBarSection from 'components/Search/SearchBarSection';
 import TopNavigationBar from 'components/Search/TopNavigationBar';
 import CreateGatheringBtn from 'components/CreateGatheringBtn';
 import { GatheringType } from 'types/Gatherings';
