@@ -10,8 +10,8 @@ export default function Home() {
         <Image />
         <View className='px-24'>
           <RecentDivingSection />
-          <ThisMonthMoimSection />
           <PopularSpotSection />
+          <ThisMonthMoimSection />
         </View>
       </ScrollView>
     </SafeAreaView>
