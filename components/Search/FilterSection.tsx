@@ -1,5 +1,6 @@
-import { View, Image, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
+import RemovableTag from 'components/Search/RemovableTag';
 import { icons } from 'constants/';
 
 export default function FilterSection() {
@@ -20,10 +21,25 @@ export default function FilterSection() {
   };
 
   return (
-    <View className='flex justify-start px-24 py-8 bg-white border-y border-gray-100'>
+    <View className='flex-row justify-center gap-x-16 px-24 py-8 bg-white border-y border-gray-100'>
       <TouchableOpacity className='w-24 h-24' onPress={handlePress}>
         <Image className='w-24 h-24' source={icons.filter} resizeMode='contain' />
       </TouchableOpacity>
+      {/* tags */}
+      <ScrollView horizontal>
+        {certificates && certificates.split(',').map((tag, index) => (
+          <RemovableTag key={index} tag={tag} group='certificates' />
+        ))}
+        {locations && locations.split(',').map((tag, index) => (
+          <RemovableTag key={index} tag={tag} group='locations' />
+        ))}
+        {moods && moods.split(',').map((tag, index) => (
+          <RemovableTag key={index} tag={tag} group='moods' />
+        ))}
+        {ages && ages.split(',').map((tag, index) => (
+          <RemovableTag key={index} tag={tag} group='ages' />
+        ))}
+      </ScrollView>
     </View>
   );
 }
