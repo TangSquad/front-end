@@ -88,7 +88,7 @@ export default function RootLayout() {
               <Stack.Screen name="(tabs)" options={{
                 headerShown: false,
                 title: '',
-                animation: 'none',
+                animation: 'fade',
               }}/>
               <Stack.Screen name="(screens)/filter" options={{
                 title: '필터',

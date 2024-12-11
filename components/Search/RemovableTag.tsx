@@ -4,7 +4,7 @@ import { tokens, icons } from 'constants/';
 
 interface RemovableTagProps {
   tag: string;
-  group: 'certificates' | 'locations' | 'moods' | 'ages';
+  group: 'certificates' | 'locations' | 'moods' | 'ages' | 'alignment';
 }
 
 export default function RemovableTag({ tag, group }: RemovableTagProps) {
@@ -13,6 +13,7 @@ export default function RemovableTag({ tag, group }: RemovableTagProps) {
     locations: string,
     moods: string,
     ages: string,
+    alignment: string,
   }>();
 
   const updateParams = (key: string, value: string) => {
@@ -33,6 +34,9 @@ export default function RemovableTag({ tag, group }: RemovableTagProps) {
       break;
     case 'ages':
       updateParams('ages', ages);
+      break;
+    case 'alignment':
+      router.replace({ pathname: '/search', params: { alignment: '' } });
       break;
     default:
       console.warn(`Unhandled group type: ${group}`);

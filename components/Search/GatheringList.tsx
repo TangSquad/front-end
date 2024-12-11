@@ -1,4 +1,5 @@
 import { FlatList, View } from 'react-native';
+import { useMemo } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
 import { getMyDiving, getDivingAll } from 'api/diving/diving';
@@ -57,21 +58,32 @@ const MoimList = ({ sectionType }: GatheringItemProps) => {
 
   const includesFilter = (moim: Moim) => {
     if (!certificates && !locations && !moods && !ages) return true;
-
+    
     return (
-      certificates.split(',').some((cert) => moim.licenseLimit === cert) ||
-      moim.locations.some((item) => new Set(locations.split(',')).has(item)) ||
-      moim.moods.some((item) => new Set(moods.split(',')).has(item)) ||
-      ages.split(',').some((age) => moim.age === age)
+      certificates?.split(',').some((cert) => moim.licenseLimit === cert) ||
+      moim.locations.some((item) => new Set(locations?.split(',')).has(item)) ||
+      moim.moods.some((item) => new Set(moods?.split(',')).has(item)) ||
+      ages?.split(',').some((age) => moim.age === age)
     );
   };
 
   const filteredData = data?.filter((item) => includesQuery(item) && includesFilter(item));
-  if (data === undefined || data.length === 0 || filteredData?.length === 0) return <NullDataView type='모임' sectionType={sectionType} />;
+
+  // Sort
+  const { alignment } = useLocalSearchParams<{ alignment: string }>();
+  const sortedData = useMemo(() => {
+    if (alignment === '인기순') {
+      return filteredData?.sort((a, b) => b.registeredUserIds.length - a.registeredUserIds.length);
+    }
+    return filteredData;
+  }, [filteredData, alignment]);
+
+  if (data === undefined || data.length === 0 || filteredData?.length === 0)
+    return <NullDataView type='모임' sectionType={sectionType} />;
 
   return (
     <FlatList
-      data={filteredData}
+      data={sortedData}
       className='h-full px-24 bg-white'
       renderItem={({ item, index }) => (
         <MoimItem item={item} index={index} />
@@ -134,11 +146,22 @@ const DivingList = ({ sectionType }: GatheringItemProps) => {
   };
 
   const filteredData = data?.filter((item) => includesQuery(item) && includesFilter(item));
-  if (data === undefined || data.length === 0 || filteredData?.length === 0) return <NullDataView type='다이빙' sectionType={sectionType} />;
+
+  // Sort
+  const { alignment } = useLocalSearchParams<{ alignment: string }>();
+  const sortedData = useMemo(() => {
+    if (alignment === '인기순') {
+      return filteredData?.sort((a, b) => b.registeredUserIds.length - a.registeredUserIds.length);
+    }
+    return filteredData;
+  }, [filteredData, alignment]);
+
+  if (data === undefined || data.length === 0 || filteredData?.length === 0)
+    return <NullDataView type='다이빙' sectionType={sectionType} />;
 
   return (
     <FlatList
-      data={filteredData}
+      data={sortedData}
       className='h-full px-24 bg-white'
       renderItem={({ item, index }) => (
         <DivingItem item={item} index={index} />

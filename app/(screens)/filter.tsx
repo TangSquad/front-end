@@ -2,6 +2,7 @@ import { View, ScrollView, SafeAreaView } from 'react-native';
 import { useState, useEffect } from 'react';
 import { router, useLocalSearchParams } from 'expo-router';
 import TagGroup from 'components/Filter/TagGroup';
+import AlignmentSection from 'components/Filter/AlignmentSection';
 import MainButton from 'components/common/MainButton';
 import { tags } from 'data/';
 
@@ -10,17 +11,20 @@ export default function Filter() {
   const [locations, setLocations] = useState<string[]>([]);
   const [moods, setMoods] = useState<string[]>([]);
   const [ages, setAges] = useState<string[]>([]);
+  const [alignment, setAlignment] = useState<string>('');
 
   const {
     certificates: paramCert,
     locations: paramLocs,
     moods: paramMoods,
     ages: paramAges,
+    alignment: paramAlignment,
   } = useLocalSearchParams<{
     certificates: string,
     locations: string,
     moods: string,
     ages: string,
+    alignment: string,
   }>();
 
   useEffect(() => {
@@ -28,7 +32,8 @@ export default function Filter() {
     setLocations(paramLocs ? paramLocs.split(',') : []);
     setMoods(paramMoods ? paramMoods.split(',') : []);
     setAges(paramAges ? paramAges.split(',') : []);
-  }, [paramAges]);
+    setAlignment(paramAlignment ? paramAlignment : '');
+  }, [paramCert, paramLocs, paramMoods, paramAges, paramAlignment]);
 
   const handlePress = () => {
     router.replace({ pathname: '/search', params: {
@@ -36,6 +41,7 @@ export default function Filter() {
       locations: locations,
       moods: moods,
       ages: ages,
+      alignment: alignment,
     } });
   };
 
@@ -66,6 +72,7 @@ export default function Filter() {
           selectedTags={moods}
           setSelectedTags={setMoods}
         />
+        <AlignmentSection alignment={alignment} setAlignment={setAlignment} />
         <View className='my-24'>
           <MainButton title='필터 적용' handlePress={handlePress} />
         </View>

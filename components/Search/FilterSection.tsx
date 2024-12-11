@@ -4,11 +4,12 @@ import RemovableTag from 'components/Search/RemovableTag';
 import { icons } from 'constants/';
 
 export default function FilterSection() {
-  const { certificates, locations, moods, ages } = useLocalSearchParams<{
+  const { certificates, locations, moods, ages, alignment } = useLocalSearchParams<{
     certificates: string,
     locations: string,
     moods: string,
     ages: string,
+    alignment: string,
   }>();
 
   const handlePress = () => {
@@ -17,6 +18,7 @@ export default function FilterSection() {
       locations: locations,
       moods: moods,
       ages: ages,
+      alignment: alignment,
     } });
   };
 
@@ -39,6 +41,7 @@ export default function FilterSection() {
         {ages && ages.split(',').map((tag, index) => (
           <RemovableTag key={index} tag={tag} group='ages' />
         ))}
+        {alignment && <RemovableTag tag={alignment} group='alignment' />}
       </ScrollView>
     </View>
   );
