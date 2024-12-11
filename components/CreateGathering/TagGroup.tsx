@@ -33,6 +33,7 @@ export default function TagGroup({ data, title, limit=null, selectedTags, setSel
             tag={tag}
             disabled={limit === selectedTags.length && !selectedTags.includes(tag) ? true : false}
             handleSelect={handleSelect}
+            checked={false}
           />
         ))}
       </View>

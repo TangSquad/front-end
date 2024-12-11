@@ -1,15 +1,21 @@
 import { Text, TouchableOpacity } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { tokens } from 'constants/';
 
 interface TagProps {
   tag: string;
   disabled: boolean;
   handleSelect: (tag: string) => void;
+  checked: boolean;
 }
 
-export default function Tag({ tag, disabled, handleSelect }: TagProps) {
-  const [isChecked, setIsChecked] = useState(false);
+export default function Tag({ tag, disabled, checked, handleSelect }: TagProps) {
+  const [isChecked, setIsChecked] = useState(checked);
+
+  useEffect(() => {
+    setIsChecked(checked);
+  }, [checked]);
+
   const checkedStyle = `${tokens.md_14} bg-white border border-primary-600`;
   const uncheckedStyle = `bg-gray-50 ${tokens.rg_14} border border-gray-50`;
 

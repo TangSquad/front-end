@@ -90,6 +90,10 @@ export default function RootLayout() {
                 title: '',
                 animation: 'none',
               }}/>
+              <Stack.Screen name="(screens)/filter" options={{
+                title: '필터',
+                animation: 'slide_from_bottom',
+              }} />
               <Stack.Screen name="(screens)/create-group" options={{
                 title: '모임 등록',
                 animation: 'slide_from_bottom',
