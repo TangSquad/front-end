@@ -1,7 +1,7 @@
 const baseUrl = 'https://api.tangsquad.com';
 const getBaseUrl = () => { return baseUrl; };
 
-const websocketUrl = 'wss://api.tangsquad.com/ws/chat';
+const websocketUrl = 'https://api.tangsquad.com/ws/chat';
 const getWebsocketUrl = () => { return websocketUrl; };
 
 const ENDPOINTS = {

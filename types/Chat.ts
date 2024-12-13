@@ -6,9 +6,11 @@ type ChatRoom = {
 
 type Message = {
   id: string;
-  content: string;
+  senderId: number;
+  roomId: string;
   sender: string;
-  timestamp: string;
+  message: string;
+  createdAt: string;
 };
 
 export {

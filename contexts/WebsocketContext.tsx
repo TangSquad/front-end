@@ -2,17 +2,19 @@ import { createContext, useContext, useEffect, useState, useRef } from 'react';
 import { getWebsocketUrl } from 'constants/api';
 import { Client } from '@stomp/stompjs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SockJS from 'sockjs-client';
+import { Message } from 'types/Chat';
 
 const WebSocketContext = createContext({
   initializeWebsocket: () => {},
   subscribeRoom: (roomId: string) => {},
-  sendMessage: (message: string) => {},
-  messages: [] as string[],
+  sendMessage: (message: string, roomId: string) => {},
+  messages: [] as Message[],
 });
 
 export function WebSocketProvider({ children }: { children: React.ReactNode }) {
   const client = useRef<Client>();
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
     return () => {
@@ -21,13 +23,15 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const subscribeRoom = (roomId: string) => {
+    client.current?.unsubscribe('/sub/chat/room/' + roomId);
+
     client.current?.subscribe('/sub/chat/room/' + roomId, (message) => {
-      console.log('Received message: ', message.body);
-      setMessages((prev) => [...prev, message.body]);
+      const parsedMessage: Message = JSON.parse(message.body);
+      setMessages((prev) => [...prev, parsedMessage]);
     });
   };
 
-  const sendMessage = (message: string) => {
+  const sendMessage = (message: string, roomId: string) => {
     if (client.current?.connected !== true) {
       console.error('WebSocket not connected, cannot send message');
       return;
@@ -36,6 +40,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
     client.current?.publish({
       destination: '/pub/chat/message',
       body: JSON.stringify({
+        roomId: roomId,
         message: message,
         type: 'TALK',
       }),
@@ -45,22 +50,24 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
   const initializeWebsocket = async () => {
     const token = await AsyncStorage.getItem('accessToken');
     if (token) {
-      console.log('Initializing WebSocket with token:', token);
+      const sock = new SockJS(getWebsocketUrl(), undefined, { header: {
+        Authorization: 'Bearer ' + token,
+      } });
       const newClient = new Client({
-        brokerURL: 'wss://api.tangsquad.com/ws/chat',
+        brokerURL: getWebsocketUrl(),
+        webSocketFactory: () => sock,
         connectHeaders: {
           Authorization: 'Bearer ' + token,
         },
-        debug: (str) => console.log('reason: ' + str),
+        connectionTimeout: 3000,
+        debug: (str) => console.log('debug: ' + str),
         onConnect: () => console.log('Connected to STOMP server'),
         onDisconnect: () => console.log('Disconnected from STOMP server'),
         onStompError: (frame) => console.error('STOMP error:', frame),
         onWebSocketError: (event) => console.error('WebSocket error:', event),
-        onChangeState: (state) => { console.log('State changed:', state); },
       });
 
       client.current = newClient;
-      console.log(client.current);
       client.current.activate();
     }
   };

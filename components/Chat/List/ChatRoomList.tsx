@@ -11,7 +11,7 @@ export default function ChatRoomList({ list }: ChatListProps) {
   if ((list.length === 0)) {
     return (
       <View className='flex-1 justify-center items-center bg-white'>
-        <Text className={`${tokens.bd_16} color-gray-400`}>데이터가 없습니다.</Text>
+        <Text className={`${tokens.bd_16} color-gray-400`}>아직 가입한 채팅방이 없습니다.</Text>
       </View>
     );
   }
