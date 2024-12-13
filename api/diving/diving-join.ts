@@ -20,6 +20,11 @@ const joinDiving = async (divingId: number) => {
   }
 };
 
+const leaveDiving = async (divingId: number) => {
+  // TODO: Implement leaveDiving
+};
+
 export {
   joinDiving,
+  leaveDiving,
 };

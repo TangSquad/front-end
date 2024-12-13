@@ -18,6 +18,11 @@ const joinMoim = async (moimId: number) => {
   }
 };
 
+const leaveMoim = async (moimId: number) => {
+  // TODO: Implement leaveMoim
+};
+
 export {
   joinMoim,
+  leaveMoim,
 };

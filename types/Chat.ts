@@ -2,6 +2,7 @@ type ChatRoom = {
   id: string;
   name: string;
   type: 'MOIM' | 'DIVING';
+  typeId: number;
 };
 
 type Message = {
