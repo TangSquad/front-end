@@ -8,7 +8,7 @@ interface RemovableTagProps {
 }
 
 export default function RemovableTag({ tag, group }: RemovableTagProps) {
-  const { certificates, locations, moods, ages } = useLocalSearchParams<{
+  const params = useLocalSearchParams<{
     certificates: string,
     locations: string,
     moods: string,
@@ -18,25 +18,29 @@ export default function RemovableTag({ tag, group }: RemovableTagProps) {
 
   const updateParams = (key: string, value: string) => {
     const updated = value.split(',').filter((item) => item !== tag);
-    router.replace({ pathname: '/search', params: { key: updated } });
+    const updatedParams = {
+      ...params,
+      [key]: updated,
+    };
+    router.replace({ pathname: '/search', params: updatedParams });
   };
   
   const handlePress = () => {
     switch (group) {
     case 'certificates':
-      updateParams('certificates', certificates);
+      updateParams('certificates', params.certificates);
       break;
     case 'locations':
-      updateParams('locations', locations);
+      updateParams('locations', params.locations);
       break;
     case 'moods':
-      updateParams('moods', moods);
+      updateParams('moods', params.moods);
       break;
     case 'ages':
-      updateParams('ages', ages);
+      updateParams('ages', params.ages);
       break;
     case 'alignment':
-      router.replace({ pathname: '/search', params: { alignment: '' } });
+      router.replace({ pathname: '/search', params: { ...params, alignment: '' } });
       break;
     default:
       console.warn(`Unhandled group type: ${group}`);

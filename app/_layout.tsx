@@ -8,6 +8,7 @@ import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { SheetProvider } from 'react-native-actions-sheet';
 import { LogbookProvider } from 'contexts/LogbookContext';
 import 'components/common/sheets';
+import ResetBtn from 'components/Filter/ResetBtn';
 import { NativeWindStyleSheet } from 'nativewind';
 import { tokens, icons } from 'constants/';
 
@@ -93,6 +94,7 @@ export default function RootLayout() {
               <Stack.Screen name="(screens)/filter" options={{
                 title: '필터',
                 animation: 'slide_from_bottom',
+                headerRight: () => <ResetBtn />,
               }} />
               <Stack.Screen name="(screens)/create-group" options={{
                 title: '모임 등록',
