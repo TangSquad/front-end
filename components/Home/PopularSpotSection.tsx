@@ -14,7 +14,7 @@ export default function PopularSpotSection() {
 
   const handlePress = (spot: string) => {
     router.replace('/search');
-    router.replace({ pathname: '/search', params: { query: spot } });
+    router.replace({ pathname: '/search', params: { locations: spot } });
   };
 
   const isEmpty = error || !data;

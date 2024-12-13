@@ -15,7 +15,7 @@ export default function RecentDivingSection() {
   const isEmpty = error || !data;
   
   return (
-    <View className='mb-12'>
+    <View className='mt-4 mb-12'>
       <Header title='신규 다이빙' path='/search' visible={!isEmpty} />
       {isEmpty ? <EmptyDataView message='신규 생성 다이빙이 없습니다.' /> :
         <View>

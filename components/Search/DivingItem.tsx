@@ -25,11 +25,11 @@ export default function DivingItem({ item, index }: DivingItemProps) {
         <View className='flex-row justify-between'>
           <View className='flex-row'>
             <TagBox content={item.age}/>
-            <TagBox content={`${item.moods.map((mood, index) => (mood + (index === item.moods.length -1 ? '' : '·')))}`}/>
+            <TagBox content={`${item.moods.map((mood, index) => (mood + (index === item.moods.length - 1 ? '' : '·')))}`}/>
           </View>
           <Text className={`flex-row ${tokens.md_12} color-gray-500`}>
             <Image source={icons.member} className='mr-4' />
-            <Text className={`${tokens.rg_12} color-gray-500`}>{item.currentPeople}/{item.limitPeople}</Text>
+            <Text className={`${tokens.rg_12} color-gray-500`}>{item.registeredUserIds.length}/{item.limitPeople}</Text>
           </Text>
         </View>
         <Text className={`${tokens.bd_16} color-gray-800`}>{item.divingName}</Text>

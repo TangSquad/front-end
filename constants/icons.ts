@@ -14,6 +14,8 @@ import fullHeart from 'assets/icons/full-heart.png';
 import settings from 'assets/icons/settings.png';
 import arrowRight from 'assets/icons/arrow-right.png';
 import member from 'assets/icons/member.png';
+import filter from 'assets/icons/filter.png';
+import reset from 'assets/icons/reset.png';
 
 export default {
   home,
@@ -32,4 +34,6 @@ export default {
   arrowRight,
   member,
   fullHeart,
+  filter,
+  reset,
 };
