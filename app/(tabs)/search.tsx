@@ -4,7 +4,7 @@ import ToggleNavigationBar from 'components/Search/ToggleNavigationBar';
 import SearchBarSection from 'components/Search/SearchBarSection';
 import FilterSection from 'components/Search/FilterSection';
 import TopNavigationBar from 'components/Search/TopNavigationBar';
-import CreateGatheringBtn from 'components/CreateGatheringBtn';
+import CreateGatheringBtn from 'components/Search/CreateGatheringBtn';
 import { GatheringType } from 'types/Gatherings';
 
 export default function Search() {
