@@ -20,7 +20,7 @@ export default function ChatRoomList({ list }: ChatListProps) {
     <FlatList
       data={list}
       keyExtractor={(item) => item.id}
-      className='w-full h-full'
+      className='w-full h-full bg-white'
       renderItem={({ item }) => (
         <ChatItem item={item} />
       )}

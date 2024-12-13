@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { useState } from 'react';
 import { router } from 'expo-router';
+import UnreadMsgIndicator from './UnreadMsgIndicator';
 import LeaveChatModal from 'components/Chat/List/LeaveChatModal';
 import { tokens, images } from 'constants/';
 import { ChatRoom } from 'types/Chat';
@@ -35,9 +36,7 @@ export default function ChatItem({ item }: ChatItemProps) {
         </View>
         <View className='flex items-end'>
           <Text className={`${tokens.rg_12} color-gray-500'`}>시간</Text>
-          <View className='flex justify-center w-20 h-20 bg-primary rounded-full text-center'>
-            <Text className={`color-white fontFamily-md fontSize-xxxsm text-center`}>1</Text>
-          </View>
+          <UnreadMsgIndicator roomId={item.id} />
         </View>
       </TouchableOpacity>
       {modalVisible &&
