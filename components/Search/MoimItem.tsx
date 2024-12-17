@@ -17,7 +17,7 @@ export default function MoimItem({ item, index }: MoimItemProps) {
   return (
     <TouchableOpacity
       key={index}
-      className='flex-row items-center gap-x-14 px-24 py-16'
+      className='flex-row items-center gap-x-14 py-16'
       onPress={() => handlePress(item.id)}
     >
       <Image source={item.thumbnailUrl ? { uri: item.thumbnailUrl } : images.defaultImage} className='w-70 h-70 rounded-10' />
@@ -25,11 +25,11 @@ export default function MoimItem({ item, index }: MoimItemProps) {
         <View className='flex-row justify-between'>
           <View className='flex-row'>
             <TagBox content={`${item.age}대`}/>
-            <TagBox content={`${item.moods.map((mood, index) => (mood + (index === item.moods.length -1 ? '' : '·')))}`}/>
+            <TagBox content={`${item.moods.map((mood, index) => (mood + (index === item.moods.length - 1 ? '' : '·')))}`}/>
           </View>
           <Text className={`flex-row ${tokens.md_12} color-gray-500`}>
             <Image source={icons.member} className='mr-4' />
-            <Text className={`${tokens.rg_12} color-gray-500`}>{item.currentPeople}/{item.limitPeople}</Text>
+            <Text className={`${tokens.rg_12} color-gray-500`}>{item.registeredUserIds.length}/{item.limitPeople}</Text>
           </Text>
         </View>
         <Text className={`${tokens.bd_16} color-gray-800`}>{item.moimName}</Text>

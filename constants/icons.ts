@@ -15,6 +15,8 @@ import settings from 'assets/icons/settings.png';
 import arrowRight from 'assets/icons/arrow-right.png';
 import arrowUp from 'assets/icons/arrow-up.png';
 import member from 'assets/icons/member.png';
+import filter from 'assets/icons/filter.png';
+import reset from 'assets/icons/reset.png';
 
 export default {
   home,
@@ -34,4 +36,6 @@ export default {
   arrowUp,
   member,
   fullHeart,
+  filter,
+  reset,
 };

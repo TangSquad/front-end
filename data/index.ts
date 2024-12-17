@@ -5,6 +5,7 @@ import equipmentSizes from './equipmentSizes';
 import divingThemes from './divingThemes';
 import weathers from './weathers';
 import conditions from './conditions';
+import spots from './spots';
 
 export {
   tags,
@@ -14,4 +15,5 @@ export {
   divingThemes,
   weathers,
   conditions,
+  spots,
 };

@@ -1,4 +1,5 @@
 import { FlatList, View } from 'react-native';
+import { useMemo } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
 import { getMyDiving, getDivingAll } from 'api/diving/diving';
@@ -30,27 +31,60 @@ const MoimList = ({ sectionType }: GatheringItemProps) => {
     queryFn: getMoimData,
   });
 
-  if (data === undefined || data.length === 0) return <NullDataView type='모임' sectionType={sectionType} />;
-
   // SearchQuery
   let { query } = useLocalSearchParams();
   query = Array.isArray(query) ? query[0] : query === undefined ? '' : query;
 
-  const includesQuery = (attribute: Moim) => {
+  const includesQuery = (moim: Moim) => {
+    if (query === '') return true;
+
     return (
-      attribute.moimName.toLowerCase().includes(query) || 
-      attribute.moimIntro.toLowerCase().includes(query) || 
-      attribute.age.toLowerCase().includes(query) || 
-      attribute.locations.some((location) => location.toLowerCase().includes(query)) || 
-      attribute.moods.some((mood) => mood.toLowerCase().includes(query)) || 
-      attribute.licenseLimit.toLowerCase().includes(query)
+      moim.moimName.toLowerCase().includes(query) || 
+      moim.moimIntro.toLowerCase().includes(query) || 
+      moim.age.toLowerCase().includes(query) || 
+      moim.locations.some((location) => location.toLowerCase().includes(query)) || 
+      moim.moods.some((mood) => mood.toLowerCase().includes(query)) || 
+      moim.licenseLimit.toLowerCase().includes(query)
     );
   };
 
+  // Filter
+  const { certificates, locations, moods, ages } = useLocalSearchParams<{
+    certificates: string,
+    locations: string,
+    moods: string,
+    ages: string,
+  }>();
+
+  const includesFilter = (moim: Moim) => {
+    if (!certificates && !locations && !moods && !ages) return true;
+    
+    return (
+      certificates?.split(',').some((cert) => moim.licenseLimit === cert) ||
+      moim.locations.some((item) => new Set(locations?.split(',')).has(item)) ||
+      moim.moods.some((item) => new Set(moods?.split(',')).has(item)) ||
+      ages?.split(',').some((age) => moim.age === age)
+    );
+  };
+
+  const filteredData = data?.filter((item) => includesQuery(item) && includesFilter(item));
+
+  // Sort
+  const { alignment } = useLocalSearchParams<{ alignment: string }>();
+  const sortedData = useMemo(() => {
+    if (alignment === '인기순') {
+      return filteredData?.sort((a, b) => b.registeredUserIds.length - a.registeredUserIds.length);
+    }
+    return filteredData;
+  }, [filteredData, alignment]);
+
+  if (data === undefined || data.length === 0 || filteredData?.length === 0)
+    return <NullDataView type='모임' sectionType={sectionType} />;
+
   return (
     <FlatList
-      data={data.filter((item) => includesQuery(item))}
-      className='h-full bg-white'
+      data={sortedData}
+      className='h-full px-24 bg-white'
       renderItem={({ item, index }) => (
         <MoimItem item={item} index={index} />
       )}
@@ -73,29 +107,62 @@ const DivingList = ({ sectionType }: GatheringItemProps) => {
     queryFn: getDivingData,
   });
 
-  if (data === undefined || data.length === 0) return <NullDataView type='다이빙' sectionType={sectionType} />;
-
   // SearchQuery
   let { query } = useLocalSearchParams();
   query = Array.isArray(query) ? query[0] : query === undefined ? '' : query;
 
-  const includesQuery = (attribute: Diving) => {
+  const includesQuery = (diving: Diving) => {
+    if (query === '') return true;
+  
     return (
-      attribute.divingName.toLowerCase().includes(query) ||
-      attribute.divingIntro.toLowerCase().includes(query) ||
-      attribute.age.toLowerCase().includes(query) ||
-      attribute.location.toLowerCase().includes(query) ||
-      attribute.moods?.some((mood) => mood.toLowerCase().includes(query)) ||
-      attribute.licenseLimit.toLowerCase().includes(query) ||
-      attribute.startDate.includes(query) ||
-      attribute.endDate.includes(query)
+      diving.divingName.toLowerCase().includes(query) ||
+      diving.divingIntro.toLowerCase().includes(query) ||
+      diving.age.toLowerCase().includes(query) ||
+      diving.location.toLowerCase().includes(query) ||
+      diving.moods?.some((mood) => mood.toLowerCase().includes(query)) ||
+      diving.licenseLimit.toLowerCase().includes(query) ||
+      diving.startDate.includes(query) ||
+      diving.endDate.includes(query)
     );
   };
 
+  // Filter
+  const { certificates, locations, moods, ages } = useLocalSearchParams<{
+    certificates: string,
+    locations: string,
+    moods: string,
+    ages: string,
+  }>();
+
+  const includesFilter = (diving: Diving) => {
+    if (!certificates && !locations && !moods && !ages) return true;
+
+    return (
+      certificates?.split(',').some((cert) => cert === diving.location) ||
+      locations?.split(',').some((location) => location === diving.location) ||
+      diving.moods.some((item) => new Set(moods?.split(',')).has(item)) ||
+      ages?.split(',').some((age) => age === diving.age)
+    );
+  };
+
+  const filteredData = data?.filter((item) => includesQuery(item) && includesFilter(item));
+
+  // Sort
+  const { alignment } = useLocalSearchParams<{ alignment: string }>();
+  const sortedData = useMemo(() => {
+    if (alignment === '인기순') {
+      return filteredData?.sort((a, b) => b.registeredUserIds.length - a.registeredUserIds.length);
+    }
+    return filteredData;
+  }, [filteredData, alignment]);
+
+  if (data === undefined || data.length === 0 || filteredData?.length === 0)
+    return <NullDataView type='다이빙' sectionType={sectionType} />;
+
   return (
     <FlatList
-      data={data.filter((item) => includesQuery(item))}
-      className='h-full bg-white'
+      data={sortedData}
+      className='h-full px-24 bg-white'
       renderItem={({ item, index }) => (
         <DivingItem item={item} index={index} />
       )}

@@ -10,6 +10,7 @@ import { LogbookProvider } from 'contexts/LogbookContext';
 import { WebSocketProvider } from 'contexts/WebsocketContext';
 import 'components/common/sheets';
 import { TextEncoder } from 'text-encoding';
+import ResetBtn from 'components/Filter/ResetBtn';
 import { NativeWindStyleSheet } from 'nativewind';
 import { tokens, icons } from 'constants/';
 import { WebSocket } from 'ws';
@@ -95,8 +96,13 @@ export default function RootLayout() {
                 <Stack.Screen name="(tabs)" options={{
                   headerShown: false,
                   title: '',
-                  animation: 'none',
+                  animation: 'fade',
                 }}/>
+                <Stack.Screen name="(screens)/filter" options={{
+                  title: '필터',
+                  animation: 'slide_from_bottom',
+                  headerRight: () => <ResetBtn />,
+                }} />
                 <Stack.Screen name="(screens)/create-group" options={{
                   title: '모임 등록',
                   animation: 'slide_from_bottom',

@@ -1,14 +1,9 @@
 import { TouchableOpacity, Image } from 'react-native';
-import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import { icons } from 'constants/';
+import { GatheringType } from 'types/Gatherings';
 
-interface CreateGatheringBtnProps {
-  type: string;
-}
-
-export default function CreateGatheringBtn( { type } : CreateGatheringBtnProps ) {
-  const router = useRouter();
-  
+export default function CreateGatheringBtn({ type }: { type: GatheringType }) {
   const handlePress = () => {
     if(type === '모임') {
       router.push('create-group');
