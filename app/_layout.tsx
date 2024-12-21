@@ -117,7 +117,6 @@ export default function RootLayout() {
                 }} />
                 <Stack.Screen name="(screens)/create-logs" options={{
                   title: '다이빙 로그북',
-                  headerBackTitleVisible: false,
                 }} />
                 <Stack.Screen name="(screens)/logbook/[id]" options={{
                   title: '로그북',
@@ -159,7 +158,6 @@ export default function RootLayout() {
                 }}/>
                 <Stack.Screen name="(screens)/chat/[id]" options={{
                   title: '채팅',
-                  headerBackTitleVisible: false,
                 }}/>
               </Stack>
               <Toast config={toastConfig}/>
