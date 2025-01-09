@@ -1,7 +1,7 @@
-import { config } from 'dotenv';
+import { config } from "dotenv";
 config();
 
-import { env } from 'process';
+import { env } from "process";
 
 export const expo = {
   name: "TangSquad",
@@ -49,10 +49,10 @@ export const expo = {
           extraMavenRepos: [
             "https://devrepo.kakao.com/nexus/content/groups/public/",
           ],
-          "newArchEnabled": true,
+          newArchEnabled: true,
         },
         ios: {
-          "newArchEnabled": true,
+          newArchEnabled: true,
         },
       },
     ],
