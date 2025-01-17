@@ -1,0 +1,20 @@
+{
+  "build": {
+    "development": {
+      "ios": {
+        "buildType": "development"
+      },
+      "android": {
+        "buildType": "development"
+      }
+    },
+    "production": {
+      "ios": {
+        "buildType": "release"
+      },
+      "android": {
+        "buildType": "release"
+      }
+    }
+  }
+}  

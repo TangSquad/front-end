@@ -7,6 +7,7 @@ export const expo = {
   name: "TangSquad",
   slug: "tangsquad",
   scheme: "tangsquad",
+  owner: "tangsquad2024",
   version: "1.0.0",
   orientation: "portrait",
   icon: "./assets/icon.png",
@@ -71,5 +72,8 @@ export const expo = {
   ],
   extra: {
     kakaoNativeAppKey: env.KAKAO_NATIVE_APP_KEY,
+    eas: {
+      projectId: "d32ebad7-5bc9-40e1-954e-c239be61817a",
+    },
   },
 };
