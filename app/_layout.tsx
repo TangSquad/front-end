@@ -150,6 +150,10 @@ export default function RootLayout() {
               <Stack.Screen name="(screens)/settings" options={{
                 title: '설정',
               }} />
+              <Stack.Screen name="(screens)/terms-of-use" options={{
+                title: '이용약관',
+                headerBackTitleVisible: false,
+              }} />
               <Stack.Screen name="(screens)/privacy-policy" options={{
                 title: '개인정보 처리방침',
                 headerBackTitleVisible: false,

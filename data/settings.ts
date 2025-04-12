@@ -1,7 +1,7 @@
 const settingsMenuList = [
   {
     title: '정보',
-    data: ['개인정보 처리방침'],
+    data: ['이용약관', '개인정보 처리방침'],
   },
   {
     title: '알림',

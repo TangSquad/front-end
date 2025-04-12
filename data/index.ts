@@ -7,6 +7,7 @@ import weathers from './weathers';
 import conditions from './conditions';
 import spots from './spots';
 import privacyPolicy from './privacyPolicy';
+import termsOfUse from './termsOfUse';
 
 export {
   tags,
@@ -18,4 +19,5 @@ export {
   conditions,
   spots,
   privacyPolicy,
+  termsOfUse,
 };
