@@ -147,6 +147,13 @@ export default function RootLayout() {
                 headerTintColor: tokens.gray_500,
                 headerTransparent: true,
               }} />
+              <Stack.Screen name="(screens)/settings" options={{
+                title: '설정',
+              }} />
+              <Stack.Screen name="(screens)/privacy-policy" options={{
+                title: '개인정보 처리방침',
+                headerBackTitleVisible: false,
+              }} />
             </Stack>
             <Toast config={toastConfig}/>
           </LogbookProvider>

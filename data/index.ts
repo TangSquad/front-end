@@ -6,6 +6,7 @@ import divingThemes from './divingThemes';
 import weathers from './weathers';
 import conditions from './conditions';
 import spots from './spots';
+import privacyPolicy from './privacyPolicy';
 
 export {
   tags,
@@ -16,4 +17,5 @@ export {
   weathers,
   conditions,
   spots,
+  privacyPolicy,
 };

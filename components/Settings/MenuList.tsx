@@ -36,6 +36,7 @@ export default function MenuList() {
     ]);
   };
 
+  // Handle press event for each item
   const handlePress = (item: string) => {
     switch (item) {
     case '로그아웃':
@@ -43,6 +44,9 @@ export default function MenuList() {
       break;
     case '회원탈퇴':
       showAcctDeleteAlert();
+      break;
+    case '개인정보 처리방침':
+      router.push('/privacy-policy');
       break;
     default:
       break;
