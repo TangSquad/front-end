@@ -36,8 +36,15 @@ export default function MenuList() {
     ]);
   };
 
+  // Handle press event for each item
   const handlePress = (item: string) => {
     switch (item) {
+    case '이용약관':
+      router.push('/terms-of-use');
+      break;
+    case '개인정보 처리방침':
+      router.push('/privacy-policy');
+      break;
     case '로그아웃':
       handleLogout();
       break;
